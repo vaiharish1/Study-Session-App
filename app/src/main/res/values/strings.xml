@@ -8,7 +8,9 @@
 
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
-
+    <string name="oneTimeText">One- Time</string>
+    <string name="repeatedText">Repeated</string>
+    <string name="projectText">Project</string>
 
 
 </resources>

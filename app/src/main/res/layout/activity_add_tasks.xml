@@ -10,7 +10,7 @@
         android:id="@+id/addTaskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="664dp"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editTextTaskName"
@@ -39,5 +39,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addTaskName"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/oneTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="581dp"
+        android:text="@string/oneTimeText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName"
+        android:onClick="oneTimeNav"
+        />
+
+    <Button
+        android:id="@+id/repeatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="581dp"
+        android:text="@string/repeatedText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/projectButton"
+        app:layout_constraintStart_toEndOf="@+id/oneTimeButton"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/projectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="581dp"
+        android:text="@string/projectText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/repeatedButton"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
