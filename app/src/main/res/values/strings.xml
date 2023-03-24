@@ -9,6 +9,7 @@
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
 
+    <string name="todaySessionHeaderStr">Today\'s Session </string>
 
 
 </resources>
