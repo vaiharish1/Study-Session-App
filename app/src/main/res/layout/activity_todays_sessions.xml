@@ -11,8 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/todaySessionHeaderStr"
         android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/todaysSessionTaskLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,23 +22,120 @@
 
     <LinearLayout
         android:id="@+id/todaysSessionTaskLayout"
-        android:layout_width="414dp"
-        android:layout_height="610dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="67dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todaysSessionHeader"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:id="@+id/todaysSessionTaskBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="25sp"
+            android:paddingTop="8sp"
+            android:paddingEnd="25sp"
+            android:paddingBottom="8sp"
+            android:visibility="visible">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/taskName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/todaySessionTaskNameStr"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/taskTimeDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/todaySessionTimeStr"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/todaysSessionTaskBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="25sp"
+            android:paddingTop="8sp"
+            android:paddingEnd="25sp"
+            android:paddingBottom="8sp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/taskName2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/todaySessionTaskNameStr"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/taskTimeDisplay2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/todaySessionTimeStr"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/todaysSessionTaskBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="25sp"
+            android:paddingTop="8sp"
+            android:paddingEnd="25sp"
+            android:paddingBottom="8sp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/taskName3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/todaySessionTaskNameStr"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/taskTimeDisplay3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/todaySessionTimeStr"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

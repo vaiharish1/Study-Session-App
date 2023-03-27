@@ -10,6 +10,8 @@
     <string name="taskNameHint">Enter Task Name </string>
 
     <string name="todaySessionHeaderStr">Today\'s Session </string>
+    <string name="todaySessionTaskNameStr">Task Name </string>
+    <string name="todaySessionTimeStr">HH:MM - HH:MM </string>
 
 
 </resources>
