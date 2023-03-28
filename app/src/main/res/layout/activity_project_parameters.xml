@@ -4,13 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OneTimeParameters">
+    tools:context=".ProjectParameters">
+
+    <TextView
+        android:id="@+id/dueDateStr3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="580dp"
+        android:text="@string/dueDateStr"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDueDate2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr" />
+
+    <EditText
+        android:id="@+id/editTextDueDate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="569dp"
+        android:ems="10"
+        android:hint="@string/editTextDueDate"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName"
+        app:layout_constraintVertical_bias="1.0"
+        android:autofillHints=""
+        />
 
     <TextView
         android:id="@+id/addTaskNameStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="664dp"
         android:text="@string/taskNameLabel"
@@ -25,7 +59,6 @@
         android:id="@+id/editTextTaskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="651dp"
@@ -36,40 +69,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toEndOf="@+id/addTaskNameStr"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/dueDateStr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="587dp"
-        android:text="@string/dueDateStr"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDueDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr" />
-
-    <EditText
-        android:id="@+id/editTextDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginBottom="580dp"
-        android:ems="10"
-        android:hint="@string/editTextDueDate"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dueDateStr"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName"
-        android:autofillHints=""
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>

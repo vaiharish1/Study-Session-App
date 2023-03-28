@@ -18,4 +18,12 @@ public class AddTasks extends AppCompatActivity {
         Intent intent = new Intent(this, OneTimeParameters.class );
         startActivity(intent);
     }
+    public void repeatedNav(View v){
+        Intent intent = new Intent(this, RepeatedParameters.class );
+        startActivity(intent);
+    }
+    public void projectNav(View v){
+        Intent intent = new Intent(this, ProjectParameters.class );
+        startActivity(intent);
+    }
 }
