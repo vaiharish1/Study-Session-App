@@ -6,8 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".ProjectParameters">
 
+    <Button
+        android:id="@+id/difficultyButton3_repeated2"
+        android:layout_width="66dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="399dp"
+        android:text="@string/highDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/difficultyButton2_repeated2"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEstTime_project" />
+
+    <Button
+        android:id="@+id/difficultyButton2_repeated2"
+        android:layout_width="62dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="400dp"
+        android:text="@string/midDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/difficultyButton3_repeated2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/difficultyButton1_project"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEstTime_repeated" />
+
+    <Button
+        android:id="@+id/difficultyButton1_project"
+        android:layout_width="68dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginBottom="404dp"
+        android:text="@string/lowDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/difficultyButton2_repeated2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/difficultyStr"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEstTime_project" />
+
     <TextView
-        android:id="@+id/dueDateStr3"
+        android:id="@+id/difficultyStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="316dp"
+        android:layout_marginBottom="337dp"
+        android:text="@string/difficultyStr"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estTimeStr"
+        app:layout_constraintVertical_bias="0.012" />
+
+    <EditText
+        android:id="@+id/editTextEstTime_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="492dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/EstTimeHint"
+        android:inputType="numberDecimal"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/estTimeStr"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDueDate_project"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/estTimeStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="500dp"
+        android:text="@string/estTimeStr"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editTextEstTime_project"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dueDateStr"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/dueDateStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -17,28 +107,31 @@
         android:text="@string/dueDateStr"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDueDate2"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDueDate_project"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr" />
+        app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editTextDueDate2"
+        android:id="@+id/editTextDueDate_project"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="31dp"
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="569dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/editTextDueDate"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName"
-        app:layout_constraintVertical_bias="1.0"
-        android:autofillHints=""
-        />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dueDateStr"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName_project"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/addTaskNameStr"
@@ -50,13 +143,15 @@
         android:text="@string/taskNameLabel"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTaskName_project"
 
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextTaskName"
+        android:id="@+id/editTextTaskName_project"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -69,6 +164,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/addTaskNameStr"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 

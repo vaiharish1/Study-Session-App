@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextTaskName"
+        android:id="@+id/editTextTaskName_onetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
@@ -36,7 +36,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.189"
         app:layout_constraintStart_toEndOf="@+id/addTaskNameStr"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -52,24 +52,59 @@
         android:text="@string/dueDateStr"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDueDate"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDueDate_onetime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr" />
 
     <EditText
-        android:id="@+id/editTextDueDate"
+        android:id="@+id/editTextDueDate_onetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="23dp"
         android:layout_marginBottom="580dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/editTextDueDate"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dueDateStr"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTaskName_onetime" />
+
+    <TextView
+        android:id="@+id/estTimeStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="535dp"
+        android:text="@string/estTimeStr"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editTextEstTime_project"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dueDateStr"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <EditText
+        android:id="@+id/editTextEstTime_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="533dp"
         android:autofillHints=""
-        />
+        android:ems="10"
+        android:hint="@string/EstTimeHint"
+        android:inputType="numberDecimal"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/estTimeStr"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDueDate_onetime"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

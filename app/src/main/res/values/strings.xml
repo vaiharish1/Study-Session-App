@@ -17,7 +17,14 @@
     <string name="repeatStr">Repeat: </string>
     <string name="incrementValueStr">… </string>
     <string name="daysStr">days</string>
-    <string name="estTimeStr">Estimated Time:</string>
+    <string name="estTimeStr">Est. Time:</string>
+    <string name="EstTimeHint">Enter Estimated Time</string>
+    <string name="difficultyStr">Difficulty:</string>
+    <string name="lowDifficultyButton">*</string>
+    <string name="midDifficultyButton">**</string>
+    <string name="highDifficultyButton">***</string>
+
+
 
 
 
