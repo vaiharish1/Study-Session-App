@@ -29,6 +29,11 @@
 
 
 
+    <string name="todaySessionHeaderStr">Today\'s Session </string>
+    <string name="todaySessionTaskNameStr">Task Name </string>
+    <string name="todaySessionTimeStr">HH:MM - HH:MM </string>
+    <string name="upButtonStr">Move up </string>
+    <string name="downButtonStr">Move down </string>
 
 
 </resources>

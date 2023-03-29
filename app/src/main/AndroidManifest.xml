@@ -21,6 +21,9 @@
             android:name=".OneTimeParameters"
             android:exported="false" />
         <activity
+            android:name=".Calendar"
+            android:exported="false" />
+        <activity
             android:name=".Settings"
             android:exported="false" />
         <activity
