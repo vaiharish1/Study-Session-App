@@ -6,38 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".AddTasks">
 
+    <Button
+        android:id="@+id/oneTimeButton"
+        android:layout_width="193dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="48dp"
+        android:onClick="oneTimeNav"
+        android:text="@string/oneTimeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/projectButton" />
+
     <TextView
-        android:id="@+id/addTaskName"
+        android:id="@+id/chooseTaskTypeStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="664dp"
-        android:text="@string/taskNameLabel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTaskName"
+        android:layout_marginTop="88dp"
+        android:text="@string/chooseTaskTypeStr"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/projectButton"
+        android:layout_width="193dp"
+        android:layout_height="135dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/projectText"
+        app:layout_constraintBottom_toTopOf="@+id/oneTimeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repeatedButton"
+        app:layout_constraintVertical_bias="0.5"
+        android:onClick="projectNav"
         />
 
-    <EditText
-        android:id="@+id/editTextTaskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="651dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/taskNameHint"
-        android:inputType="textPersonName"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/repeatedButton"
+        android:layout_width="196dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/repeatedText"
+        app:layout_constraintBottom_toTopOf="@+id/projectButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addTaskName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseTaskTypeStr"
+        android:onClick="repeatedNav"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

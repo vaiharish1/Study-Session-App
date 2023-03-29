@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">LuRiVa2</string>
-    <string name="apptitle">LRV</string>
+    <string name="title">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
     <string name="viewCal">View Calendar</string>
     <string name="addTasks">Add Tasks</string>
@@ -8,6 +8,26 @@
 
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
+    <string name="oneTimeText">One- Time</string>
+    <string name="repeatedText">Repeated</string>
+    <string name="projectText">Project</string>
+    <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
+    <string name="dueDateStr">Due Date:</string>
+    <string name="editTextDueDate">Enter a Date</string>
+    <string name="repeatStr">Repeat: </string>
+    <string name="incrementValueStr">… </string>
+    <string name="daysStr">days</string>
+    <string name="estTimeStr">Est. Time:</string>
+    <string name="EstTimeHint">Enter Est. Time</string>
+    <string name="difficultyStr">Difficulty:</string>
+    <string name="lowDifficultyButton">*</string>
+    <string name="midDifficultyButton">**</string>
+    <string name="highDifficultyButton">***</string>
+    <string name = "hoursStr">hours</string>
+
+
+
+
 
     <string name="todaySessionHeaderStr">Today\'s Session </string>
     <string name="todaySessionTaskNameStr">Task Name </string>
