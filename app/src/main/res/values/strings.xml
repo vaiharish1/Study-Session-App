@@ -18,11 +18,12 @@
     <string name="incrementValueStr">… </string>
     <string name="daysStr">days</string>
     <string name="estTimeStr">Est. Time:</string>
-    <string name="EstTimeHint">Enter Estimated Time</string>
+    <string name="EstTimeHint">Enter Est. Time</string>
     <string name="difficultyStr">Difficulty:</string>
     <string name="lowDifficultyButton">*</string>
     <string name="midDifficultyButton">**</string>
     <string name="highDifficultyButton">***</string>
+    <string name = "hoursStr">hours</string>
 
 
 
