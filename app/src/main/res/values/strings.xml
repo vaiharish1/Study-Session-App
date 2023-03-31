@@ -1,4 +1,6 @@
 <resources>
+
+    //home screen
     <string name="app_name">LuRiVa2</string>
     <string name="title">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
@@ -6,6 +8,7 @@
     <string name="addTasks">Add Tasks</string>
     <string name="settings">Settings</string>
 
+    //add tasks
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
     <string name="oneTimeText">One- Time</string>
@@ -24,6 +27,8 @@
     <string name="midDifficultyButton">**</string>
     <string name="highDifficultyButton">***</string>
     <string name = "hoursStr">hours</string>
+    <string name = "doneButton_repeated">DONE</string>
+
 
 
 

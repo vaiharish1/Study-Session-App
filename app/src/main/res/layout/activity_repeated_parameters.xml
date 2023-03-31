@@ -26,6 +26,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/EstTimeHint"
+        android:onClick="collectTime"
         android:inputType="numberDecimal"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/hoursStr"
@@ -92,6 +93,7 @@
         android:ems="10"
         android:hint="@string/taskNameHint"
         android:inputType="textPersonName"
+        android:onClick="collectTaskName"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/addTaskNameStr"
         app:layout_constraintStart_toStartOf="@+id/editTextDueDate_repeated"
@@ -101,6 +103,7 @@
         android:id="@+id/editTextDueDate_repeated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="collectDueDate"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/editTextDueDate"
@@ -118,6 +121,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/incrementValueStr"
+        android:onClick="collectIncrement"
         android:inputType="number|textPersonName"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/IncrementStr"
@@ -167,5 +171,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/difficultyButton2_repeated"
         app:layout_constraintTop_toTopOf="@+id/difficultyButton2_repeated" />
+
+    <Button
+        android:id="@+id/doneButton_repeated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/doneButton_repeated"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultyButton1_repeated"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
