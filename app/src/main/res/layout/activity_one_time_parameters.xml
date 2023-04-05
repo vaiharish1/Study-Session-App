@@ -7,50 +7,54 @@
     tools:context=".OneTimeParameters">
 
     <TextView
+        android:id="@+id/TextViewdifficulty_onetime"
+        android:layout_width="210dp"
+        android:layout_height="65dp"
+        android:ems="10"
+        android:onClick="collectDif"
+        android:text="@string/textDifficulty"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/difficultyButton3_onetime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultyStr3"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
         android:id="@+id/hoursStr3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="461dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginStart="18dp"
         android:text="@string/hoursStr"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextEstTime_project"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/addTaskNameStr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/taskNameLabel"
-
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/dueDateStr"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/editTextEstTime_onetime"
+        app:layout_constraintStart_toEndOf="@+id/editTextEstTime_onetime" />
 
     <EditText
         android:id="@+id/editTextTaskName_onetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/taskNameHint"
         android:inputType="textPersonName"
+        android:onClick="collectTaskName"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/addTaskNameStr"
-        app:layout_constraintStart_toStartOf="@+id/editTextDueDate_onetime"
-        app:layout_constraintTop_toTopOf="@+id/addTaskNameStr" />
+        app:layout_constraintStart_toEndOf="@+id/addTaskNameStr" />
 
     <TextView
         android:id="@+id/dueDateStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="9dp"
         android:text="@string/dueDateStr"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/estTimeStr"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDueDate_onetime"
         app:layout_constraintStart_toStartOf="@+id/addTaskNameStr"
         app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr" />
 
@@ -58,61 +62,102 @@
         android:id="@+id/editTextDueDate_onetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/editTextDueDate"
         android:inputType="date|datetime"
         android:minHeight="48dp"
+        android:onClick="collectDueDate"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/dueDateStr"
-        app:layout_constraintStart_toEndOf="@+id/dueDateStr"
-        app:layout_constraintTop_toTopOf="@+id/dueDateStr" />
+        app:layout_constraintStart_toStartOf="@+id/editTextTaskName_onetime" />
 
     <TextView
         android:id="@+id/estTimeStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
         android:text="@string/estTimeStr"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/difficultyStr3"
         app:layout_constraintStart_toStartOf="@+id/dueDateStr"
         app:layout_constraintTop_toBottomOf="@+id/dueDateStr" />
 
     <EditText
-        android:id="@+id/editTextEstTime_project"
+        android:id="@+id/editTextEstTime_onetime"
         android:layout_width="206dp"
         android:layout_height="54dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/EstTimeHint"
         android:inputType="numberDecimal"
+        android:onClick="collectTime"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/hoursStr3"
-        app:layout_constraintStart_toStartOf="@+id/editTextDueDate_onetime"
-        app:layout_constraintTop_toTopOf="@+id/hoursStr3" />
+        app:layout_constraintBottom_toBottomOf="@+id/estTimeStr"
+        app:layout_constraintStart_toStartOf="@+id/editTextDueDate_onetime" />
 
     <Button
-        android:id="@+id/difficultyButton2_project4"
-        android:layout_width="62dp"
-        android:layout_height="49dp"
-        android:text="@string/midDifficultyButton"
-        app:layout_constraintBottom_toBottomOf="@+id/difficultyButton1_project6"
-        app:layout_constraintEnd_toStartOf="@+id/difficultyButton3_project4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/difficultyButton1_project6"
-        app:layout_constraintTop_toTopOf="@+id/difficultyButton1_project6" />
-
-    <Button
-        android:id="@+id/difficultyButton3_project4"
-        android:layout_width="66dp"
-        android:layout_height="50dp"
-        android:text="@string/highDifficultyButton"
-        app:layout_constraintBottom_toBottomOf="@+id/difficultyButton2_project4"
+        android:id="@+id/doneButton_onetime"
+        android:layout_width="108dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginBottom="17dp"
+        android:onClick="todaysSessionsNav"
+        android:text="@string/doneButton_repeated"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/difficultyButton2_project4"
-        app:layout_constraintTop_toTopOf="@+id/difficultyButton2_project4" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultyButton2_onetime" />
+
+    <TextView
+        android:id="@+id/addTaskNameStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+
+        android:layout_marginTop="82dp"
+        android:text="@string/taskNameLabel"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/difficultyButton3_onetime"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="202dp"
+        android:onClick="onClickHard"
+        android:text="@string/highDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/difficultyButton2_onetime" />
+
+    <Button
+        android:id="@+id/difficultyButton1_onetime"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="onClickEasy"
+        android:text="@string/lowDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="@+id/difficultyButton2_onetime"
+        app:layout_constraintEnd_toStartOf="@+id/difficultyButton2_onetime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/difficultyButton2_onetime"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/difficultyButton2_onetime"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="onClickMedium"
+        android:text="@string/midDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="@+id/difficultyButton3_onetime"
+        app:layout_constraintEnd_toStartOf="@+id/difficultyButton3_onetime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/difficultyButton1_onetime"
+        app:layout_constraintTop_toTopOf="@+id/difficultyButton3_onetime"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/difficultyStr3"
@@ -120,17 +165,11 @@
         android:layout_height="wrap_content"
         android:text="@string/difficultyStr"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/estTimeStr"
-        app:layout_constraintTop_toBottomOf="@+id/estTimeStr" />
+        app:layout_constraintBottom_toTopOf="@+id/TextViewdifficulty_onetime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEstTime_onetime"
+        app:layout_constraintVertical_bias="0.5" />
 
-    <Button
-        android:id="@+id/difficultyButton1_project6"
-        android:layout_width="68dp"
-        android:layout_height="49dp"
-        android:text="@string/lowDifficultyButton"
-        app:layout_constraintBottom_toBottomOf="@+id/difficultyStr3"
-        app:layout_constraintStart_toEndOf="@+id/difficultyStr3"
-        app:layout_constraintStart_toStartOf="@+id/editTextEstTime_project"
-        app:layout_constraintTop_toTopOf="@+id/difficultyStr3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

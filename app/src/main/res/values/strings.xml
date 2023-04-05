@@ -14,7 +14,7 @@
     <string name="oneTimeText">One- Time</string>
     <string name="repeatedText">Repeated</string>
     <string name="projectText">Project</string>
-    <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
+    <string name="chooseTaskTypeStr">What type of task are you adding?</string>
     <string name="dueDateStr">Due Date:</string>
     <string name="editTextDueDate">Enter a Date</string>
     <string name="repeatStr">Repeat: </string>
@@ -28,6 +28,7 @@
     <string name="highDifficultyButton">***</string>
     <string name = "hoursStr">hours</string>
     <string name = "doneButton_repeated">DONE</string>
+    <string name = "textDifficulty">Click Difficulty</string>
 
 
 
