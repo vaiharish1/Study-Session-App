@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditBlackoutTimes">
+
+    <TextView
+        android:id="@+id/editBlackoutTimesHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/editBlackoutTimesHeaderStr"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/editBlackoutTimesBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/enterBlackoutDaysPrompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enterBlackoutDaysPromptStr"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/chooseDaysDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/selectDaysStr"
+            android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/enterBlackoutTimesPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enterBlackoutTimesPromptStr"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/startTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterStartTimesStr"
+            android:importantForAutofill="no"
+            android:inputType="time"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/endTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/enterEndTimesStr"
+            android:importantForAutofill="no"
+            android:inputType="time"
+            android:minHeight="48dp"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/resetBlackoutTimes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="save"
+            android:rotation="0"
+            android:rotationX="0"
+            android:rotationY="0"
+            android:text="@string/resetBlackoutTimesStr" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

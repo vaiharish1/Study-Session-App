@@ -15,5 +15,26 @@
     <string name="upButtonStr">Move up </string>
     <string name="downButtonStr">Move down </string>
 
+    <string name="settingsHeaderStr">Settings </string>
+    <string name="settingsDisableNotificationsStr">Disable notifications</string>
+    <string name="settingsEditBlackoutTimesStr">Edit Blackout Times</string>
+    <string name="settingsEditTimerStr">Edit Timer</string>
 
+    <string-array name="editDaysList">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string name="editBlackoutTimesHeaderStr">Edit Blackout Times</string>
+    <string name="enterBlackoutDaysPromptStr">Select a day</string>
+    <string name="enterBlackoutTimesPromptStr">Enter a time when you are not available</string>
+    <string name="enterStartTimesStr">Enter the start time (HH:MM)</string>
+    <string name="enterEndTimesStr">Enter the end time (HH:MM)</string>
+    <string name="resetBlackoutTimesStr">Save and add another time</string>
+    <string name="selectDaysStr">Select a day</string>
 </resources>
