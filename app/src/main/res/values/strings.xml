@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">LuRiVa2</string>
-    <string name="title">LRV</string>
+    <string name="app_name">LuRiVa - Session Study App!</string>
+    <string name="appNameStr">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
     <string name="viewCal">View Calendar</string>
     <string name="addTasks">Add Tasks</string>
