@@ -150,7 +150,7 @@
         android:id="@+id/addTaskNameStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="91dp"
 
         android:layout_marginEnd="56dp"

@@ -80,15 +80,15 @@ public class ProjectParameters extends AppCompatActivity {
 
     public void onClickEasy(View v){
         populateEasy();
-        collectDif();
+        collectDif(v);
     }
     public void onClickMedium(View v){
         populateMid();
-        collectDif();
+        collectDif(v);
     }
     public void onCLickHard(View v){
         populateHard();
-        collectDif();
+        collectDif(v);
     }
     public String getDif() {
         TextView difText = findViewById(R.id.TextViewdifficulty_project);
@@ -99,18 +99,11 @@ public class ProjectParameters extends AppCompatActivity {
         return difStr;
     }
 
-    public void collectDif() {
+    public void collectDif(View v) {
         String dif = getDif();
         Toast toast = Toast.makeText(getApplicationContext(), "Difficulty: " + dif, Toast.LENGTH_LONG);
         toast.show();
 
-    }
-
-    public void TodaysSessionsNav(){
-        Intent intent = new Intent(this, TodaysSessions.class );
-        startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
-        toast.show();
     }
 
     public void todaysSessionsNav(View v){

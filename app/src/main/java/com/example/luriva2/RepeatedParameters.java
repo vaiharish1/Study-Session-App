@@ -81,15 +81,15 @@ public class RepeatedParameters extends AppCompatActivity {
 
     public void onClickEasy(View v){
         populateEasy();
-        collectDif();
+        collectDif(v);
     }
     public void onClickMedium(View v){
         populateMid();
-        collectDif();
+        collectDif(v);
     }
     public void onCLickHard(View v){
         populateHard();
-        collectDif();
+        collectDif(v);
     }
     public String getDif() {
         TextView difText = findViewById(R.id.TextViewdifficulty_repeated);
@@ -100,7 +100,7 @@ public class RepeatedParameters extends AppCompatActivity {
         return difStr;
     }
 
-    public void collectDif() {
+    public void collectDif(View v) {
         String dif = getDif();
         Toast toast = Toast.makeText(getApplicationContext(), "Difficulty: " + dif, Toast.LENGTH_LONG);
         toast.show();
