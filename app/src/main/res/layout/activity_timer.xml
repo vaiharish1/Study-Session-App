@@ -4,58 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings">
+    tools:context=".Timer">
 
     <TextView
-        android:id="@+id/settingsHeader"
+        android:id="@+id/timerStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="48dp"
-        android:text="@string/settingsHeaderStr"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/editBlackoutTimes"
+        android:layout_marginTop="48dp"
+        android:text="Status: On Break"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/disableNotificationsSwitch"
+    <TextView
+        android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:minHeight="48dp"
-        android:text="@string/settingsDisableNotificationsStr"
-        android:textSize="18sp"
+        android:layout_marginTop="40dp"
+        android:text="00:00:00"
+        android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editBlackoutTimes" />
+        app:layout_constraintTop_toBottomOf="@+id/timerStatus" />
 
-    <Switch
-        android:id="@+id/disableAppsSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:minHeight="48dp"
-        android:text="@string/settingsDisableAppsStr"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/disableNotificationsSwitch" />
-
-    <Button
-        android:id="@+id/editBlackoutTimes"
+    <TextView
+        android:id="@+id/motivationalQuote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:onClick="editBlackoutTimesNav"
-        android:text="@string/settingsEditBlackoutTimesStr"
+        android:text="You got this!"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/timer" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/motivationalQuote" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

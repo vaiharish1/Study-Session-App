@@ -17,8 +17,9 @@
 
     <string name="settingsHeaderStr">Settings </string>
     <string name="settingsDisableNotificationsStr">Disable notifications</string>
+    <string name="settingsDisableAppsStr">Disable other apps</string>
     <string name="settingsEditBlackoutTimesStr">Edit Blackout Times</string>
-    <string name="settingsEditTimerStr">Edit Timer</string>
+    <string name="settingsEditTimerStr">Edit Break Timer</string>
 
     <string-array name="editDaysList">
         <item>Monday</item>
