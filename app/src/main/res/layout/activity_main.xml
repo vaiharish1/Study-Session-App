@@ -10,71 +10,68 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:textSize="60sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/todaysSessions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
+        app:layout_constraintVertical_bias="0.5"
         tools:text="@string/title" />
 
     <Button
         android:id="@+id/todaysSessions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginEnd="117dp"
-        android:text="@string/todaySession"
-        app:layout_constraintBottom_toTopOf="@+id/viewCalendar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
         android:onClick="todaysSessionsNav"
-        />
+        android:text="@string/todaySession"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/viewCalendar"
+        app:layout_constraintEnd_toEndOf="@+id/viewCalendar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/viewCalendar"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
         android:id="@+id/viewCalendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="127dp"
-        android:layout_marginEnd="128dp"
-        android:text="@string/viewCal"
-        app:layout_constraintBottom_toTopOf="@+id/addTasks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todaysSessions"
         android:onClick="viewCalNav"
+        android:text="@string/viewCal"
 
-        />
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/addTasks"
+        app:layout_constraintEnd_toEndOf="@+id/addTasks"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/addTasks"
+        app:layout_constraintTop_toBottomOf="@+id/todaysSessions" />
 
     <Button
         android:id="@+id/addTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
-        android:layout_marginEnd="147dp"
-        android:text="@string/addTasks"
-        app:layout_constraintBottom_toTopOf="@+id/settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewCalendar"
         android:onClick="addTasksNav"
-        />
+        android:text="@string/addTasks"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/settings"
+        app:layout_constraintEnd_toEndOf="@+id/settings"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/settings"
+        app:layout_constraintTop_toBottomOf="@+id/viewCalendar" />
 
     <Button
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginEnd="147dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginEnd="151dp"
+        android:onClick="settingsNav"
         android:text="@string/settings"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTasks"
-        android:onClick="settingsNav"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/addTasks" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
