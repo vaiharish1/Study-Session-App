@@ -1,3 +1,5 @@
+package com.example.luriva2.dataModelClasses;
+
 import java.util.Date;
 
 public class ProjectTask extends Task {

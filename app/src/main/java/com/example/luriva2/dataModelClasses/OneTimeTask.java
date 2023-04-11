@@ -1,3 +1,4 @@
+package com.example.luriva2.dataModelClasses;
 
 public class OneTimeTask extends Task {
 	

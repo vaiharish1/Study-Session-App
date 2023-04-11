@@ -1,3 +1,5 @@
+package com.example.luriva2.dataModelClasses;
+
 public class Task {
 	private String name;
 	private int difficulty;
