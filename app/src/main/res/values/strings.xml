@@ -5,6 +5,7 @@
     <string name="viewCal">View Calendar</string>
     <string name="addTasks">Add Tasks</string>
     <string name="settings">Settings</string>
+    <string name="timerButtonStr">Timer</string>
 
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>

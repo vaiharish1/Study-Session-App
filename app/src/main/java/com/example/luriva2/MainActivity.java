@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void settingsNav(View v) {
         Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
+
+    public void timerNav(View v){
+        Log.d("Luke","Test");
+        Intent intent = new Intent(this,Timer.class);
         startActivity(intent);
     }
 }

@@ -3,54 +3,47 @@ package com.example.luriva2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class Timer extends AppCompatActivity {
     TextView status;
     TextView timer;
     TextView motivationalQuote;
-    int timeInt;
-    String timerText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-        TextView status = findViewById(R.id.timerStatus);
-        TextView timer = findViewById(R.id.timer);
-        TextView motivationalQuote = findViewById(R.id.motivationalQuote);
-        timeInt = 1;
-        timerText = "45:00";
+        status = findViewById(R.id.timerStatus);
+        timer = findViewById(R.id.timer);
+        motivationalQuote = findViewById(R.id.motivationalQuote);
+        int min = 2;
+        CountDownTimer countdown = new CountDownTimer(min*60*1000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timer.setText(msToMin(millisUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+                timer.setText("Done!");
+            }
+
+        };
+
+         countdown.start();
+
     }
 
-    public void countdown(){
-        while(timeInt!=0){
-            timeToInt();
-            timeInt--;
-            delay(1);
-            intToTime();
-            timer.setText(timerText);
-        }
+    private String msToMin(long ms) {
+        int sec = (int)(ms/1000)%60;
+        int min = (int)(ms/1000)/60;
+        String time = String.format("%02d",min) + ":" + String.format("%02d",sec);
+        return time;
     }
 
-    private void timeToInt(){
-        int min = Integer.parseInt(timerText.substring(0,2))*60;
-        int sec = Integer.parseInt(timerText.substring(3,5));
-        timeInt = min + sec;
-    }
-    private void intToTime() {
-        int min = timeInt/60;
-        int sec = timeInt%60;
-        timerText = (String.format("%02d",min) + ":" + String.format("%02d",sec));
-    }
-
-    public void delay(long n)
-    {
-        n *= 1000000000;
-        long startDelay = System.nanoTime();
-        long endDelay = 0;
-        while (endDelay - startDelay < n)
-            endDelay = System.nanoTime();
-    }
 
 }
