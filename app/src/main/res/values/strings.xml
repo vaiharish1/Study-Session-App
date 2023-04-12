@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">LuRiVa2</string>
-    <string name="apptitle">LRV</string>
+    <string name="appTitle">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
     <string name="viewCal">View Calendar</string>
     <string name="addTasks">Add Tasks</string>
@@ -39,4 +39,14 @@
     <string name="enterEndTimesStr">Enter the end time (HH:MM)</string>
     <string name="resetBlackoutTimesStr">Save and add another time</string>
     <string name="selectDaysStr">Select a day</string>
+
+    <string name="cancelButtonStr">Cancel</string>
+    <string-array name="motivationQuotes">
+        <item>You got this!</item>
+        <item>Keep up the good work!</item>
+        <item>Relax. Take a deep breathe.</item>
+        <item>Don\'t give up!</item>
+        <item>Give your all!</item>
+        <item>Try your best!</item>
+    </string-array>
 </resources>

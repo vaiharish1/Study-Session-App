@@ -7,60 +7,54 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/mainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/appTitle"
         android:textSize="60sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/todaysSessions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
-        tools:text="@string/apptitle" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/todaysSessions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginEnd="117dp"
         android:onClick="todaysSessionsNav"
         android:text="@string/todaySession"
-        app:layout_constraintBottom_toTopOf="@+id/settings"
+        app:layout_constraintBottom_toTopOf="@+id/addTasks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
 
     <Button
         android:id="@+id/viewCalendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="127dp"
-        android:layout_marginEnd="128dp"
         android:onClick="viewCalNav"
         android:text="@string/viewCal"
-        app:layout_constraintBottom_toTopOf="@+id/timerButton"
+
+        app:layout_constraintBottom_toTopOf="@+id/settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/settings" />
+        app:layout_constraintTop_toBottomOf="@+id/timerButton" />
 
     <Button
         android:id="@+id/addTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="147dp"
-        android:layout_marginEnd="147dp"
         android:onClick="addTasksNav"
         android:text="@string/addTasks"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/timerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timerButton" />
+        app:layout_constraintTop_toBottomOf="@+id/todaysSessions" />
 
     <Button
         android:id="@+id/settings"
@@ -68,11 +62,11 @@
         android:layout_height="wrap_content"
         android:onClick="settingsNav"
         android:text="@string/settings"
-        app:layout_constraintBottom_toTopOf="@+id/viewCalendar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todaysSessions" />
+        app:layout_constraintTop_toBottomOf="@+id/viewCalendar" />
 
     <Button
         android:id="@+id/timerButton"
@@ -80,10 +74,10 @@
         android:layout_height="wrap_content"
         android:onClick="timerNav"
         android:text="@string/timerButtonStr"
-        app:layout_constraintBottom_toTopOf="@+id/addTasks"
+        app:layout_constraintBottom_toTopOf="@+id/viewCalendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewCalendar" />
+        app:layout_constraintTop_toBottomOf="@+id/addTasks" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
