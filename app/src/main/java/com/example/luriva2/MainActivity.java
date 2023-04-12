@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
     public void viewCalNav(View v){
+        Log.d("vai","in viewCalNav method");
         Intent intent = new Intent(this, ViewCalendar.class );
         startActivity(intent);
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Calendar", Toast.LENGTH_LONG);

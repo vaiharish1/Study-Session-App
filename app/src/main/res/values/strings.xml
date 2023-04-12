@@ -29,12 +29,16 @@
     <string name = "hoursStr">hours</string>
     <string name = "doneButton_repeated">DONE</string>
     <string name = "textDifficulty">Click Difficulty</string>
-
-
-
-
-
-
+    <string name="rightArrow"><![CDATA[—>]]></string>
+    <string name="leftArrow"><![CDATA[<—]]></string>
+    <string name="todaysDate">April 2023</string>
+    <string name="sunString">SUN</string>
+    <string name="monString">MON</string>
+    <string name="tueString">TUE</string>
+    <string name="wedString">WED</string>
+    <string name="thuString">THU</string>
+    <string name="friString">FRI</string>
+    <string name="satString">SAT</string>
 
 
 </resources>
