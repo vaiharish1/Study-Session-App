@@ -10,14 +10,10 @@
         android:id="@+id/hoursStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="99dp"
-        android:layout_marginEnd="30dp"
         android:text="@string/hoursStr"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextEstTime_repeated"
-        app:layout_constraintTop_toBottomOf="@+id/daysStr" />
+        app:layout_constraintBottom_toBottomOf="@+id/editTextEstTime_repeated"
+        app:layout_constraintStart_toEndOf="@+id/editTextEstTime_repeated" />
 
     <EditText
         android:id="@+id/editTextEstTime_repeated"
@@ -27,10 +23,10 @@
         android:ems="10"
         android:hint="@string/EstTimeHint"
         android:inputType="numberDecimal"
+        android:onClick="collectTime"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/hoursStr"
-        app:layout_constraintStart_toStartOf="@+id/difficultyButton1_repeated"
-        app:layout_constraintTop_toTopOf="@+id/hoursStr" />
+        app:layout_constraintBottom_toBottomOf="@+id/estTimeStr"
+        app:layout_constraintStart_toStartOf="@+id/editTextIncrementValue_repeated" />
 
     <TextView
         android:id="@+id/estTimeStr"
@@ -38,19 +34,32 @@
         android:layout_height="wrap_content"
         android:text="@string/estTimeStr"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/difficultyStr"
-        app:layout_constraintStart_toStartOf="@+id/difficultyStr"
+        app:layout_constraintBottom_toTopOf="@+id/TextViewdifficulty_repeated"
+        app:layout_constraintStart_toStartOf="@+id/IncrementStr"
         app:layout_constraintTop_toBottomOf="@+id/IncrementStr" />
 
+    <EditText
+        android:id="@+id/editTextIncrementValue_repeated"
+        android:layout_width="132dp"
+        android:layout_height="53dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/incrementValueStr"
+        android:inputType="number|textPersonName"
+        android:minHeight="48dp"
+        android:onClick="collectIncrement"
+        app:layout_constraintBottom_toBottomOf="@+id/IncrementStr"
+        app:layout_constraintStart_toStartOf="@+id/editTextTaskName_repeated" />
+
     <TextView
-        android:id="@+id/dueDateStr"
+        android:id="@+id/daysStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dueDateStr"
+        android:layout_marginStart="55dp"
+        android:text="@string/daysStr"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/IncrementStr"
-        app:layout_constraintStart_toStartOf="@+id/IncrementStr"
-        app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr" />
+        app:layout_constraintBottom_toBottomOf="@+id/editTextIncrementValue_repeated"
+        app:layout_constraintStart_toEndOf="@+id/editTextIncrementValue_repeated" />
 
     <TextView
         android:id="@+id/IncrementStr"
@@ -59,113 +68,115 @@
         android:text="@string/repeatStr"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/estTimeStr"
-        app:layout_constraintStart_toStartOf="@+id/estTimeStr"
-        app:layout_constraintTop_toBottomOf="@+id/dueDateStr" />
-
-    <TextView
-        android:id="@+id/daysStr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:text="@string/daysStr"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/EditTextIncrementValue_repeated"
-        app:layout_constraintStart_toEndOf="@+id/EditTextIncrementValue_repeated"
-        app:layout_constraintTop_toTopOf="@+id/EditTextIncrementValue_repeated" />
-
-    <TextView
-        android:id="@+id/addTaskNameStr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/taskNameLabel"
-        android:textSize="20sp"
-
-        app:layout_constraintBottom_toTopOf="@+id/dueDateStr"
-        app:layout_constraintStart_toStartOf="@+id/dueDateStr"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/addTaskNameStr"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskNameStr" />
 
     <EditText
         android:id="@+id/editTextTaskName_repeated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/taskNameHint"
         android:inputType="textPersonName"
+        android:onClick="collectTaskName"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/addTaskNameStr"
-        app:layout_constraintStart_toStartOf="@+id/editTextDueDate_repeated"
-        app:layout_constraintTop_toTopOf="@+id/addTaskNameStr" />
-
-    <EditText
-        android:id="@+id/editTextDueDate_repeated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/editTextDueDate"
-        android:inputType="date|datetime"
-        android:minHeight="48dp"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/dueDateStr"
-        app:layout_constraintStart_toStartOf="@+id/EditTextIncrementValue_repeated"
-        app:layout_constraintTop_toTopOf="@+id/dueDateStr" />
-
-    <EditText
-        android:id="@+id/EditTextIncrementValue_repeated"
-        android:layout_width="132dp"
-        android:layout_height="53dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/incrementValueStr"
-        android:inputType="number|textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/IncrementStr"
-        app:layout_constraintStart_toStartOf="@+id/editTextEstTime_repeated"
-        app:layout_constraintTop_toTopOf="@+id/IncrementStr" />
+        app:layout_constraintStart_toEndOf="@+id/addTaskNameStr" />
 
     <TextView
-        android:id="@+id/difficultyStr"
+        android:id="@+id/addTaskNameStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/difficultyStr"
+
+        android:layout_marginStart="19dp"
+        android:text="@string/taskNameLabel"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/IncrementStr"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/estTimeStr" />
-
-    <Button
-        android:id="@+id/difficultyButton1_repeated"
-        android:layout_width="68dp"
-        android:layout_height="49dp"
-        android:text="@string/lowDifficultyButton"
-        app:layout_constraintBottom_toBottomOf="@+id/difficultyStr"
-        app:layout_constraintEnd_toStartOf="@+id/difficultyButton2_repeated"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/difficultyStr"
-        app:layout_constraintTop_toTopOf="@+id/difficultyStr" />
-
-    <Button
-        android:id="@+id/difficultyButton2_repeated"
-        android:layout_width="62dp"
-        android:layout_height="49dp"
-        android:text="@string/midDifficultyButton"
-        app:layout_constraintBottom_toBottomOf="@+id/difficultyButton1_repeated"
-        app:layout_constraintEnd_toStartOf="@+id/difficultyButton3_repeated"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/difficultyButton1_repeated"
-        app:layout_constraintTop_toTopOf="@+id/difficultyButton1_repeated" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/difficultyButton3_repeated"
-        android:layout_width="66dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="onCLickHard"
         android:text="@string/highDifficultyButton"
         app:layout_constraintBottom_toBottomOf="@+id/difficultyButton2_repeated"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/difficultyButton2_repeated"
-        app:layout_constraintTop_toTopOf="@+id/difficultyButton2_repeated" />
+        app:layout_constraintTop_toTopOf="@+id/difficultyButton2_repeated"
+        app:layout_constraintVertical_bias="0.0"
+        app:toggleCheckedStateOnClick="true" />
+
+    <Button
+        android:id="@+id/difficultyButton2_repeated"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:onClick="onClickMedium"
+        android:text="@string/midDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="@+id/difficultyButton1_repeated"
+        app:layout_constraintEnd_toStartOf="@+id/difficultyButton3_repeated"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/difficultyButton1_repeated"
+        app:layout_constraintTop_toTopOf="@+id/difficultyButton1_repeated"
+        app:layout_constraintVertical_bias="0.0"
+        app:toggleCheckedStateOnClick="true" />
+
+    <Button
+        android:id="@+id/difficultyButton1_repeated"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="237dp"
+        android:onClick="onClickEasy"
+        android:text="@string/lowDifficultyButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/difficultyButton2_repeated"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewdifficulty_repeated"
+        app:toggleCheckedStateOnClick="true" />
+
+    <Button
+        android:id="@+id/doneButton_repeated"
+        android:layout_width="108dp"
+        android:layout_height="74dp"
+        android:onClick="todaysSessionsNav"
+        android:text="@string/doneButton_repeated"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewdifficulty_repeated"
+        app:layout_constraintVertical_bias="0.767" />
+
+    <TextView
+        android:id="@+id/difficultyStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/difficultyStr"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/TextViewdifficulty_repeated"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEstTime_repeated"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/TextViewdifficulty_repeated"
+        android:layout_width="199dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:text="@string/textDifficulty"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultyStr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

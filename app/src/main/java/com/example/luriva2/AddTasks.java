@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class AddTasks extends AppCompatActivity {
 
@@ -17,13 +18,19 @@ public class AddTasks extends AppCompatActivity {
     public void oneTimeNav(View v){
         Intent intent = new Intent(this, OneTimeParameters.class );
         startActivity(intent);
+        Toast toast = Toast.makeText(getApplicationContext(), "Viewing One-Time Task Manager", Toast.LENGTH_LONG);
+        toast.show();
     }
     public void repeatedNav(View v){
         Intent intent = new Intent(this, RepeatedParameters.class );
         startActivity(intent);
+        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Repeated Task Manager", Toast.LENGTH_LONG);
+        toast.show();
     }
     public void projectNav(View v){
         Intent intent = new Intent(this, ProjectParameters.class );
         startActivity(intent);
+        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Project Task Manager", Toast.LENGTH_LONG);
+        toast.show();
     }
 }
