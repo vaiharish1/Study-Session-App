@@ -3,13 +3,28 @@ package com.example.luriva2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.luriva2.dataModelClasses.Constants;
+import com.example.luriva2.dataModelClasses.OneTimeTask;
+import com.example.luriva2.dataModelClasses.Session;
+import com.example.luriva2.dataModelClasses.Task;
+import com.example.luriva2.TodaysSessions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 public class OneTimeParameters extends AppCompatActivity {
+
+    private ArrayList<Session> sessionModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +36,7 @@ public class OneTimeParameters extends AppCompatActivity {
             EditText taskNameText = findViewById(R.id.editTextTaskName_onetime);
             String taskNameStr = taskNameText.getText().toString();
             if (taskNameStr.isEmpty()) {
-                taskNameStr = "";
+                taskNameStr = null;
             }
             return taskNameStr;
         }
@@ -108,10 +123,59 @@ public class OneTimeParameters extends AppCompatActivity {
         }
 
     public void todaysSessionsNav(View v){
+        String name = getTaskName();
+        int dueDate = Integer.parseInt(getDueDate());
+
+        String difficulty = getDif();
+        int estimatedDifficulty;
+        if (difficulty.equals("Easy")) estimatedDifficulty = 3;
+        else if (difficulty.equals("Medium")) estimatedDifficulty = 2;
+        else if (difficulty.equals("Hard")) estimatedDifficulty = 1;
+        else estimatedDifficulty = 4;
+
+        Task newTask = new OneTimeTask(name, dueDate, estimatedDifficulty);
+
+        loadData();
+        sessionModels.add(new Session(newTask.getName(), sessionModels.get(sessionModels.size()-1).getEndTime() + Constants.BUFFER_TIME, sessionModels.get(sessionModels.size()-1).getEndTime() + Constants.BUFFER_TIME + newTask.getEstimatedTime()/newTask.getDifficulty()));
+        saveData(v);
+
         Intent intent = new Intent(this, TodaysSessions.class );
         startActivity(intent);
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    public void saveData(View v) {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(sessionModels);
+        editor.putString("session list", json);
+        editor.apply();
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("session list", null);
+        Type type = new TypeToken<ArrayList<Session>>() {}.getType();
+        sessionModels = gson.fromJson(json, type);
+
+        if (sessionModels == null) {
+            setUpSessionModels();
+        }
+    }
+
+    public void setUpSessionModels() {
+        sessionModels = new ArrayList<Session>();
+        String[] sessionNames = getResources().getStringArray(R.array.session_names);
+        String[] sessionStartTimes = getResources().getStringArray(R.array.session_start_times);
+        String[] sessionEndTimes = getResources().getStringArray(R.array.session_end_times);
+
+        for (int i = 0; i < sessionNames.length; i++) {
+            sessionModels.add(new Session(sessionNames[i], Integer.parseInt(sessionStartTimes[i]), Integer.parseInt(sessionEndTimes[i])));
+            Log.v("MODELS", sessionModels.get(i).toString());
+        }
     }
 
     }

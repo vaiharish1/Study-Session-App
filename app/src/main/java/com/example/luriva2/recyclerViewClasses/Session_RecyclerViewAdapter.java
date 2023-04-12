@@ -48,7 +48,7 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
     @Override
     public void onBindViewHolder(@NonNull Session_RecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.taskNameText.setText(sessionModels.get(position).getSessionName());
-        holder.taskTimeDisplayText.setText(Integer.toString(sessionModels.get(position).getStartTime()));
+        holder.taskTimeDisplayText.setText(Integer.toString(sessionModels.get(position).getStartTime()) + " - " + Integer.toString(sessionModels.get(position).getEndTime()));
         holder.upButton.setText(R.string.upButtonStr);
         holder.downButton.setText(R.string.downButtonStr);
         if (position == 0) holder.upButton.setVisibility(View.GONE);

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
@@ -34,6 +35,18 @@ public class TodaysSessions extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         createAdapter();
+
+        makeSaveButtonDisabled();
+    }
+
+    private void makeSaveButtonDisabled() {
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setEnabled(false);
+    }
+
+    private void makeSaveButtonEnabled() {
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setEnabled(true);
     }
 
     public void saveData(View v) {
@@ -43,6 +56,8 @@ public class TodaysSessions extends AppCompatActivity {
         String json = gson.toJson(sessionModels);
         editor.putString("session list", json);
         editor.apply();
+
+        makeSaveButtonDisabled();
     }
 
     private void loadData() {
@@ -76,6 +91,8 @@ public class TodaysSessions extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                     Log.v("PRESSED BUTTON", "UP");
                 }
+
+                makeSaveButtonEnabled();
             }
         });
 
@@ -83,7 +100,7 @@ public class TodaysSessions extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void setUpSessionModels() {
+    public void setUpSessionModels() {
         sessionModels = new ArrayList<Session>();
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionStartTimes = getResources().getStringArray(R.array.session_start_times);
