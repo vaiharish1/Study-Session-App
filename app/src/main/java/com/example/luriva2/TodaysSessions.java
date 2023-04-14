@@ -11,4 +11,6 @@ public class TodaysSessions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todays_sessions);
     }
+
+
 }
