@@ -8,12 +8,13 @@
 
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
+    <string name="taskTypeLabel">Session Type</string>
     <string name="oneTimeText">One- Time</string>
     <string name="repeatedText">Repeated</string>
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
     <string name="dueDateStr">Due Date:</string>
-    <string name="editTextDueDate">Enter a Date</string>
+    <string name="editTextDueDate">MM/DD/YYYY</string>
     <string name="repeatStr">Repeat: </string>
     <string name="incrementValueStr">… </string>
     <string name="daysStr">days</string>
@@ -60,22 +61,29 @@
     <string-array name="session_names">
         <item>STEM Project</item>
         <item>DBQs</item>
-        <item>Table</item>
-        <item>Car</item>
+        <item>Physics</item>
+        <item>Exercise</item>
     </string-array>
 
     <string-array name="session_start_times">
-        <item>10</item>
-        <item>12</item>
-        <item>1000</item>
-        <item>7</item>
+        <item>03:00</item>
+        <item>12:00</item>
+        <item>14:00</item>
+        <item>16:00</item>
     </string-array>
 
     <string-array name="session_end_times">
-        <item>11</item>
-        <item>12</item>
-        <item>1005</item>
-        <item>307</item>
+        <item>3:50</item>
+        <item>12:45</item>
+        <item>14:50</item>
+        <item>16:30</item>
+    </string-array>
+
+    <string-array name="session_types">
+        <item>Project</item>
+        <item>Repeated</item>
+        <item>One-Time</item>
+        <item>Repeated</item>
     </string-array>
 
 </resources>

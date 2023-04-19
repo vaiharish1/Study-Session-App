@@ -4,14 +4,25 @@ public class Session {
 	private String sessionName;
 	private int startTime;
 	private int endTime;
+
+	private String taskType;
 	
 	private int nextStartTime;
 
-	public Session(String sessionName, int startTime, int endTime) {
+	public Session(String sessionName, int startTime, int endTime, String taskType) {
 		this.sessionName = sessionName;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.nextStartTime = endTime + Constants.BUFFER_TIME;
+		this.taskType = taskType;
+	}
+
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
 	}
 
 	public String getSessionName() {

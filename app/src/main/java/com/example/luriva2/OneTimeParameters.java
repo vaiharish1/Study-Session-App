@@ -136,7 +136,7 @@ public class OneTimeParameters extends AppCompatActivity {
         Task newTask = new OneTimeTask(name, dueDate, estimatedDifficulty);
 
         loadData();
-        sessionModels.add(new Session(newTask.getName(), sessionModels.get(sessionModels.size()-1).getEndTime() + Constants.BUFFER_TIME, sessionModels.get(sessionModels.size()-1).getEndTime() + Constants.BUFFER_TIME + newTask.getEstimatedTime()/newTask.getDifficulty()));
+        sessionModels.add(new Session(newTask.getName(), sessionModels.get(sessionModels.size()-1).getEndTime() + Constants.BUFFER_TIME, sessionModels.get(sessionModels.size()-1).getEndTime() + Constants.BUFFER_TIME + newTask.getEstimatedTime()/newTask.getDifficulty(), "One-Time"));
         saveData(v);
 
         Intent intent = new Intent(this, TodaysSessions.class );
@@ -171,9 +171,10 @@ public class OneTimeParameters extends AppCompatActivity {
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionStartTimes = getResources().getStringArray(R.array.session_start_times);
         String[] sessionEndTimes = getResources().getStringArray(R.array.session_end_times);
+        String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 
         for (int i = 0; i < sessionNames.length; i++) {
-            sessionModels.add(new Session(sessionNames[i], Integer.parseInt(sessionStartTimes[i]), Integer.parseInt(sessionEndTimes[i])));
+            sessionModels.add(new Session(sessionNames[i], Integer.parseInt(sessionStartTimes[i]), Integer.parseInt(sessionEndTimes[i]), sessionTypes[i]));
             Log.v("MODELS", sessionModels.get(i).toString());
         }
     }

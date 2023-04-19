@@ -28,8 +28,6 @@ public class TodaysSessions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todays_sessions);
 
-        getSupportActionBar().hide();
-
         loadData();
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -83,15 +81,14 @@ public class TodaysSessions extends AppCompatActivity {
                 if (v.getId() == R.id.downButton) {
                     Session session = sessionModels.remove(position);
                     sessionModels.add(position + 1, session);
-                    adapter.notifyDataSetChanged();
                     Log.v("PRESSED BUTTON", "DOWN");
                 } else if (v.getId() == R.id.upButton) {
                     Session session = sessionModels.remove(position);
                     sessionModels.add(position - 1, session);
-                    adapter.notifyDataSetChanged();
                     Log.v("PRESSED BUTTON", "UP");
                 }
 
+                adapter.notifyDataSetChanged();
                 makeSaveButtonEnabled();
             }
         });
@@ -105,9 +102,10 @@ public class TodaysSessions extends AppCompatActivity {
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionStartTimes = getResources().getStringArray(R.array.session_start_times);
         String[] sessionEndTimes = getResources().getStringArray(R.array.session_end_times);
+        String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 
         for (int i = 0; i < sessionNames.length; i++) {
-            sessionModels.add(new Session(sessionNames[i], Integer.parseInt(sessionStartTimes[i]), Integer.parseInt(sessionEndTimes[i])));
+            sessionModels.add(new Session(sessionNames[i], Integer.parseInt(sessionStartTimes[i]), Integer.parseInt(sessionEndTimes[i]), sessionTypes[i]));
             Log.v("MODELS", sessionModels.get(i).toString());
         }
     }

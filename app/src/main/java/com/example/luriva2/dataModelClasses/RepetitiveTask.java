@@ -3,8 +3,8 @@ package com.example.luriva2.dataModelClasses;
 public class RepetitiveTask extends Task {
 	private String howOften;
 	
-	public RepetitiveTask(String n, int d, int eT, String ho) {
-		super(n, d, eT);
+	public RepetitiveTask(String n, int eT, String ho) {
+		super(n, 1, eT);
 		howOften = ho;
 	}
 	

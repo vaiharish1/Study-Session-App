@@ -49,21 +49,31 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
     public void onBindViewHolder(@NonNull Session_RecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.taskNameText.setText(sessionModels.get(position).getSessionName());
         holder.taskTimeDisplayText.setText(Integer.toString(sessionModels.get(position).getStartTime()) + " - " + Integer.toString(sessionModels.get(position).getEndTime()));
+        holder.sessionTypeDisplayText.setText(sessionModels.get(position).getTaskType());
         holder.upButton.setText(R.string.upButtonStr);
         holder.downButton.setText(R.string.downButtonStr);
-        if (position == 0) holder.upButton.setVisibility(View.GONE);
-        if (position == getItemCount()-1) holder.downButton.setVisibility(View.GONE);
+        if (position == 0) {
+            holder.upButton.setVisibility(View.GONE);
+        } else {
+            holder.upButton.setVisibility(View.VISIBLE);
+        }
+        if (position == getItemCount()-1) {
+            holder.downButton.setVisibility(View.GONE);
+        } else {
+            holder.downButton.setVisibility(View.VISIBLE);
+        }
         Log.v("BINDING POSITION", Integer.toString(position) + " " + holder.taskNameText.getText());
     }
 
     @Override
     public int getItemCount() {
+        Log.v("ITEM COUNT", Integer.toString(sessionModels.size()));
         return sessionModels.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView taskNameText, taskTimeDisplayText;
+        private TextView taskNameText, taskTimeDisplayText, sessionTypeDisplayText;
         private Button upButton, downButton;
 
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
@@ -71,6 +81,7 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
 
             taskNameText = itemView.findViewById(R.id.taskNameText);
             taskTimeDisplayText = itemView.findViewById(R.id.taskTimeDisplayText2);
+            sessionTypeDisplayText = itemView.findViewById(R.id.sessionTypeText);
             upButton = itemView.findViewById(R.id.upButton);
             downButton = itemView.findViewById(R.id.downButton);
 
