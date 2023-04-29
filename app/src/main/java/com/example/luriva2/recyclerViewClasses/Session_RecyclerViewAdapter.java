@@ -47,9 +47,9 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
 
     @Override
     public void onBindViewHolder(@NonNull Session_RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.taskNameText.setText(sessionModels.get(position).getSessionName());
-        holder.taskTimeDisplayText.setText(Integer.toString(sessionModels.get(position).getStartTime()) + " - " + Integer.toString(sessionModels.get(position).getEndTime()));
-        holder.sessionTypeDisplayText.setText(sessionModels.get(position).getTaskType());
+        holder.taskNameText.setText(sessionModels.get(position).getTask().getTaskName());
+        holder.taskTimeDisplayText.setText(sessionModels.get(position).getTimeblock().getStartTime() + " - " + sessionModels.get(position).getTimeblock().getEndTime());
+        holder.sessionTypeDisplayText.setText(sessionModels.get(position).getTask().getTaskType());
         holder.upButton.setText(R.string.upButtonStr);
         holder.downButton.setText(R.string.downButtonStr);
         if (position == 0) {
@@ -62,12 +62,12 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
         } else {
             holder.downButton.setVisibility(View.VISIBLE);
         }
-        Log.v("BINDING POSITION", Integer.toString(position) + " " + holder.taskNameText.getText());
+//        Log.v("BINDING POSITION", Integer.toString(position) + " " + holder.taskNameText.getText());
     }
 
     @Override
     public int getItemCount() {
-        Log.v("ITEM COUNT", Integer.toString(sessionModels.size()));
+//        Log.v("ITEM COUNT", Integer.toString(sessionModels.size()));
         return sessionModels.size();
     }
 

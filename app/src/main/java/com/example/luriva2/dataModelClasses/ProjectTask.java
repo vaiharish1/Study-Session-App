@@ -1,20 +1,19 @@
 package com.example.luriva2.dataModelClasses;
 
-import java.util.Date;
-
 public class ProjectTask extends Task {
+
 	private Date dueDate;
-	
-	public ProjectTask(String n, int d, int eT, Date dd) {
-		super(n, d, eT);
-		dueDate = dd;
+
+	public ProjectTask(String taskName, int estimatedTime, int difficulty, Date dueDate) {
+		super(taskName, estimatedTime, difficulty, "Project");
+		this.dueDate = dueDate;
 	}
-	
-	public Date getDate() {
+
+	public Date getDueDate() {
 		return dueDate;
 	}
-	
-	public void setDate(Date dd) {
-		dueDate = dd;
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
 	}
 }

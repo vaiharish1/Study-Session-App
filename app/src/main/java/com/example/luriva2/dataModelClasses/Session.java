@@ -1,64 +1,46 @@
 package com.example.luriva2.dataModelClasses;
 
 public class Session {
-	private String sessionName;
-	private int startTime;
-	private int endTime;
+	private Task task;
 
-	private String taskType;
-	
-	private int nextStartTime;
+	private Date date;
+	private Timeblock timeblock;
+	private Time nextStartTime;
 
-	public Session(String sessionName, int startTime, int endTime, String taskType) {
-		this.sessionName = sessionName;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.nextStartTime = endTime + Constants.BUFFER_TIME;
-		this.taskType = taskType;
+	public Session(Task task, Date date, Timeblock timeblock) {
+		this.task = task;
+		this.date = date;
+		this.timeblock = timeblock;
+		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.BUFFER_TIME);
 	}
 
-	public String getTaskType() {
-		return taskType;
+	public Task getTask() {
+		return task;
 	}
 
-	public void setTaskType(String taskType) {
-		this.taskType = taskType;
+	public Date getDate() {
+		return date;
 	}
 
-	public String getSessionName() {
-		return sessionName;
+	public Timeblock getTimeblock() {
+		return timeblock;
 	}
 
-	public void setSessionName(String sessionName) {
-		this.sessionName = sessionName;
+	public void setTimeblock(Timeblock timeblock) {
+		this.timeblock = timeblock;
+		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.BUFFER_TIME);
 	}
 
-	public int getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(int startTime) {
-		this.startTime = startTime;
-	}
-
-	public int getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(int endTime) {
-		this.endTime = endTime;
-	}
-
-	public void setNextStartTime(int nextStartTime) {
-		this.nextStartTime = nextStartTime;
+	public Time getNextStartTime() {
+		return nextStartTime;
 	}
 
 	@Override
 	public String toString() {
 		return "Session{" +
-				"sessionName='" + sessionName + '\'' +
-				", startTime=" + startTime +
-				", endTime=" + endTime +
+				"task=" + task +
+				", date=" + date +
+				", timeblock=" + timeblock +
 				", nextStartTime=" + nextStartTime +
 				'}';
 	}

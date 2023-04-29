@@ -1,18 +1,19 @@
 package com.example.luriva2.dataModelClasses;
 
 public class RepetitiveTask extends Task {
-	private String howOften;
-	
-	public RepetitiveTask(String n, int eT, String ho) {
-		super(n, 1, eT);
-		howOften = ho;
+
+	private int howOften;
+
+	public RepetitiveTask(String taskName, int estimatedTime, int difficulty, int howOften) {
+		super(taskName, estimatedTime, difficulty, "Project");
+		this.howOften = howOften;
 	}
-	
-	public String getHowOften() {
+
+	public int getHowOften() {
 		return howOften;
 	}
-	
-	public void setHowOften(String ho) {
-		howOften = ho;
+
+	public void setHowOften(int howOften) {
+		this.howOften = howOften;
 	}
 }
