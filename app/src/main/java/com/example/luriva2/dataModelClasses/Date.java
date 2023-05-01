@@ -1,5 +1,7 @@
 package com.example.luriva2.dataModelClasses;
 
+import java.util.Objects;
+
 public class Date implements Comparable<Date> {
     public static int[] daysOfMonths = {31,28,31,30,31,30,31,31,30,31,30,31};
     private int month, day, year;
@@ -8,6 +10,19 @@ public class Date implements Comparable<Date> {
         this.month = month;
         this.day = day;
         this.year = year;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Date date = (Date) o;
+        return month == date.month && day == date.day && year == date.year;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(month, day, year);
     }
 
     public Date addDays(int days) {
