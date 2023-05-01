@@ -18,6 +18,15 @@
             android:name=".EditBlackoutTimes"
             android:exported="false" />
         <activity
+            android:name=".ProjectParameters"
+            android:exported="false" />
+        <activity
+            android:name=".RepeatedParameters"
+            android:exported="false" />
+        <activity
+            android:name=".OneTimeParameters"
+            android:exported="false" />
+        <activity
             android:name=".Calendar"
             android:exported="false" />
         <activity
