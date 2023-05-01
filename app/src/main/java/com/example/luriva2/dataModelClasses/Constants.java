@@ -1,4 +1,4 @@
-package com.example.luriva2.dataModels;
+package com.example.luriva2.dataModelClasses;
 
 public final class Constants {
 	private Constants() {
