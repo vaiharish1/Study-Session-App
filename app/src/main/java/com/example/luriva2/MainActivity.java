@@ -41,4 +41,9 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Settings", Toast.LENGTH_LONG);
         toast.show();
     }
+
+    public void onTitleClick(){
+        Toast toast = Toast.makeText(getApplicationContext(), ":P", Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,7 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         monthYearText = findViewById(R.id.monthYearTV);
     }
     private void setMonthView() {
-        monthYearText.setText(monthYearFromDate(selectedDate));
+        monthYearText.setText(monthYearFormDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
@@ -62,8 +63,13 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         return daysInMonthArray;
     }
 
-    private String monthYearFromDate(LocalDate date){
+    private String monthYearFormDate(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(formatter);
+    }
+
+    private String monthDateYearFormDate(LocalDate date, String dayText){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/" + dayText + "/yyyy");
         return date.format(formatter);
     }
 
@@ -77,9 +83,16 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
     }
 
     public void onItemClick(int position, String dayText){
-        if(dayText.equals("")){
-            String message = "Selected Date" + dayText + " " + monthYearFromDate(selectedDate);
+        if(!dayText.equals("")){
+            String message = "Opening tasks for: " + dayText + " " + monthYearFormDate(selectedDate);
             Toast.makeText(this, message,Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(this, DaySessions.class );
+            intent.putExtra("date", monthDateYearFormDate(selectedDate, dayText));
+            startActivity(intent);
+
+
+
         }
     }
 
