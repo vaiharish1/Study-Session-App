@@ -30,12 +30,20 @@ import java.util.Locale;
 public class TodaysSessions extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ArrayList<Session> sessionModels;
+    private ArrayList<Session> allSessions, sessionModels;
+
+    private Date today;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todays_sessions);
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        String formattedDate = sdf.format(c.getTime());
+        String[] components = formattedDate.split("-");
+        today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
 
         loadData();
 
@@ -60,7 +68,21 @@ public class TodaysSessions extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(sessionModels);
+
+        ArrayList<Session> savedSessions = new ArrayList<Session>();
+        for (int i = 0; i < allSessions.size(); i++) {
+            if (allSessions.get(i).getDate().equals(today)) {
+                continue;
+            } else {
+                savedSessions.add(allSessions.get(i));
+            }
+        }
+
+        for (int i = 0; i < sessionModels.size(); i++) {
+            savedSessions.add(sessionModels.get(i));
+        }
+
+        String json = gson.toJson(savedSessions);
         editor.putString("session list", json);
         editor.apply();
 
@@ -74,20 +96,15 @@ public class TodaysSessions extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("session list", null);
         Type type = new TypeToken<ArrayList<Session>>() {}.getType();
-        ArrayList<Session> allSessions = gson.fromJson(json, type);
+        allSessions = gson.fromJson(json, type);
 
         if (allSessions == null) {
             setUpSessionModels();
         } else {
-            Calendar c = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-            String formattedDate = sdf.format(c.getTime());
-            String[] components = formattedDate.split("-");
-            Date today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
-
             for (Session s : allSessions) {
                 if (s.getDate().equals(today)) {
                     sessionModels.add(s);
+                    Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
                 }
             }
         }
@@ -133,7 +150,7 @@ public class TodaysSessions extends AppCompatActivity {
     }
 
     public void setUpSessionModels() {
-        sessionModels = new ArrayList<Session>();
+        allSessions = new ArrayList<Session>();
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 
@@ -142,18 +159,12 @@ public class TodaysSessions extends AppCompatActivity {
         String[] sessionEndTimesHours = getResources().getStringArray(R.array.session_end_times_hours);
         String[] sessionEndTimesMinutes = getResources().getStringArray(R.array.session_end_times_minutes);
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(c.getTime());
-        String[] components = formattedDate.split("-");
-//        Log.v("TODAYS DATE", formattedDate);
-
         for (int i = 0; i < sessionNames.length; i++) {
             Time startTime = new Time(Integer.parseInt(sessionStartTimesHours[i]), Integer.parseInt(sessionStartTimesMinutes[i]));
             Time endTime = new Time(Integer.parseInt(sessionEndTimesHours[i]), Integer.parseInt(sessionEndTimesMinutes[i]));
             Timeblock tb = new Timeblock(startTime, endTime);
             Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i]);
-            sessionModels.add(new Session(t, new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2])), tb));
+            allSessions.add(new Session(t, today, tb));
 //            Log.v("MODELS", sessionModels.get(i).toString());
         }
     }

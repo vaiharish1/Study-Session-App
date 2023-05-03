@@ -30,7 +30,9 @@ import java.util.Locale;
 
 public class OneTimeParameters extends AppCompatActivity {
 
-    private ArrayList<Session> sessionModels;
+    private ArrayList<Session> allSessions, daysSessions;
+
+    private Date doingDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,14 +172,27 @@ public class OneTimeParameters extends AppCompatActivity {
 
         Task newTask = new OneTimeTask(name, time, estimatedDifficulty, dueDate);
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(c.getTime());
-        String[] components = formattedDate.split("-");
-        Date today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
+        doingDate = dueDate.subtractDays(1);
 
-        loadData();
-        // TODO: Add new session here
+        loadData(doingDate);
+
+        Log.v("adding task", "ADDED TASK TO " + doingDate.toString());
+
+        if (daysSessions.size() == 0) {
+            Time startTime = new Time(12+5, 0);
+            Time endTime = startTime.add(0, time);
+            Timeblock newTB = new Timeblock(startTime, endTime);
+            Session newSession = new Session(newTask, doingDate, newTB);
+            daysSessions.add(newSession);
+        } else {
+            Session lastSession = daysSessions.get(daysSessions.size()-1);
+            Time startTime = lastSession.getNextStartTime();
+            Time endTime = startTime.add(0, time);
+            Timeblock newTB = new Timeblock(startTime, endTime);
+            Session newSession = new Session(newTask, doingDate, newTB);
+            daysSessions.add(newSession);
+        }
+
         saveData(v);
 
         Intent intent = new Intent(this, TodaysSessions.class );
@@ -190,25 +205,47 @@ public class OneTimeParameters extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(sessionModels);
+
+        ArrayList<Session> savedSessions = new ArrayList<Session>();
+        for (int i = 0; i < allSessions.size(); i++) {
+            if (allSessions.get(i).getDate().equals(doingDate)) {
+                continue;
+            } else {
+                savedSessions.add(allSessions.get(i));
+            }
+        }
+
+        for (int i = 0; i < daysSessions.size(); i++) {
+            savedSessions.add(daysSessions.get(i));
+        }
+
+        String json = gson.toJson(savedSessions);
         editor.putString("session list", json);
         editor.apply();
     }
 
-    private void loadData() {
+    private void loadData(Date doingDate) {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("session list", null);
         Type type = new TypeToken<ArrayList<Session>>() {}.getType();
-        sessionModels = gson.fromJson(json, type);
+        allSessions = gson.fromJson(json, type);
 
-        if (sessionModels == null) {
+        if (allSessions == null) {
             setUpSessionModels();
+        }
+
+        daysSessions = new ArrayList<Session>();
+
+        for (int i = 0; i < allSessions.size(); i++) {
+            if (allSessions.get(i).getDate().equals(doingDate)) {
+                daysSessions.add(allSessions.get(i));
+            }
         }
     }
 
     public void setUpSessionModels() {
-        sessionModels = new ArrayList<Session>();
+        allSessions = new ArrayList<Session>();
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 
@@ -217,19 +254,20 @@ public class OneTimeParameters extends AppCompatActivity {
         String[] sessionEndTimesHours = getResources().getStringArray(R.array.session_end_times_hours);
         String[] sessionEndTimesMinutes = getResources().getStringArray(R.array.session_end_times_minutes);
 
-        android.icu.util.Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/DD/YYYY", Locale.getDefault());
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String formattedDate = sdf.format(c.getTime());
-        String[] components = formattedDate.split("/");
+        String[] components = formattedDate.split("-");
+//        Log.v("TODAYS DATE", formattedDate);
 
         for (int i = 0; i < sessionNames.length; i++) {
             Time startTime = new Time(Integer.parseInt(sessionStartTimesHours[i]), Integer.parseInt(sessionStartTimesMinutes[i]));
             Time endTime = new Time(Integer.parseInt(sessionEndTimesHours[i]), Integer.parseInt(sessionEndTimesMinutes[i]));
             Timeblock tb = new Timeblock(startTime, endTime);
             Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i]);
-            sessionModels.add(new Session(t, new Date(Integer.parseInt(components[0]), Integer.parseInt(components[1]), Integer.parseInt(components[2])), tb));
+            allSessions.add(new Session(t, new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2])), tb));
 //            Log.v("MODELS", sessionModels.get(i).toString());
         }
     }
 
-    }
+}
