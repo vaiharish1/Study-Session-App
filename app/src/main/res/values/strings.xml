@@ -8,13 +8,12 @@
 
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
-    <string name="taskTypeLabel">Session Type</string>
     <string name="oneTimeText">One- Time</string>
     <string name="repeatedText">Repeated</string>
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
     <string name="dueDateStr">Due Date:</string>
-    <string name="editTextDueDate">MM/DD/YYYY</string>
+    <string name="editTextDueDate">Enter a Date</string>
     <string name="repeatStr">Repeat: </string>
     <string name="incrementValueStr">… </string>
     <string name="daysStr">days</string>
@@ -99,5 +98,22 @@
         <item>One-Time</item>
         <item>Repeated</item>
     </string-array>
+
+
+
+
+
+    <string name="rightArrow"><![CDATA[—>]]></string>
+    <string name="leftArrow"><![CDATA[<—]]></string>
+    <string name="todaysDate">April 2023</string>
+    <string name="sunString">SUN</string>
+    <string name="monString">MON</string>
+    <string name="tueString">TUE</string>
+    <string name="wedString">WED</string>
+    <string name="thuString">THUR</string>
+    <string name="friString">FRI</string>
+    <string name="satString">SAT</string>
+    <string name="taskTypeLabel">aa</string>
+
 
 </resources>
