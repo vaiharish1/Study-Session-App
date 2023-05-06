@@ -42,7 +42,7 @@ public class Date implements Comparable<Date> {
     }
 
     public Date subtractDays(int days) {
-        int d = day + days;
+        int d = day - days;
         int m = month;
         int y = year;
         while (d < 0) {
