@@ -1,10 +1,14 @@
 <resources>
+
+    //home screen
+    <string name="appTitle">LRV</string>
     <string name="app_name">LuRiVa - Study Session App!</string>
     <string name="title">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
     <string name="viewCal">View Calendar</string>
     <string name="addTasks">Add Tasks</string>
     <string name="settings">Settings</string>
+    <string name="timerButtonStr">Timer</string>
 
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
@@ -24,8 +28,10 @@
     <string name="midDifficultyButton">**</string>
     <string name="highDifficultyButton">***</string>
     <string name = "hoursStr">hours</string>
-    <string name="textDifficulty">Click Difficulty</string>
     <string name = "doneButton_repeated">DONE</string>
+    <string name = "textDifficulty">Click Difficulty</string>
+
+    //todays session
     <string name="saveButtonStr">SAVE SESSIONS</string>
 
     <string name="todaySessionHeaderStr">Today\'s Session </string>
@@ -34,11 +40,14 @@
     <string name="upButtonStr">Move up </string>
     <string name="downButtonStr">Move down </string>
 
+    //settings
     <string name="settingsHeaderStr">Settings </string>
     <string name="settingsDisableNotificationsStr">Disable notifications</string>
+    <string name="settingsDisableAppsStr">Disable other apps</string>
     <string name="settingsEditBlackoutTimesStr">Edit Blackout Times</string>
-    <string name="settingsEditTimerStr">Edit Timer</string>
+    <string name="settingsEditTimerStr">Edit Break Timer</string>
 
+    //edit blackout times
     <string-array name="editDaysList">
         <item>Monday</item>
         <item>Tuesday</item>
@@ -52,8 +61,8 @@
     <string name="editBlackoutTimesHeaderStr">Edit Blackout Times</string>
     <string name="enterBlackoutDaysPromptStr">Select a day</string>
     <string name="enterBlackoutTimesPromptStr">Enter a time when you are not available</string>
-    <string name="enterStartTimesStr">Enter the start time (HH:MM)</string>
-    <string name="enterEndTimesStr">Enter the end time (HH:MM)</string>
+    <string name="enterStartTimesStr">Enter the start time in 24 hour format (HH:MM)</string>
+    <string name="enterEndTimesStr">Enter the end time in 24 hour format (HH:MM)</string>
     <string name="resetBlackoutTimesStr">Save and add another time</string>
     <string name="selectDaysStr">Select a day</string>
 
@@ -99,9 +108,16 @@
         <item>Repeated</item>
     </string-array>
 
-
-
-
+    //timer
+    <string name="cancelButtonStr">Cancel</string>
+    <string-array name="motivationQuotes">
+        <item>You got this!</item>
+        <item>Keep up the good work!</item>
+        <item>Relax. Take a deep breathe.</item>
+        <item>Don\'t give up!</item>
+        <item>Give your all!</item>
+        <item>Try your best!</item>
+    </string-array>
 
     <string name="rightArrow"><![CDATA[—>]]></string>
     <string name="leftArrow"><![CDATA[<—]]></string>
@@ -114,6 +130,5 @@
     <string name="friString">FRI</string>
     <string name="satString">SAT</string>
     <string name="taskTypeLabel">aa</string>
-
 
 </resources>
