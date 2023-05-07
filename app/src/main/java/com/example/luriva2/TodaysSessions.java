@@ -99,15 +99,17 @@ public class TodaysSessions extends AppCompatActivity {
         allSessions = gson.fromJson(json, type);
 
         if (allSessions == null) {
+            Log.v("no sessions here", "no session at all");
             setUpSessionModels();
-        } else {
-            for (Session s : allSessions) {
-                if (s.getDate().equals(today)) {
-                    sessionModels.add(s);
-                    Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
-                }
+        }
+        for (Session s : allSessions) {
+            Log.v("all sessions here", "adding these sessions: " + s.toString());
+            if (s.getDate().equals(today)) {
+                sessionModels.add(s);
+                Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
             }
         }
+
     }
 
     public void createAdapter() {
