@@ -44,4 +44,14 @@ public class Task {
 	public void setTaskType(String taskType) {
 		this.taskType = taskType;
 	}
+
+	@Override
+	public String toString() {
+		return "Task{" +
+				"taskName='" + taskName + '\'' +
+				", estimatedTime=" + estimatedTime +
+				", difficulty=" + difficulty +
+				", taskType='" + taskType + '\'' +
+				'}';
+	}
 }

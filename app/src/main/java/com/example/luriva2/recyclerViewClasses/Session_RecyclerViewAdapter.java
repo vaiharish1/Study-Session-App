@@ -62,7 +62,7 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
         } else {
             holder.downButton.setVisibility(View.VISIBLE);
         }
-//        Log.v("BINDING POSITION", Integer.toString(position) + " " + holder.taskNameText.getText());
+        Log.v("BINDING POSITION", sessionModels.get(position).toString());
     }
 
     @Override

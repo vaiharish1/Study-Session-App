@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTasks">
+    tools:context=".Timer">
 
     <FrameLayout
         android:id="@+id/navigationLayout"
@@ -13,59 +13,56 @@
         app:layout_constraintBottom_toTopOf="@+id/navigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/oneTimeButton"
-        android:layout_width="193dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="48dp"
-        android:onClick="oneTimeNav"
-        android:text="@string/oneTimeText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/projectButton" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/chooseTaskTypeStr"
+        android:id="@+id/timerStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="@string/chooseTaskTypeStr"
-        android:textAlignment="center"
-        android:textSize="30sp"
+        android:layout_marginTop="48dp"
+        android:text="Status: On Break"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/projectButton"
-        android:layout_width="193dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="50dp"
-        android:onClick="projectNav"
-        android:text="@string/projectText"
-        app:layout_constraintBottom_toTopOf="@+id/oneTimeButton"
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="00:00"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repeatedButton"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/timerStatus" />
+
+    <TextView
+        android:id="@+id/motivationalQuote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="You got this!"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer" />
 
     <Button
-        android:id="@+id/repeatedButton"
-        android:layout_width="196dp"
-        android:layout_height="132dp"
-        android:layout_marginTop="50dp"
-        android:onClick="repeatedNav"
-        android:text="@string/repeatedText"
-        app:layout_constraintBottom_toTopOf="@+id/projectButton"
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:onClick="cancel"
+        android:text="@string/cancelButtonStr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseTaskTypeStr" />
+        app:layout_constraintTop_toBottomOf="@+id/motivationalQuote" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationView"
@@ -74,6 +71,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/navigation_bar"/>
-
+        app:menu="@menu/navigation_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
