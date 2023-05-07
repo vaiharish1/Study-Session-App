@@ -60,18 +60,22 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
         toast.show();
     }
+    
     public void viewCalNav(View v){
+        // Log.d("vai","in viewCalNav method");
         Intent intent = new Intent(this, ViewCalendar.class );
         startActivity(intent);
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Calendar", Toast.LENGTH_LONG);
         toast.show();
     }
+    
     public void addTasksNav(View v){
         Intent intent = new Intent(this, AddTasks.class );
         startActivity(intent);
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Task Manager", Toast.LENGTH_LONG);
         toast.show();
     }
+    
     public void settingsNav(View v) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
@@ -79,10 +83,16 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
+
     public void timerNav(View v){
         Intent intent = new Intent(this,Timer.class);
         startActivity(intent);
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Timer", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    public void onTitleClick(){
+        Toast toast = Toast.makeText(getApplicationContext(), ":P", Toast.LENGTH_LONG);
         toast.show();
     }
 }
