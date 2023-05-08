@@ -67,16 +67,14 @@ public class OneTimeParameters extends AppCompatActivity {
             }
         });
     }
-
         public String getTaskName() {
             EditText taskNameText = findViewById(R.id.editTextTaskName_onetime);
             String taskNameStr = taskNameText.getText().toString();
             if (taskNameStr.isEmpty()) {
-                taskNameStr = null;
+                taskNameStr = "";
             }
             return taskNameStr;
         }
-
 
         public void collectTaskName(View v) {
             String taskName = getTaskName();
@@ -116,15 +114,15 @@ public class OneTimeParameters extends AppCompatActivity {
 
         }
 
-        public void populateEasy(){
+        public void populateEasy() {
             TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
             difficultyText.setText("Easy");
         }
-        public void populateMid(){
+        public void populateMid() {
             TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
             difficultyText.setText("Medium");
         }
-        public void populateHard(){
+        public void populateHard() {
             TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
             difficultyText.setText("Hard");
         }
@@ -160,22 +158,56 @@ public class OneTimeParameters extends AppCompatActivity {
 
     public void todaysSessionsNav(View v){
         String name = getTaskName();
+        if (name.isEmpty()) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Empty task name.", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
 
-        String dueDate = getDueDate();
+        String dueDateRegEx = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
+        String dueDateStr = getDueDate();
+
+        if (!dueDateStr.matches(dueDateRegEx)) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Incorrect date format.", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
+
+        String[] dueDateComponents = dueDateStr.split("/");
+        Date dueDate = new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
+
+        String timeStr = getTime();
+        if (timeStr.isEmpty()) {
+            Toast toast = Toast.makeText(getApplicationContext(), "No estimated time given.", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
+
+        int time = Integer.parseInt(getTime());
 
         String difficulty = getDif();
+        if (difficulty.equals("Click Difficulty")) {
+            Toast toast = Toast.makeText(getApplicationContext(), "No task difficulty stated.", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
+
         int estimatedDifficulty;
         if (difficulty.equals("Easy")) estimatedDifficulty = 3;
         else if (difficulty.equals("Medium")) estimatedDifficulty = 2;
         else if (difficulty.equals("Hard")) estimatedDifficulty = 1;
         else estimatedDifficulty = 4;
 
-        int time = Integer.parseInt(getTime());
+        Task newTask = new OneTimeTask(name, time, estimatedDifficulty, dueDate);
 
-        Task newTask = new OneTimeTask(name, time, estimatedDifficulty, new Date(0, 0, 2025));
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        String formattedDate = sdf.format(c.getTime());
+        String[] components = formattedDate.split("-");
+        Date today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
 
         loadData();
-        // TODO: add session here
+        // TODO: Add new session here
         saveData(v);
 
         Intent intent = new Intent(this, TodaysSessions.class );
