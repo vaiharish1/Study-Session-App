@@ -325,5 +325,4 @@ public class OneTimeParameters extends AppCompatActivity {
 //            Log.v("MODELS", sessionModels.get(i).toString());
         }
     }
-
 }
