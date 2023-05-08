@@ -78,7 +78,6 @@ public class ProjectParameters extends AppCompatActivity {
         return taskNameStr;
     }
 
-
     public void collectTaskName(View v) {
         String taskName = getTaskName();
         Toast toast = Toast.makeText(getApplicationContext(), "Task Name: " + taskName, Toast.LENGTH_LONG);

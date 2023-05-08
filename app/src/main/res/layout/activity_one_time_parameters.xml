@@ -24,19 +24,19 @@
         android:layout_marginStart="140dp"
         android:layout_marginTop="13dp"
         android:ems="10"
-        android:onClick="collectDif"
         android:text="@string/textDifficulty"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/difficultyButton2_onetime" />
+<!--    android:onClick="collectDif"-->
 
     <TextView
         android:id="@+id/hoursStr3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:text="@string/hoursStr"
+        android:text="@string/minutesStr"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextEstTime_onetime"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -62,12 +62,12 @@
         android:hint="@string/editTextDueDate"
         android:inputType="date|datetime"
         android:minHeight="48dp"
-        android:onClick="collectDueDate"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/dueDateStr"
         app:layout_constraintLeft_toLeftOf="@id/editTextTaskName_onetime"
         app:layout_constraintStart_toStartOf="@+id/editTextTaskName_onetime"
         tools:layout_editor_absoluteY="161dp" />
+<!--    android:onClick="collectDueDate" -->
 
     <EditText
         android:id="@+id/editTextTaskName_onetime"
@@ -78,12 +78,11 @@
         android:ems="10"
         android:hint="@string/taskNameHint"
         android:inputType="textPersonName"
-        android:onClick="collectTaskName"
         android:textSize="20sp"
-
         app:layout_constraintBottom_toBottomOf="@+id/addTaskNameStr"
         app:layout_constraintLeft_toRightOf="@id/addTaskNameStr"
         app:layout_constraintStart_toEndOf="@+id/addTaskNameStr" />
+<!--    android:onClick="collectTaskName"-->
 
     <EditText
         android:id="@+id/editTextEstTime_onetime"
@@ -93,11 +92,11 @@
         android:ems="10"
         android:hint="@string/EstTimeHint"
         android:inputType="numberDecimal"
-        android:onClick="collectTime"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/estTimeStr"
         app:layout_constraintLeft_toLeftOf="@id/editTextDueDate_onetime"
         app:layout_constraintStart_toStartOf="@+id/editTextDueDate_onetime" />
+<!--    android:onClick="collectTime"-->
 
     <TextView
         android:id="@+id/estTimeStr"
@@ -126,7 +125,6 @@
         android:id="@+id/addTaskNameStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="50dp"
         android:layout_marginTop="114dp"
         android:layout_marginBottom="60sp"
@@ -142,7 +140,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="29dp"
         android:layout_marginEnd="10dp"
-        android:onClick="onClickMedium"
+        android:onClick="populateMid"
         android:text="@string/midDifficultyButton"
         app:layout_constraintEnd_toEndOf="@+id/editTextEstTime_onetime"
         app:layout_constraintEnd_toStartOf="@+id/difficultyButton3_onetime"
@@ -158,7 +156,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="29dp"
         android:layout_marginEnd="10dp"
-        android:onClick="onClickEasy"
+        android:onClick="populateEasy"
         android:text="@string/lowDifficultyButton"
         app:layout_constraintEnd_toStartOf="@+id/difficultyButton2_onetime"
         app:layout_constraintHorizontal_bias="0.5"
@@ -171,7 +169,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="29dp"
         android:layout_marginEnd="50dp"
-        android:onClick="onClickHard"
+        android:onClick="populateHard"
         android:text="@string/highDifficultyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -185,11 +183,9 @@
         android:layout_marginStart="50dp"
         android:layout_marginBottom="300dp"
         android:height="48dp"
-        android:onClick="onClickTest"
         android:text="@string/difficultyStr"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

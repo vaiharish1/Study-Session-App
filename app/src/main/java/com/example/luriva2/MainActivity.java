@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        // remove the settings button as we decided that is outside of the scope
+        Button settingsButton = findViewById(R.id.settings);
+        settingsButton.setVisibility(View.GONE);
     }
 
     private void replaceFragment(Fragment fragment){
@@ -82,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(getApplicationContext(), "Viewing Settings", Toast.LENGTH_LONG);
         toast.show();
     }
-
 
     public void timerNav(View v){
         Intent intent = new Intent(this,Timer.class);

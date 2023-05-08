@@ -28,6 +28,7 @@
     <string name="midDifficultyButton">**</string>
     <string name="highDifficultyButton">***</string>
     <string name = "hoursStr">hours</string>
+    <string name="minutesStr">minutes</string>
     <string name = "doneButton_repeated">DONE</string>
     <string name = "textDifficulty">Click Difficulty</string>
 
