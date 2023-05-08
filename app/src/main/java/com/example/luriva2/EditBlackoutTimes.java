@@ -1,22 +1,52 @@
 package com.example.luriva2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 
 //Made with help from https://developer.android.com/develop/ui/views/components/spinner#java
 public class EditBlackoutTimes extends AppCompatActivity {
-
+    NavigationBarView navigationBarView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_edit_blackout_times);
+        navigationBarView = findViewById(R.id.navigationView);
+        navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
+        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.timerNavigation:
+                        startActivity(new Intent(getApplicationContext(),Timer.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.homeNavigation:
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.viewTasksNavigation:
+                        startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+
+                return false;
+            }
+        });
 
         Spinner spinner = (Spinner) findViewById(R.id.chooseDaysDropdown);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.editDaysList, android.R.layout.simple_spinner_item);

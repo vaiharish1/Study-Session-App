@@ -1,14 +1,17 @@
 package com.example.luriva2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +21,7 @@ import com.example.luriva2.dataModelClasses.Task;
 import com.example.luriva2.dataModelClasses.Time;
 import com.example.luriva2.dataModelClasses.Timeblock;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,21 +34,35 @@ import java.util.Locale;
 public class TodaysSessions extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ArrayList<Session> allSessions, sessionModels;
-
-    private Date today;
-
+    private ArrayList<Session> sessionModels;
+    NavigationBarView navigationBarView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todays_sessions);
+        navigationBarView = findViewById(R.id.navigationView);
+        navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
+        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.timerNavigation:
+                        startActivity(new Intent(getApplicationContext(),Timer.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.homeNavigation:
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.viewTasksNavigation:
+                        startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(c.getTime());
-        String[] components = formattedDate.split("-");
-        today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
-
+                return false;
+            }
+        });
         loadData();
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -68,21 +86,7 @@ public class TodaysSessions extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-
-        ArrayList<Session> savedSessions = new ArrayList<Session>();
-        for (int i = 0; i < allSessions.size(); i++) {
-            if (allSessions.get(i).getDate().equals(today)) {
-                continue;
-            } else {
-                savedSessions.add(allSessions.get(i));
-            }
-        }
-
-        for (int i = 0; i < sessionModels.size(); i++) {
-            savedSessions.add(sessionModels.get(i));
-        }
-
-        String json = gson.toJson(savedSessions);
+        String json = gson.toJson(sessionModels);
         editor.putString("session list", json);
         editor.apply();
 
@@ -96,15 +100,20 @@ public class TodaysSessions extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("session list", null);
         Type type = new TypeToken<ArrayList<Session>>() {}.getType();
-        allSessions = gson.fromJson(json, type);
+        ArrayList<Session> allSessions = gson.fromJson(json, type);
 
         if (allSessions == null) {
             setUpSessionModels();
         } else {
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            String formattedDate = sdf.format(c.getTime());
+            String[] components = formattedDate.split("-");
+            Date today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
+
             for (Session s : allSessions) {
                 if (s.getDate().equals(today)) {
                     sessionModels.add(s);
-                    Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
                 }
             }
         }
@@ -150,7 +159,7 @@ public class TodaysSessions extends AppCompatActivity {
     }
 
     public void setUpSessionModels() {
-        allSessions = new ArrayList<Session>();
+        sessionModels = new ArrayList<Session>();
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 
@@ -159,12 +168,18 @@ public class TodaysSessions extends AppCompatActivity {
         String[] sessionEndTimesHours = getResources().getStringArray(R.array.session_end_times_hours);
         String[] sessionEndTimesMinutes = getResources().getStringArray(R.array.session_end_times_minutes);
 
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        String formattedDate = sdf.format(c.getTime());
+        String[] components = formattedDate.split("-");
+//        Log.v("TODAYS DATE", formattedDate);
+
         for (int i = 0; i < sessionNames.length; i++) {
             Time startTime = new Time(Integer.parseInt(sessionStartTimesHours[i]), Integer.parseInt(sessionStartTimesMinutes[i]));
             Time endTime = new Time(Integer.parseInt(sessionEndTimesHours[i]), Integer.parseInt(sessionEndTimesMinutes[i]));
             Timeblock tb = new Timeblock(startTime, endTime);
             Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i]);
-            allSessions.add(new Session(t, today, tb));
+            sessionModels.add(new Session(t, new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2])), tb));
 //            Log.v("MODELS", sessionModels.get(i).toString());
         }
     }
