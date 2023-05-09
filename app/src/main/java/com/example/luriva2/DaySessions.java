@@ -86,6 +86,7 @@ public class DaySessions extends AppCompatActivity {
         }
 
         String json = gson.toJson(savedSessions);
+
         editor.putString("session list", json);
         editor.apply();
 
@@ -140,42 +141,12 @@ public class DaySessions extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Session>>() {}.getType();
         allSessions = gson.fromJson(json, type);
 
-        if (allSessions == null) {
-            setUpSessionModels();
-        } else {
-            for (Session s : allSessions) {
-                if (s.getDate().equals(thisDay)) {
-                    sessionModels.add(s);
-                    Log.v("THIS SESSION'S ADDING", "adding these sessions: " + s.toString());
-                }
+        for (Session s : allSessions) {
+//            Log.v("all sessions here", "adding these sessions: " + s.toString());
+            if (s.getDate().equals(thisDay)) {
+                sessionModels.add(s);
+//                Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
             }
         }
     }
-
-    public void setUpSessionModels() {
-        allSessions = new ArrayList<Session>();
-        String[] sessionNames = getResources().getStringArray(R.array.session_names);
-        String[] sessionTypes = getResources().getStringArray(R.array.session_types);
-
-        String[] sessionStartTimesHours = getResources().getStringArray(R.array.session_start_times_hours);
-        String[] sessionStartTimesMinutes = getResources().getStringArray(R.array.session_start_times_minutes);
-        String[] sessionEndTimesHours = getResources().getStringArray(R.array.session_end_times_hours);
-        String[] sessionEndTimesMinutes = getResources().getStringArray(R.array.session_end_times_minutes);
-
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(c.getTime());
-        String[] components = formattedDate.split("-");
-//        Log.v("TODAYS DATE", formattedDate);
-
-        for (int i = 0; i < sessionNames.length; i++) {
-            Time startTime = new Time(Integer.parseInt(sessionStartTimesHours[i]), Integer.parseInt(sessionStartTimesMinutes[i]));
-            Time endTime = new Time(Integer.parseInt(sessionEndTimesHours[i]), Integer.parseInt(sessionEndTimesMinutes[i]));
-            Timeblock tb = new Timeblock(startTime, endTime);
-            Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i]);
-            allSessions.add(new Session(t, new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2])), tb));
-//            Log.v("MODELS", sessionModels.get(i).toString());
-        }
-    }
-
 }
