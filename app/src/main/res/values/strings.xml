@@ -1,5 +1,4 @@
 <resources>
-
     //home screen
     <string name="appTitle">LRV</string>
     <string name="app_name">LuRiVa - Study Session App!</string>
@@ -27,10 +26,10 @@
     <string name="lowDifficultyButton">*</string>
     <string name="midDifficultyButton">**</string>
     <string name="highDifficultyButton">***</string>
-    <string name = "hoursStr">hours</string>
+    <string name="hoursStr">hours</string>
     <string name="minutesStr">minutes</string>
-    <string name = "doneButton_repeated">DONE</string>
-    <string name = "textDifficulty">Click Difficulty</string>
+    <string name="doneButton_repeated">DONE</string>
+    <string name="textDifficulty">Click Difficulty</string>
 
     //todays session
     <string name="saveButtonStr">SAVE SESSIONS</string>
@@ -131,5 +130,4 @@
     <string name="friString">FRI</string>
     <string name="satString">SAT</string>
     <string name="taskTypeLabel">aa</string>
-
 </resources>
