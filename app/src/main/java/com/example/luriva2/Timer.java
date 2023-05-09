@@ -63,7 +63,7 @@ public class Timer extends AppCompatActivity {
         else if(min == 15)
             status.setText("Status: Break time");
         else
-            status.setText("Status: No current session");
+            status.setText("Status: Not working");
         countdown = new CountDownTimer(min*60*1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
