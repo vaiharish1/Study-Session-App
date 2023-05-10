@@ -78,10 +78,8 @@ public class DaySessions extends DisplaySessions {
     public void createAdapter() {
         ArrayList<Session> sessionModels = getSessionModels();
         Session_RecyclerViewAdapter adapter = new Session_RecyclerViewAdapter(this, sessionModels);
-        Log.v("ADAPTER", "created adapter");
 
         recyclerView.setAdapter(adapter);
-        Log.v("SET ADAPTER", "set the adapter");
 
         adapter.setOnItemClickListener(new Session_RecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -95,7 +93,6 @@ public class DaySessions extends DisplaySessions {
                     session.setTimeblock(temp);
 
                     sessionModels.add(position + 1, session);
-//                    Log.v("PRESSED BUTTON", "DOWN");
                 } else if (v.getId() == R.id.upButton) {
                     Session session = sessionModels.remove(position);
 
@@ -105,7 +102,6 @@ public class DaySessions extends DisplaySessions {
                     session.setTimeblock(temp);
 
                     sessionModels.add(position - 1, session);
-//                    Log.v("PRESSED BUTTON", "UP");
                 }
 
                 adapter.notifyDataSetChanged();
@@ -114,8 +110,6 @@ public class DaySessions extends DisplaySessions {
         });
 
         recyclerView.setAdapter(adapter);
-        Log.v("SET ADAPTER", "set the adapter");
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

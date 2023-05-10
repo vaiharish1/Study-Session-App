@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 public class DisplaySessions extends AppCompatActivity {
@@ -58,18 +59,14 @@ public class DisplaySessions extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
-        ArrayList<Session> savedSessions = new ArrayList<Session>();
+        ArrayList<Session> savedSessions = new ArrayList<>();
         for (int i = 0; i < allSessions.size(); i++) {
-            if (allSessions.get(i).getDate().equals(changedThisDate)) {
-                continue;
-            } else {
+            if (!allSessions.get(i).getDate().equals(changedThisDate)) {
                 savedSessions.add(allSessions.get(i));
             }
         }
 
-        for (int i = 0; i < sessionModels.size(); i++) {
-            savedSessions.add(sessionModels.get(i));
-        }
+        Collections.addAll(sessionModels);
 
         String json = gson.toJson(savedSessions);
 
@@ -80,7 +77,7 @@ public class DisplaySessions extends AppCompatActivity {
     }
 
     public void loadData(Date theDay) {
-        sessionModels = new ArrayList<Session>();
+        sessionModels = new ArrayList<>();
 
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -92,7 +89,7 @@ public class DisplaySessions extends AppCompatActivity {
             Log.v("all sessions here", "adding these sessions: " + s.toString());
             if (s.getDate().equals(theDay)) {
                 sessionModels.add(s);
-                Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
+                Log.v("TODAY'S SESSION ADDING", "adding these sessions: " + s);
             }
         }
     }

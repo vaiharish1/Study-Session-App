@@ -1,21 +1,13 @@
 package com.example.luriva2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
@@ -24,15 +16,12 @@ import com.example.luriva2.dataModelClasses.Timeblock;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
-    private NavigationBarView navigationBarView; // navigation bar
 
     private ArrayList<Session> allSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
@@ -43,26 +32,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        navigationBarView = findViewById(R.id.navigationView);
+        // navigation bar
+        NavigationBarView navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.homeNavigation);
-        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.timerNavigation:
-                        startActivity(new Intent(getApplicationContext(),Timer.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.homeNavigation:
-                        return true;
-                    case R.id.viewTasksNavigation:
-                        startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-
-                return false;
+        navigationBarView.setOnItemSelectedListener(item -> {
+            switch(item.getItemId()){
+                case R.id.timerNavigation:
+                    startActivity(new Intent(getApplicationContext(),Timer.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.homeNavigation:
+                    return true;
+                case R.id.viewTasksNavigation:
+                    startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
+                    overridePendingTransition(0,0);
+                    return true;
             }
+
+            return false;
         });
 
         // setting today's date by getting a calendar instance
@@ -120,11 +107,6 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
-    public void onTitleClick(){
-        Toast toast = Toast.makeText(getApplicationContext(), ":P", Toast.LENGTH_LONG);
-        toast.show();
-    }
-
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -143,10 +125,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
-        ArrayList<Session> savedSessions = new ArrayList<Session>();
-        for (int i = 0; i < allSessions.size(); i++) {
-            savedSessions.add(allSessions.get(i));
-        }
+        ArrayList<Session> savedSessions = new ArrayList<>(allSessions);
 
         String json = gson.toJson(savedSessions);
         editor.putString("session list", json);
@@ -154,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpSessionModels() {
-        allSessions = new ArrayList<Session>();
+        allSessions = new ArrayList<>();
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 

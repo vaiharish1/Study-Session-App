@@ -1,42 +1,20 @@
 package com.example.luriva2;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import com.example.luriva2.dataModelClasses.Constants;
 import com.example.luriva2.dataModelClasses.Date;
-import com.example.luriva2.dataModelClasses.OneTimeTask;
 import com.example.luriva2.dataModelClasses.RepetitiveTask;
-import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
-import com.example.luriva2.dataModelClasses.Time;
-import com.example.luriva2.dataModelClasses.Timeblock;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class RepeatedParameters extends TaskParameters {
     private NavigationBarView navigationBarView; // navigation bar
-
-    private Date doingDate; // today's date and the date of the task
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +120,7 @@ public class RepeatedParameters extends TaskParameters {
         Date today = getToday();
 
         for (int i = 0; i < 30; i++) {
-            doingDate = today.addDays(i * howOften);
+            Date doingDate = today.addDays(i * howOften);
             addingSessions(doingDate, time, newTask);
         }
 

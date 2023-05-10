@@ -11,16 +11,10 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.OneTimeTask;
-import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
-import com.example.luriva2.dataModelClasses.Time;
-import com.example.luriva2.dataModelClasses.Timeblock;
-import java.util.ArrayList;
 
 public class OneTimeParameters extends TaskParameters {
     private NavigationBarView navigationBarView; // navigation bar
-
-    private Date doingDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +128,7 @@ public class OneTimeParameters extends TaskParameters {
         Task newTask = new OneTimeTask(name, time, estimatedDifficulty, dueDate);
 
         // we will do this task one day before the duedate
-        doingDate = dueDate.subtractDays(1);
+        Date doingDate = dueDate.subtractDays(1);
         Date today = getToday();
 
         while (!addingSessions(doingDate, time, newTask)) {
