@@ -8,7 +8,7 @@ public class Task {
 
 	public Task(String taskName, int estimatedTime, int difficulty, String taskType) {
 		this.taskName = taskName;
-		this.estimatedTime = estimatedTime;
+		this.estimatedTime = estimatedTime + Constants.BUFFER_TIME * difficulty;
 		this.difficulty = difficulty;
 		this.taskType = taskType;
 	}

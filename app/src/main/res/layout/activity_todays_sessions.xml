@@ -47,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:onClick="saveData"
+        android:onClick="onClickSaveData"
         android:text="@string/saveButtonStr"
         android:textSize="24sp"
         android:textStyle="bold"

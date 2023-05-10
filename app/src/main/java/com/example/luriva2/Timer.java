@@ -1,16 +1,11 @@
 package com.example.luriva2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Random;
@@ -29,24 +24,21 @@ public class Timer extends AppCompatActivity {
 
         navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.timerNavigation);
-        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.timerNavigation:
-                        return true;
-                    case R.id.homeNavigation:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.viewTasksNavigation:
-                        startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-
-                return false;
+        navigationBarView.setOnItemSelectedListener(item -> {
+            switch(item.getItemId()){
+                case R.id.timerNavigation:
+                    return true;
+                case R.id.homeNavigation:
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.viewTasksNavigation:
+                    startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
+                    overridePendingTransition(0,0);
+                    return true;
             }
+
+            return false;
         });
 
         status = findViewById(R.id.timerStatus);
@@ -59,12 +51,12 @@ public class Timer extends AppCompatActivity {
 
     public void startTimer(int min){
         if(min == 45)
-            status.setText("Status: Working");
+            status.setText(R.string.statusWorkingString);
         else if(min == 15)
-            status.setText("Status: Break time");
+            status.setText(R.string.statusBreakTimeString);
         else
-            status.setText("Status: Not working");
-        countdown = new CountDownTimer(min*60*1000,1000) {
+            status.setText(R.string.statusNotWorkingString);
+        countdown = new CountDownTimer((long) min *60*1000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timer.setText(msToMin(millisUntilFinished));
@@ -73,9 +65,9 @@ public class Timer extends AppCompatActivity {
             @Override
             public void onFinish() {
                 String[] motivation = getResources().getStringArray(R.array.motivationQuotes);
-                int motivLen = motivation.length;
+                int motivationLen = motivation.length;
                 Random randy = new Random();
-                motivationalQuote.setText(motivation[randy.nextInt(motivLen)]);
+                motivationalQuote.setText(motivation[randy.nextInt(motivationLen)]);
                 startTimer(min);
             }
 
@@ -90,7 +82,7 @@ public class Timer extends AppCompatActivity {
     }
 
     public void cancel(View v){
-        status.setText("Timer cancelled");
+        status.setText(R.string.cancelledStr);
         countdown.cancel();
     }
 
