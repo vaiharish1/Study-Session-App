@@ -1,5 +1,4 @@
 <resources>
-
     //home screen
     <string name="appTitle">LRV</string>
     <string name="app_name">LuRiVa - Study Session App!</string>
@@ -12,7 +11,7 @@
 
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
-    <string name="oneTimeText">One- Time</string>
+    <string name="oneTimeText">One-Time</string>
     <string name="repeatedText">Repeated</string>
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
@@ -27,18 +26,19 @@
     <string name="lowDifficultyButton">*</string>
     <string name="midDifficultyButton">**</string>
     <string name="highDifficultyButton">***</string>
-    <string name = "hoursStr">hours</string>
-    <string name = "doneButton_repeated">DONE</string>
-    <string name = "textDifficulty">Click Difficulty</string>
+    <string name="hoursStr">hours</string>
+    <string name="minutesStr">minutes</string>
+    <string name="doneButton_repeated">DONE</string>
+    <string name="textDifficulty">Click Difficulty</string>
 
     //todays session
     <string name="saveButtonStr">SAVE SESSIONS</string>
 
-    <string name="todaySessionHeaderStr">Today\'s Session </string>
-    <string name="todaySessionTaskNameStr">Task Name </string>
-    <string name="todaySessionTimeStr">HH:MM - HH:MM </string>
-    <string name="upButtonStr">Move up </string>
-    <string name="downButtonStr">Move down </string>
+    <string name="todaySessionHeaderStr">Today\'s Sessions</string>
+    <string name="todaySessionTaskNameStr">Task Name</string>
+    <string name="todaySessionTimeStr">HH:MM - HH:MM</string>
+    <string name="upButtonStr">Move up</string>
+    <string name="downButtonStr">Move down</string>
 
     //settings
     <string name="settingsHeaderStr">Settings </string>
@@ -119,6 +119,10 @@
         <item>Try your best!</item>
     </string-array>
 
+    <string name="statusNotWorkingString">Status: Not Working</string>
+    <string name="statusBreakTimeString">Status: Break Time</string>
+    <string name="statusWorkingString">Status: In Session</string>
+    <string name="cancelledStr">Timer Cancelled</string>
     <string name="rightArrow"><![CDATA[—>]]></string>
     <string name="leftArrow"><![CDATA[<—]]></string>
     <string name="todaysDate">April 2023</string>
@@ -130,5 +134,4 @@
     <string name="friString">FRI</string>
     <string name="satString">SAT</string>
     <string name="taskTypeLabel">aa</string>
-
 </resources>
