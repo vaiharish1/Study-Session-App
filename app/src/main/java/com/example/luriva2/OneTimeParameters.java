@@ -1,44 +1,26 @@
 package com.example.luriva2;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import com.example.luriva2.dataModelClasses.Constants;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.OneTimeTask;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
-import com.example.luriva2.TodaysSessions;
 import com.example.luriva2.dataModelClasses.Time;
 import com.example.luriva2.dataModelClasses.Timeblock;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class OneTimeParameters extends AppCompatActivity {
+public class OneTimeParameters extends TaskParameters {
     private NavigationBarView navigationBarView; // navigation bar
 
-    private ArrayList<Session> allSessions, daysSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
-
-    private Date today, doingDate; // today's date and the date of the task
+    private Date doingDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +51,6 @@ public class OneTimeParameters extends AppCompatActivity {
                 return false;
             }
         });
-
-        // setting today's date by getting a calendar instance
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        String formattedDate = sdf.format(c.getTime());
-        String[] components = formattedDate.split("-");
-        today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
     }
 
     // getting the task name from the edittext
@@ -88,12 +63,6 @@ public class OneTimeParameters extends AppCompatActivity {
         return taskNameStr;
     }
 
-//        public void collectTaskName(View v) {
-//            String taskName = getTaskName();
-//            Toast toast = Toast.makeText(getApplicationContext(), "Task Name: " + taskName, Toast.LENGTH_LONG);
-//            toast.show();
-//        }
-
     // getting the due date from the edittext
     public String getDueDate() {
         EditText dueDateText = findViewById(R.id.editTextDueDate_onetime);
@@ -104,12 +73,6 @@ public class OneTimeParameters extends AppCompatActivity {
         return dueDateStr;
     }
 
-//        public void collectDueDate(View v) {
-//            String dueDate = getDueDate();
-//            Toast toast = Toast.makeText(getApplicationContext(), "Due Date: " + dueDate, Toast.LENGTH_LONG);
-//            toast.show();
-//        }
-
     // getting the estimated time from the edittext
     public String getTime() {
         EditText timeText = findViewById(R.id.editTextEstTime_onetime);
@@ -119,12 +82,6 @@ public class OneTimeParameters extends AppCompatActivity {
         }
         return timeStr;
     }
-
-//        public void collectTime(View v) {
-//            String time = getTime();
-//            Toast toast = Toast.makeText(getApplicationContext(), "Estimated time: " + time, Toast.LENGTH_LONG);
-//            toast.show();
-//        }
 
     // when pressing the "easy" button, populating the difficulty text with "Easy"
     public void populateEasy(View v) {
@@ -142,19 +99,6 @@ public class OneTimeParameters extends AppCompatActivity {
         difficultyText.setText("Hard");
     }
 
-//        public void onClickEasy(View v){
-//            populateEasy();
-//            collectDif(v);
-//        }
-//        public void onClickMedium(View v){
-//            populateMid();
-//            collectDif(v);
-//        }
-//        public void onClickHard(View v){
-//            populateHard();
-//            collectDif(v);
-//        }
-
     // getting the estimated difficulty from the difficulty textview
     public String getDif() {
         TextView difText = findViewById(R.id.TextViewdifficulty_onetime);
@@ -165,88 +109,38 @@ public class OneTimeParameters extends AppCompatActivity {
         return difStr;
     }
 
-//        public void collectDif(View v) {
-//            String dif = getDif();
-//            Toast toast = Toast.makeText(getApplicationContext(), "Difficulty: " + dif, Toast.LENGTH_LONG);
-//            toast.show();
-//        }
-
     // when adding the task, we get all the required information (and catch for errors) and then add the task
     public void todaysSessionsNav(View v){
         // getting the task name
         String name = getTaskName();
-        if (name.isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Empty task name.", Toast.LENGTH_LONG);
-            toast.show();
-            return;
-        }
+        if (!checkTaskName(name)) return;
 
         // getting the due date
-        String dueDateRegEx = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
         String dueDateStr = getDueDate();
-
-        if (!dueDateStr.matches(dueDateRegEx)) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Incorrect date format.", Toast.LENGTH_LONG);
-            toast.show();
-            return;
-        }
-
-        String[] dueDateComponents = dueDateStr.split("/");
-        Date dueDate = new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
+        if (!checkDueDate(dueDateStr)) return;
+        Date dueDate = transformToDate(dueDateStr);
 
         // getting the estimated time
         String timeStr = getTime();
-        if (timeStr.isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "No estimated time given.", Toast.LENGTH_LONG);
-            toast.show();
-            return;
-        }
-
-        int time = Integer.parseInt(getTime());
+        if (!checkEstimatedTime(timeStr)) return;
+        int time = transformToTime(timeStr);
 
         // getting the difficulty of the task
         String difficulty = getDif();
-        if (difficulty.equals("Click Difficulty")) {
-            Toast toast = Toast.makeText(getApplicationContext(), "No task difficulty stated.", Toast.LENGTH_LONG);
-            toast.show();
-            return;
-        }
-
-        int estimatedDifficulty;
-        if (difficulty.equals("Easy")) estimatedDifficulty = 3;
-        else if (difficulty.equals("Medium")) estimatedDifficulty = 2;
-        else if (difficulty.equals("Hard")) estimatedDifficulty = 1;
-        else estimatedDifficulty = 4;
+        if (!checkDifficulty(difficulty)) return;
+        int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task
         Task newTask = new OneTimeTask(name, time, estimatedDifficulty, dueDate);
 
         // we will do this task one day before the duedate
         doingDate = dueDate.subtractDays(1);
+        Date today = getToday();
 
-        // load the data and save all the sessions that are on this "doing date"
-        loadData(doingDate);
-//        Log.v("adding task", "ADDED TASK TO " + doingDate.toString());
-
-        // if there aren't any sessions on this date YET, then add one at 4pm
-        if (daysSessions.size() == 0) {
-            Time startTime = new Time(12+4, 0);
-            Time endTime = startTime.add(0, time);
-            Timeblock newTB = new Timeblock(startTime, endTime);
-            Session newSession = new Session(newTask, doingDate, newTB);
-            daysSessions.add(newSession);
-        } // otherwise, add this session right after the previous session according to buffer times
-        else {
-            Session lastSession = daysSessions.get(daysSessions.size()-1);
-            Time startTime = lastSession.getNextStartTime();
-            Time endTime = startTime.add(0, time);
-            Timeblock newTB = new Timeblock(startTime, endTime);
-            Session newSession = new Session(newTask, doingDate, newTB);
-            daysSessions.add(newSession);
+        while (!addingSessions(doingDate, time, newTask)) {
+            doingDate = doingDate.subtractDays(1);
+            if (doingDate.compareTo(today) < 0) break;
         }
-
-        // save this data
-        saveData(v);
 
         // starting up another activity with an intent
         Intent intent;
@@ -261,47 +155,5 @@ public class OneTimeParameters extends AppCompatActivity {
         // toast that we have added the task
         Toast toast = Toast.makeText(getApplicationContext(), "Adding Task...", Toast.LENGTH_LONG);
         toast.show();
-    }
-
-    public void saveData(View v) {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-
-        ArrayList<Session> savedSessions = new ArrayList<Session>();
-        for (int i = 0; i < allSessions.size(); i++) {
-            if (allSessions.get(i).getDate().equals(doingDate)) {
-                continue;
-            } else {
-                savedSessions.add(allSessions.get(i));
-            }
-        }
-
-        for (int i = 0; i < daysSessions.size(); i++) {
-            savedSessions.add(daysSessions.get(i));
-        }
-
-        String json = gson.toJson(savedSessions);
-
-        editor.putString("session list", json);
-        editor.apply();
-    }
-
-    private void loadData(Date thisDay) {
-        daysSessions = new ArrayList<Session>();
-
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("session list", null);
-        Type type = new TypeToken<ArrayList<Session>>() {}.getType();
-        allSessions = gson.fromJson(json, type);
-
-        for (Session s : allSessions) {
-//            Log.v("all sessions here", "adding these sessions: " + s.toString());
-            if (s.getDate().equals(thisDay)) {
-                daysSessions.add(s);
-//                Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
-            }
-        }
     }
 }
