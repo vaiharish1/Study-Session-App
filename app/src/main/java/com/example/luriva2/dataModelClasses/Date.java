@@ -4,7 +4,9 @@ import java.util.Objects;
 
 public class Date implements Comparable<Date> {
     public static int[] daysOfMonths = {31,28,31,30,31,30,31,31,30,31,30,31};
-    private int month, day, year;
+    private final int month;
+    private final int day;
+    private final int year;
 
     public Date(int month, int day, int year) {
         this.month = month;

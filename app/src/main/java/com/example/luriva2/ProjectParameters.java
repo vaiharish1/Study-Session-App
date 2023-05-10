@@ -1,13 +1,9 @@
 package com.example.luriva2;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -16,22 +12,9 @@ import android.widget.Toast;
 
 import com.example.luriva2.dataModelClasses.Constants;
 import com.example.luriva2.dataModelClasses.Date;
-import com.example.luriva2.dataModelClasses.OneTimeTask;
 import com.example.luriva2.dataModelClasses.ProjectTask;
-import com.example.luriva2.dataModelClasses.RepetitiveTask;
-import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
-import com.example.luriva2.dataModelClasses.Time;
-import com.example.luriva2.dataModelClasses.Timeblock;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Locale;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ProjectParameters extends TaskParameters {
@@ -119,21 +102,21 @@ public class ProjectParameters extends TaskParameters {
     public void todaysSessionsNav(View v){
         // getting the task name
         String name = getTaskName();
-        if (!checkTaskName(name)) return;
+        if (checkTaskName(name)) return;
 
         // getting the due date
         String dueDateStr = getDueDate();
-        if (!checkDueDate(dueDateStr)) return;
+        if (checkDueDate(dueDateStr)) return;
         Date dueDate = transformToDate(dueDateStr);
 
         // getting the estimated time
         String timeStr = getTime();
-        if (!checkEstimatedTime(timeStr)) return;
+        if (checkEstimatedTime(timeStr)) return;
         int time = transformToTime(timeStr);
 
         // getting the difficulty of the task
         String difficulty = getDif();
-        if (!checkDifficulty(difficulty)) return;
+        if (checkDifficulty(difficulty)) return;
         int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task

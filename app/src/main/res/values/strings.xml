@@ -9,6 +9,11 @@
     <string name="settings">Settings</string>
     <string name="timerButtonStr">Timer</string>
 
+    //popup screen
+    <string name="startupPopupTitleStr">Welcome to enLighten!</string>
+    <string name="startupPopupBodyStr">Since this is the first time you\'re using the app, we have created a few sample sessions in the "Today\'s Sessions" tab. Feel free to explore using the different buttons on the home screen and the navigation bar. </string>
+    <string name="startupDismissStr">TAP ANYWHERE TO DISMISS MESSAGE.</string>
+
     <string name="taskNameLabel">Name: </string>
     <string name="taskNameHint">Enter Task Name </string>
     <string name="oneTimeText">One-Time</string>
@@ -24,8 +29,11 @@
     <string name="EstTimeHint">Enter Est. Time</string>
     <string name="difficultyStr">Difficulty:</string>
     <string name="lowDifficultyButton">*</string>
+    <string name="lowDifficultyStr">Easy</string>
     <string name="midDifficultyButton">**</string>
+    <string name="midDifficultyStr">Medium</string>
     <string name="highDifficultyButton">***</string>
+    <string name="highDifficultyStr">Hard</string>
     <string name="hoursStr">hours</string>
     <string name="minutesStr">minutes</string>
     <string name="doneButton_repeated">DONE</string>

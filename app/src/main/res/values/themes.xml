@@ -18,7 +18,6 @@
         <item name="android:statusBarColor">@color/madder</item>
         <!-- Customize your theme here. -->
         <item name="android:background">@color/minty_rose</item>
-
-
+<!--        <item name="android:background">@color/transparent</item>-->
     </style>
 </resources>

@@ -1,12 +1,19 @@
 package com.example.luriva2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
@@ -26,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Session> allSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
     private Date today; // today's date and the date of the task
+
+    private ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+        layout = findViewById(R.id.mainConstraintLayout);
+
         // setting today's date by getting a calendar instance
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -71,40 +82,67 @@ public class MainActivity extends AppCompatActivity {
         // TODO: add settings button
     }
 
-    public void todaysSessionsNav(View v){
-        Intent intent = new Intent(this, TodaysSessions.class );
-        startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
+
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
         toast.show();
     }
 
+    public void todaysSessionsNav(View v){
+        Intent intent = new Intent(this, TodaysSessions.class );
+        startActivity(intent);
+        showToast("Viewing Today's Sessions...");
+//        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
+//        toast.show();
+    }
+
     public void viewCalNav(View v){
-        // Log.d("vai","in viewCalNav method");
         Intent intent = new Intent(this, ViewCalendar.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Calendar", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Calendar...");
     }
 
     public void addTasksNav(View v){
         Intent intent = new Intent(this, AddTasks.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Task Manager", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Task Manager...");
     }
 
     public void settingsNav(View v) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Settings", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Settings...");
     }
 
     public void timerNav(View v){
         Intent intent = new Intent(this,Timer.class);
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Timer", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Timer...");
+    }
+
+    private void createPopupWindow() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popUpView = inflater.inflate(R.layout.startup_popup_window, null);
+
+        int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
+        popUpView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
     }
 
     private void loadData() {
@@ -115,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         allSessions = gson.fromJson(json, type);
 
         if (allSessions == null) {
-            // TODO: add popup screen that briefly introduces the app
+            createPopupWindow();
             setUpSessionModels();
         }
     }
@@ -148,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
             Timeblock tb = new Timeblock(startTime, endTime);
             Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i]);
             allSessions.add(new Session(t, today, tb));
-//            Log.v("MODELS", sessionModels.get(i).toString());
         }
     }
 }

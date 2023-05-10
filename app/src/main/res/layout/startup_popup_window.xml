@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="50sp"
+    android:layout_marginTop="10sp"
+    android:layout_marginEnd="50sp"
+    android:layout_marginBottom="10sp"
+    android:orientation="vertical"
+    android:background="@drawable/popup_background">
+
+    <TextView
+        android:id="@+id/startupPopupTitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="#00000000"
+        android:text="@string/startupPopupTitleStr"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/startupPopupBodyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="#00000000"
+        android:text="@string/startupPopupBodyStr"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/startupPopupDismissText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="#00000000"
+        android:text="@string/startupDismissStr"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+</LinearLayout>

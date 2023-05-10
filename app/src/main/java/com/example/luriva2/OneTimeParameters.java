@@ -1,9 +1,7 @@
 package com.example.luriva2;
 
-import androidx.annotation.NonNull;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +12,6 @@ import com.example.luriva2.dataModelClasses.OneTimeTask;
 import com.example.luriva2.dataModelClasses.Task;
 
 public class OneTimeParameters extends TaskParameters {
-    private NavigationBarView navigationBarView; // navigation bar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,28 +19,26 @@ public class OneTimeParameters extends TaskParameters {
         setContentView(R.layout.activity_one_time_parameters); // the layout to be used
 
         // all the things with the navigation bar
-        navigationBarView = findViewById(R.id.navigationView);
+        // navigation bar
+        NavigationBarView navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
-        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.timerNavigation:
-                        startActivity(new Intent(getApplicationContext(),Timer.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.homeNavigation:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.viewTasksNavigation:
-                        startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-
-                return false;
+        navigationBarView.setOnItemSelectedListener(item -> {
+            switch(item.getItemId()){
+                case R.id.timerNavigation:
+                    startActivity(new Intent(getApplicationContext(),Timer.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.homeNavigation:
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.viewTasksNavigation:
+                    startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
+                    overridePendingTransition(0,0);
+                    return true;
             }
+
+            return false;
         });
     }
 
@@ -80,17 +75,17 @@ public class OneTimeParameters extends TaskParameters {
     // when pressing the "easy" button, populating the difficulty text with "Easy"
     public void populateEasy(View v) {
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
-        difficultyText.setText("Easy");
+        difficultyText.setText(R.string.lowDifficultyStr);
     }
     // when pressing the "medium" button, populating the difficulty text with "Medium"
     public void populateMid(View v) {
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
-        difficultyText.setText("Medium");
+        difficultyText.setText(R.string.midDifficultyStr);
     }
     // when pressing the "hard" button, populating the difficulty text with "Hard"
     public void populateHard(View v) {
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
-        difficultyText.setText("Hard");
+        difficultyText.setText(R.string.highDifficultyStr);
     }
 
     // getting the estimated difficulty from the difficulty textview
@@ -107,27 +102,27 @@ public class OneTimeParameters extends TaskParameters {
     public void todaysSessionsNav(View v){
         // getting the task name
         String name = getTaskName();
-        if (!checkTaskName(name)) return;
+        if (checkTaskName(name)) return;
 
         // getting the due date
         String dueDateStr = getDueDate();
-        if (!checkDueDate(dueDateStr)) return;
+        if (checkDueDate(dueDateStr)) return;
         Date dueDate = transformToDate(dueDateStr);
 
         // getting the estimated time
         String timeStr = getTime();
-        if (!checkEstimatedTime(timeStr)) return;
+        if (checkEstimatedTime(timeStr)) return;
         int time = transformToTime(timeStr);
 
         // getting the difficulty of the task
         String difficulty = getDif();
-        if (!checkDifficulty(difficulty)) return;
+        if (checkDifficulty(difficulty)) return;
         int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task
         Task newTask = new OneTimeTask(name, time, estimatedDifficulty, dueDate);
 
-        // we will do this task one day before the duedate
+        // we will do this task one day before the due date
         Date doingDate = dueDate.subtractDays(1);
         Date today = getToday();
 

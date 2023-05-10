@@ -98,7 +98,7 @@ public class RepeatedParameters extends TaskParameters {
     public void todaysSessionsNav(View v){
         // getting the task name
         String name = getTaskName();
-        if (!checkTaskName(name)) return;
+        if (checkTaskName(name)) return;
 
         // getting how often to repeat
         String howOftenStr = getIncrement();
@@ -107,12 +107,12 @@ public class RepeatedParameters extends TaskParameters {
 
         // getting the estimated time
         String timeStr = getTime();
-        if (!checkEstimatedTime(timeStr)) return;
+        if (checkEstimatedTime(timeStr)) return;
         int time = transformToTime(timeStr);
 
         // getting the difficulty of the task
         String difficulty = getDif();
-        if (!checkDifficulty(difficulty)) return;
+        if (checkDifficulty(difficulty)) return;
         int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task
