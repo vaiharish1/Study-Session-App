@@ -9,27 +9,36 @@
     <string name="settings">Settings</string>
     <string name="timerButtonStr">Timer</string>
 
+    //Add tasks - intro screen
     <string name="taskNameLabel">Name: </string>
-    <string name="taskNameHint">Enter Task Name </string>
     <string name="oneTimeText">One-Time</string>
     <string name="repeatedText">Repeated</string>
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
+
+   //Add tasks - textViews
     <string name="dueDateStr">Due Date:</string>
-    <string name="editTextDueDate">Enter a Date</string>
     <string name="repeatStr">Repeat: </string>
-    <string name="incrementValueStr">… </string>
     <string name="daysStr">days</string>
     <string name="estTimeStr">Est. Time:</string>
+
+   //Add tasks - hints
+    <string name="taskNameHint">Enter Task Name </string>
     <string name="EstTimeHint">Enter Est. Time</string>
     <string name="difficultyStr">Difficulty:</string>
-    <string name="lowDifficultyButton">*</string>
-    <string name="midDifficultyButton">**</string>
-    <string name="highDifficultyButton">***</string>
+    <string name="textDifficulty">Click Difficulty</string>
+    <string name="editTextDueDateHint">MM/DD/YYYY</string>
+    <string name="incrementValueStr">… </string>
+
+
+
+    <string name="lowDifficultyButton">Easy</string>
+    <string name="midDifficultyButton">Medium</string>
+    <string name="highDifficultyButton">Hard</string>
+
     <string name="hoursStr">hours</string>
     <string name="minutesStr">minutes</string>
     <string name="doneButton_repeated">DONE</string>
-    <string name="textDifficulty">Click Difficulty</string>
 
     //todays session
     <string name="saveButtonStr">SAVE SESSIONS</string>
@@ -39,6 +48,12 @@
     <string name="todaySessionTimeStr">HH:MM - HH:MM</string>
     <string name="upButtonStr">Move up</string>
     <string name="downButtonStr">Move down</string>
+    <string name="repeatedTitle">Add Repeated Task</string>
+    <string name="onetimeTitle">Add One- Time Task</string>
+    <string name="projectTitle">Add Project Task</string>
+
+
+
 
     //settings
     <string name="settingsHeaderStr">Settings </string>
@@ -123,6 +138,8 @@
     <string name="statusBreakTimeString">Status: Break Time</string>
     <string name="statusWorkingString">Status: In Session</string>
     <string name="cancelledStr">Timer Cancelled</string>
+
+    // calendar
     <string name="rightArrow"><![CDATA[—>]]></string>
     <string name="leftArrow"><![CDATA[<—]]></string>
     <string name="todaysDate">April 2023</string>
