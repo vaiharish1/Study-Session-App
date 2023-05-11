@@ -96,4 +96,4 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 }
->>>>>>>>> Temporary merge branch 2
+

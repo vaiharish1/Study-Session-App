@@ -119,9 +119,6 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
             Intent intent = new Intent(this, DaySessions.class );
             intent.putExtra("date", monthDateYearFormDate(selectedDate, dayText));
             startActivity(intent);
-
-
-
         }
     }
 
