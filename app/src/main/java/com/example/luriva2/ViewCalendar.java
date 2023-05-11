@@ -30,11 +30,12 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("vai","in onCreate cal view");
+
         setContentView(R.layout.activity_view_calendar);
         initWidgets();
         selectedDate = LocalDate.now();
         setMonthView();
+
         navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -64,6 +65,7 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
     }
+
     private void setMonthView() {
         monthYearText.setText(monthYearFormDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
@@ -113,7 +115,7 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
 
     public void onItemClick(int position, String dayText){
         if(!dayText.equals("")){
-            String message = "Opening tasks for: " + dayText + " " + monthYearFormDate(selectedDate);
+            String message = "Opening tasks for " + dayText + " " + monthYearFormDate(selectedDate);
             Toast.makeText(this, message,Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, DaySessions.class );

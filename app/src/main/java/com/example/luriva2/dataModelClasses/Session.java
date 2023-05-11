@@ -11,7 +11,7 @@ public class Session {
 		this.task = task;
 		this.date = date;
 		this.timeblock = timeblock;
-		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.BUFFER_TIME);
+		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.IN_BETWEEN_TIME);
 	}
 
 	public Task getTask() {
@@ -28,7 +28,7 @@ public class Session {
 
 	public void setTimeblock(Timeblock timeblock) {
 		this.timeblock = timeblock;
-		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.BUFFER_TIME);
+		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.IN_BETWEEN_TIME);
 	}
 
 	public Time getNextStartTime() {
