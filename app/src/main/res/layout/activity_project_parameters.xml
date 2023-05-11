@@ -23,14 +23,17 @@
         android:id="@+id/TextViewdifficulty_project"
         android:layout_width="151dp"
         android:layout_height="29dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
         android:ems="10"
         android:text="@string/textDifficulty"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/difficultyButton2_project"
-        app:layout_constraintStart_toStartOf="@+id/difficultyButton2_project"
-        app:layout_constraintTop_toBottomOf="@+id/difficultyButton2_project" />
+        app:layout_constraintBottom_toTopOf="@+id/difficultyButton2_project"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextEstTime_project" />
 
     <TextView
         android:id="@+id/textView"
@@ -38,6 +41,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
         android:background="#EAB2BD"
+        android:paddingVertical="10dp"
         android:text="@string/projectTitle"
         android:textAlignment="center"
         android:textColor="#952323"
@@ -59,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewdifficulty_project" />
+        app:layout_constraintTop_toBottomOf="@+id/difficultyButton1_project" />
 
     <TextView
         android:id="@+id/hoursStr2"
@@ -113,7 +117,7 @@
         android:id="@+id/difficultyStr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:text="@string/difficultyStr"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/estTimeStr"
