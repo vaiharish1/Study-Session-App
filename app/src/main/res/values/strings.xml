@@ -21,13 +21,13 @@
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
 
-    //Add tasks - textViews
+   //Add tasks - textViews
     <string name="dueDateStr">Due Date:</string>
     <string name="repeatStr">Repeat: </string>
     <string name="daysStr">days</string>
     <string name="estTimeStr">Est. Time:</string>
 
-    //Add tasks - hints
+   //Add tasks - hints
     <string name="taskNameHint">Enter Task Name </string>
     <string name="EstTimeHint">Enter Est. Time</string>
     <string name="difficultyStr">Difficulty:</string>
@@ -51,6 +51,9 @@
     <string name="todaySessionTimeStr">HH:MM - HH:MM</string>
     <string name="upButtonStr">Move up</string>
     <string name="downButtonStr">Move down</string>
+    <string name="repeatedTitle">Add Repeated Task</string>
+    <string name="onetimeTitle">Add One- Time Task</string>
+    <string name="projectTitle">Add Project Task</string>
 
     //settings
     <string name="settingsHeaderStr">Settings </string>
