@@ -22,6 +22,7 @@ public class OneTimeParameters extends TaskParameters {
         setContentView(R.layout.activity_one_time_parameters); // the layout to be used
 
         // all the things with the navigation bar
+
         navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
