@@ -13,27 +13,23 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/navigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
+        app:layout_constraintVertical_bias="0.091">
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/mainTitle"
+    <ImageView
+        android:id="@+id/appLogoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/appTitle"
-        android:textColor="#000000"
-        android:textSize="60sp"
+        android:contentDescription="App Logo"
         app:layout_constraintBottom_toTopOf="@+id/todaysSessions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
-        tools:text="@string/appTitle" />
+        app:layout_constraintTop_toTopOf="@+id/navigationLayout"
+        app:srcCompat="@drawable/app_logo" />
 
     <Button
         android:id="@+id/todaysSessions"
@@ -43,12 +39,35 @@
         android:paddingHorizontal="20dp"
         android:paddingVertical="20dp"
         android:text="@string/todaySession"
-        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/viewAllSessions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appLogoView" />
+
+    <Button
+        android:id="@+id/timerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="timerNav"
+        android:text="@string/timerButtonStr"
+        app:layout_constraintBottom_toTopOf="@+id/viewCalendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTasks" />
+
+    <Button
+        android:id="@+id/viewAllSessions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="allSessionsNav"
+        android:text="@string/allSessions"
         app:layout_constraintBottom_toTopOf="@+id/addTasks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/todaysSessions" />
 
     <Button
         android:id="@+id/viewCalendar"
@@ -78,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todaysSessions" />
+        app:layout_constraintTop_toBottomOf="@+id/viewAllSessions" />
 
     <Button
         android:id="@+id/settings"

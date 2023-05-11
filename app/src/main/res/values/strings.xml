@@ -4,6 +4,7 @@
     <string name="app_name">LuRiVa - Study Session App!</string>
     <string name="title">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
+    <string name="allSessions">View All Sessions</string>
     <string name="viewCal">View Calendar</string>
     <string name="addTasks">Add Tasks</string>
     <string name="settings">Settings</string>
