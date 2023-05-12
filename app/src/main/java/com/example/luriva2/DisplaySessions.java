@@ -66,7 +66,7 @@ public class DisplaySessions extends AppCompatActivity {
             }
         }
 
-        Collections.addAll(sessionModels);
+        savedSessions.addAll(sessionModels);
 
         String json = gson.toJson(savedSessions);
 
@@ -86,10 +86,8 @@ public class DisplaySessions extends AppCompatActivity {
         allSessions = gson.fromJson(json, type);
 
         for (Session s : allSessions) {
-            Log.v("all sessions here", "adding these sessions: " + s.toString());
             if (s.getDate().equals(theDay)) {
                 sessionModels.add(s);
-                Log.v("TODAY'S SESSION ADDING", "adding these sessions: " + s);
             }
         }
     }

@@ -3,7 +3,10 @@ package com.example.luriva2;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -36,22 +39,32 @@ public class AddTasks extends AppCompatActivity {
         });
     }
 
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
+
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
     public void oneTimeNav(View v){
         Intent intent = new Intent(this, OneTimeParameters.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing One-Time Task Manager", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing One-Time Task Manager...");
     }
     public void repeatedNav(View v){
         Intent intent = new Intent(this, RepeatedParameters.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Repeated Task Manager", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Repeated Task Manager...");
     }
     public void projectNav(View v){
         Intent intent = new Intent(this, ProjectParameters.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Project Task Manager", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Project Task Manager...");
     }
 }

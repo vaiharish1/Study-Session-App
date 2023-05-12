@@ -1,7 +1,7 @@
 <resources>
     //home screen
     <string name="appTitle">LRV</string>
-    <string name="app_name">LuRiVa - Study Session App!</string>
+    <string name="app_name">enLighten</string>
     <string name="title">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
     <string name="allSessions">View All Tasks</string>
@@ -10,6 +10,11 @@
     <string name="settings">Settings</string>
     <string name="timerButtonStr">Timer</string>
 
+    //popup screen
+    <string name="startupPopupTitleStr">Welcome to enLighten!</string>
+    <string name="startupPopupBodyStr">Since this is the first time you\'re using the app, we have created a few sample sessions in the "Today\'s Sessions" tab. Feel free to explore using the different buttons on the home screen and the navigation bar. </string>
+    <string name="startupDismissStr">TAP ANYWHERE TO DISMISS MESSAGE.</string>
+
     //Add tasks - intro screen
     <string name="taskNameLabel">Name: </string>
     <string name="oneTimeText">One-Time</string>
@@ -17,20 +22,19 @@
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
 
-    //Add tasks - textViews
+   //Add tasks - textViews
     <string name="dueDateStr">Due Date:</string>
     <string name="repeatStr">Repeat: </string>
     <string name="daysStr">days</string>
     <string name="estTimeStr">Est. Time:</string>
 
-    //Add tasks - hints
+   //Add tasks - hints
     <string name="taskNameHint">Enter Task Name </string>
     <string name="EstTimeHint">Enter Est. Time</string>
     <string name="difficultyStr">Difficulty:</string>
     <string name="textDifficulty">Click Difficulty</string>
     <string name="editTextDueDateHint">MM/DD/YYYY</string>
     <string name="incrementValueStr">… </string>
-
 
     <string name="lowDifficultyButton">Easy</string>
     <string name="midDifficultyButton">Medium</string>
@@ -51,7 +55,6 @@
     <string name="repeatedTitle">Add Repeated Task</string>
     <string name="onetimeTitle">Add One- Time Task</string>
     <string name="projectTitle">Add Project Task</string>
-
 
     //settings
     <string name="settingsHeaderStr">Settings </string>
@@ -87,9 +90,9 @@
     </string-array>
 
     <string-array name="session_start_times_hours">
-        <item>03</item>
-        <item>12</item>
-        <item>14</item>
+        <item>8</item>
+        <item>9</item>
+        <item>11</item>
         <item>16</item>
     </string-array>
 
@@ -101,9 +104,9 @@
     </string-array>
 
     <string-array name="session_end_times_hours">
-        <item>03</item>
-        <item>12</item>
-        <item>14</item>
+        <item>8</item>
+        <item>9</item>
+        <item>11</item>
         <item>16</item>
     </string-array>
 
@@ -116,9 +119,9 @@
 
     <string-array name="session_types">
         <item>Project</item>
-        <item>Repeated</item>
+        <item>Repetitive</item>
         <item>One-Time</item>
-        <item>Repeated</item>
+        <item>Repetitive</item>
     </string-array>
 
     //timer

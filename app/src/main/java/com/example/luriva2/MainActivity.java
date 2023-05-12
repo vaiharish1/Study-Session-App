@@ -1,12 +1,21 @@
 package com.example.luriva2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
@@ -23,9 +32,15 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Session> allSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
+    private ArrayList<Session> allSessions, todaySessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
+
+    private ArrayList<Task> allTasks;
 
     private Date today; // today's date and the date of the task
+
+    private Time curTime;
+
+    private ConstraintLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +67,19 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+        layout = findViewById(R.id.mainConstraintLayout);
+
         // setting today's date by getting a calendar instance
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String formattedDate = sdf.format(c.getTime());
         String[] components = formattedDate.split("-");
         today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
+
+        sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        formattedDate = sdf.format(c.getTime());
+        components = formattedDate.split(":");
+        curTime = new Time(Integer.parseInt(components[0]), Integer.parseInt(components[1]));
 
         // adding the sessions automatically
         loadData();
@@ -69,42 +91,97 @@ public class MainActivity extends AppCompatActivity {
         Button settingsButton = findViewById(R.id.settings);
         settingsButton.setVisibility(View.GONE);
         // TODO: add settings button
+
+        checkSessionsStartTimer();
+    }
+
+    public void checkSessionsStartTimer() {
+        boolean flag = true;
+        for (int i = 0; i < todaySessions.size(); i++) {
+            Session sesh = todaySessions.get(i);
+            if (sesh.getTimeblock().contains(curTime)) {
+                showToast("You're currently in a session.");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent mainIntent = new Intent(MainActivity.this, Timer.class);
+                        MainActivity.this.startActivity(mainIntent);
+                        finish();
+                    }
+                }, 2000);
+                flag = false;
+            }
+        }
+        if (flag) {
+            showToast("You're on a break!");
+        }
+    }
+
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
+
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 
     public void todaysSessionsNav(View v){
         Intent intent = new Intent(this, TodaysSessions.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Today's Sessions...");
     }
 
     public void viewCalNav(View v){
-        // Log.d("vai","in viewCalNav method");
         Intent intent = new Intent(this, ViewCalendar.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Calendar", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Calendar...");
+    }
+
+    public void viewAllTasks(View v) {
+        Intent intent = new Intent(this, AllTasks.class );
+        startActivity(intent);
+        showToast("Viewing All Tasks...");
     }
 
     public void addTasksNav(View v){
         Intent intent = new Intent(this, AddTasks.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Task Manager", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Task Manager...");
     }
 
     public void settingsNav(View v) {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Settings", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Settings...");
     }
 
     public void timerNav(View v){
         Intent intent = new Intent(this,Timer.class);
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Timer", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Timer...");
+    }
+
+    private void createPopupWindow() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popUpView = inflater.inflate(R.layout.startup_popup_window, null);
+
+        int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
+        popUpView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
     }
 
     private void loadData() {
@@ -114,9 +191,21 @@ public class MainActivity extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Session>>() {}.getType();
         allSessions = gson.fromJson(json, type);
 
-        if (allSessions == null) {
-            // TODO: add popup screen that briefly introduces the app
+        json = sharedPreferences.getString("task list", null);
+        type = new TypeToken<ArrayList<Task>>() {}.getType();
+        allTasks = gson.fromJson(json, type);
+
+        todaySessions = new ArrayList<>();
+
+        if (allTasks == null || allSessions == null) {
+            createPopupWindow();
             setUpSessionModels();
+        }
+
+        for (Session s : allSessions) {
+            if (s.getDate().equals(today)) {
+                todaySessions.add(s);
+            }
         }
     }
 
@@ -130,10 +219,16 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(savedSessions);
         editor.putString("session list", json);
         editor.apply();
+
+        ArrayList<Task> savedTasks = new ArrayList<>(allTasks);
+        json = gson.toJson(savedTasks);
+        editor.putString("task list", json);
+        editor.apply();
     }
 
     public void setUpSessionModels() {
         allSessions = new ArrayList<>();
+        allTasks = new ArrayList<>();
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 
@@ -146,9 +241,13 @@ public class MainActivity extends AppCompatActivity {
             Time startTime = new Time(Integer.parseInt(sessionStartTimesHours[i]), Integer.parseInt(sessionStartTimesMinutes[i]));
             Time endTime = new Time(Integer.parseInt(sessionEndTimesHours[i]), Integer.parseInt(sessionEndTimesMinutes[i]));
             Timeblock tb = new Timeblock(startTime, endTime);
-            Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i]);
+            Date d;
+            if (sessionTypes[i].equals("Repetitive")) d = null;
+            else if (sessionTypes[i].equals("Project")) d = new Date(5, 23, 2023);
+            else d = new Date(5, 13, 2023);
+            Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i], d);
+            allTasks.add(t);
             allSessions.add(new Session(t, today, tb));
-//            Log.v("MODELS", sessionModels.get(i).toString());
         }
     }
 }

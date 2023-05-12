@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luriva2.dataModelClasses.Date;
@@ -24,6 +28,8 @@ public class TaskParameters extends AppCompatActivity {
 
     private ArrayList<Session> allSessions, daysSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
+    private ArrayList<Task> allTasks;
+
     private Date today; // today's date and the date of the task
 
     @Override
@@ -38,12 +44,17 @@ public class TaskParameters extends AppCompatActivity {
         today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
     }
 
-    public ArrayList<Session> getAllSessions() {
-        return allSessions;
-    }
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
 
-    public ArrayList<Session> getDaysSessions() {
-        return daysSessions;
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 
     public Date getToday() {
@@ -52,37 +63,33 @@ public class TaskParameters extends AppCompatActivity {
 
     public boolean checkTaskName(String name) {
         if (name.isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Empty task name.", Toast.LENGTH_LONG);
-            toast.show();
-            return false;
+            showToast("Empty task name.");
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean checkDueDate(String dueDateStr) {
-        String dueDateRegEx = "^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$";
+        String dueDateRegEx = "^(1[0-2]|0[1-9])/(3[01]|[12]\\d|0[1-9])/\\d{4}$";
 
         if (!dueDateStr.matches(dueDateRegEx)) {
-            Toast toast = Toast.makeText(getApplicationContext(), "Incorrect date format.", Toast.LENGTH_LONG);
-            toast.show();
-            return false;
+            showToast("Incorrect date format.");
+            return true;
         }
-        return true;
+        return false;
     }
 
     public Date transformToDate(String dueDateStr) {
         String[] dueDateComponents = dueDateStr.split("/");
-        Date dueDate = new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
-        return dueDate;
+        return new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
     }
 
     public boolean checkEstimatedTime(String timeStr) {
         if (timeStr.isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "No estimated time given.", Toast.LENGTH_LONG);
-            toast.show();
-            return false;
+            showToast("No estimated time given.");
+            return true;
         }
-        return true;
+        return false;
     }
 
     public int transformToTime(String timeStr) {
@@ -91,24 +98,28 @@ public class TaskParameters extends AppCompatActivity {
 
     public boolean checkDifficulty(String difficulty) {
         if (difficulty.equals("Click Difficulty")) {
-            Toast toast = Toast.makeText(getApplicationContext(), "No task difficulty stated.", Toast.LENGTH_LONG);
-            toast.show();
-            return false;
+            showToast("No task difficulty stated.");
+            return true;
         }
-        return true;
+        return false;
     }
 
     public int transformToEstimatedDifficulty(String difficulty) {
-        if (difficulty.equals("Easy")) return 1;
-        else if (difficulty.equals("Medium")) return 2;
-        else if (difficulty.equals("Hard")) return 3;
-        else return 0;
+        switch (difficulty) {
+            case "Easy":
+                return 1;
+            case "Medium":
+                return 2;
+            case "Hard":
+                return 3;
+            default:
+                return 0;
+        }
     }
 
     public boolean checkHowOften(String howOftenStr) {
         if (howOftenStr.isEmpty()) {
-            Toast toast = Toast.makeText(getApplicationContext(), "How often task is repeated not given.", Toast.LENGTH_LONG);
-            toast.show();
+            showToast("How often task is repeated not given.");
             return false;
         }
         return true;
@@ -118,23 +129,25 @@ public class TaskParameters extends AppCompatActivity {
         return Integer.parseInt(howOftenStr);
     }
 
+    public void addTask(Task t) {
+        loadTasks();
+        allTasks.add(t);
+        saveTasks();
+    }
+
     public void saveData(Date thisDay) {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
-        ArrayList<Session> savedSessions = new ArrayList<Session>();
+        ArrayList<Session> savedSessions = new ArrayList<>();
         for (int i = 0; i < allSessions.size(); i++) {
-            if (allSessions.get(i).getDate().equals(thisDay)) {
-                continue;
-            } else {
+            if (!allSessions.get(i).getDate().equals(thisDay)) {
                 savedSessions.add(allSessions.get(i));
             }
         }
 
-        for (int i = 0; i < daysSessions.size(); i++) {
-            savedSessions.add(daysSessions.get(i));
-        }
+        savedSessions.addAll(daysSessions);
 
         String json = gson.toJson(savedSessions);
 
@@ -142,8 +155,20 @@ public class TaskParameters extends AppCompatActivity {
         editor.apply();
     }
 
+    public void saveTasks() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+
+        ArrayList<Task> savedTasks = new ArrayList<>(allTasks);
+        String json = gson.toJson(savedTasks);
+
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
     public void loadData(Date thisDay) {
-        daysSessions = new ArrayList<Session>();
+        daysSessions = new ArrayList<>();
 
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -158,6 +183,14 @@ public class TaskParameters extends AppCompatActivity {
 //                Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
             }
         }
+    }
+
+    public void loadTasks() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<Task>>() {}.getType();
+        allTasks = gson.fromJson(json, type);
     }
 
     public boolean addingSessions(Date doingDate, int estimatedTime, Task task) {

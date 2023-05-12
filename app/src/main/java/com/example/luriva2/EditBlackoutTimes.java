@@ -107,8 +107,5 @@ public class EditBlackoutTimes extends AppCompatActivity {
         }
         return timeInt;
     }
-
-
-
 }
 

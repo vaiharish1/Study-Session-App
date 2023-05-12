@@ -1,7 +1,8 @@
 package com.example.luriva2.dataModelClasses;
 
 public class Time implements Comparable<Time> {
-    private int hour, minute;
+    private final int hour;
+    private final int minute;
 
     public Time(int hour, int minute) {
         this.hour = hour;

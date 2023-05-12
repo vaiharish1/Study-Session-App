@@ -6,11 +6,18 @@ public class Task {
 	private int difficulty;
 	private String taskType;
 
-	public Task(String taskName, int estimatedTime, int difficulty, String taskType) {
+	private Date dueDate;
+
+	public Task(String taskName, int estimatedTime, int difficulty, String taskType, Date dueDate) {
 		this.taskName = taskName;
 		this.estimatedTime = estimatedTime + Constants.BUFFER_TIME * difficulty;
 		this.difficulty = difficulty;
 		this.taskType = taskType;
+		this.dueDate = dueDate;
+	}
+
+	public Date getDueDate() {
+		return dueDate;
 	}
 
 	public String getTaskName() {

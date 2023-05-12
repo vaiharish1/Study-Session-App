@@ -1,20 +1,16 @@
 package com.example.luriva2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.navigation.NavigationBarView;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -38,26 +34,23 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
 
         navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
-        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.timerNavigation:
-                        startActivity(new Intent(getApplicationContext(),Timer.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.homeNavigation:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.viewTasksNavigation:
-                        startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-
-                return false;
+        navigationBarView.setOnItemSelectedListener(item -> {
+            switch(item.getItemId()){
+                case R.id.timerNavigation:
+                    startActivity(new Intent(getApplicationContext(),Timer.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.homeNavigation:
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.viewTasksNavigation:
+                    startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
+                    overridePendingTransition(0,0);
+                    return true;
             }
+
+            return false;
         });
     }
 
@@ -113,10 +106,23 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
+
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
     public void onItemClick(int position, String dayText){
         if(!dayText.equals("")){
             String message = "Opening tasks for " + dayText + " " + monthYearFormDate(selectedDate);
-            Toast.makeText(this, message,Toast.LENGTH_LONG).show();
+            showToast(message);
 
             Intent intent = new Intent(this, DaySessions.class );
             intent.putExtra("date", monthDateYearFormDate(selectedDate, dayText));

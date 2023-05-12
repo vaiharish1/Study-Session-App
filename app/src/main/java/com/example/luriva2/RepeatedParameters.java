@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.luriva2.dataModelClasses.Date;
-import com.example.luriva2.dataModelClasses.RepetitiveTask;
 import com.example.luriva2.dataModelClasses.Task;
 
 public class RepeatedParameters extends TaskParameters {
@@ -98,7 +97,7 @@ public class RepeatedParameters extends TaskParameters {
     public void todaysSessionsNav(View v){
         // getting the task name
         String name = getTaskName();
-        if (!checkTaskName(name)) return;
+        if (checkTaskName(name)) return;
 
         // getting how often to repeat
         String howOftenStr = getIncrement();
@@ -107,16 +106,20 @@ public class RepeatedParameters extends TaskParameters {
 
         // getting the estimated time
         String timeStr = getTime();
-        if (!checkEstimatedTime(timeStr)) return;
+        if (checkEstimatedTime(timeStr)) return;
         int time = transformToTime(timeStr);
 
         // getting the difficulty of the task
         String difficulty = getDif();
-        if (!checkDifficulty(difficulty)) return;
+        if (checkDifficulty(difficulty)) return;
         int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task
-        Task newTask = new RepetitiveTask(name, time, estimatedDifficulty, howOften);
+        Task newTask = new Task(name, time, estimatedDifficulty, "Repetitive", null);
+
+        // adding the task
+        addTask(newTask);
+
         Date today = getToday();
 
         for (int i = 0; i < 30; i++) {
@@ -126,7 +129,6 @@ public class RepeatedParameters extends TaskParameters {
 
         Intent intent = new Intent(this, TodaysSessions.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Today's Sessions...");
     }
 }
