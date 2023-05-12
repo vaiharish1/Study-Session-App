@@ -116,6 +116,10 @@ public class RepeatedParameters extends TaskParameters {
 
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "Repetitive", null);
+
+        // adding the task
+        addTask(newTask);
+
         Date today = getToday();
 
         for (int i = 0; i < 30; i++) {

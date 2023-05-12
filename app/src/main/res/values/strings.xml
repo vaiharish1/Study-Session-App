@@ -119,9 +119,9 @@
 
     <string-array name="session_types">
         <item>Project</item>
-        <item>Repeated</item>
+        <item>Repetitive</item>
         <item>One-Time</item>
-        <item>Repeated</item>
+        <item>Repetitive</item>
     </string-array>
 
     //timer

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.example.luriva2.dataModelClasses.Task;
 import com.example.luriva2.dataModelClasses.Timeblock;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import com.example.luriva2.recyclerViewClasses.Task_RecyclerViewAdapter;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,11 +31,29 @@ public class AllTasks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_tasks);
 
-        loadTasks();
+        // navigation bar
+        NavigationBarView navigationBarView = findViewById(R.id.navigationView);
+        navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
+        navigationBarView.setOnItemSelectedListener(item -> {
+            switch(item.getItemId()){
+                case R.id.timerNavigation:
+                    startActivity(new Intent(getApplicationContext(),Timer.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.homeNavigation:
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+                case R.id.viewTasksNavigation:
+                    startActivity(new Intent(getApplicationContext(),TodaysSessions.class));
+                    overridePendingTransition(0,0);
+                    return true;
+            }
 
-        for (int i = 0; i < allTasks.size(); i++) {
-            Log.v("TASK", allTasks.get(i).toString());
-        }
+            return false;
+        });
+
+        loadTasks();
 
         recyclerView = findViewById(R.id.recyclerView);
 

@@ -38,12 +38,12 @@ public class Task_RecyclerViewAdapter extends RecyclerView.Adapter<Task_Recycler
     public void onBindViewHolder(@NonNull Task_RecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.taskNameText.setText(allTasks.get(position).getTaskName());
         holder.taskTypeText.setText(allTasks.get(position).getTaskType());
-//        Date dueDate = allTasks.get(position).getDueDate();
-//        if (dueDate != null) {
-//            holder.dueDateText.setText(dueDate.toString());
-//        } else {
-//            holder.dueDateText.setText("");
-//        }
+        Date dueDate = allTasks.get(position).getDueDate();
+        if (dueDate != null) {
+            holder.dueDateText.setText(dueDate.toString());
+        } else {
+            holder.dueDateText.setText("");
+        }
     }
 
     @Override

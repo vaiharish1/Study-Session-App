@@ -120,6 +120,10 @@ public class ProjectParameters extends TaskParameters {
 
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "Project", dueDate);
+
+        // adding the task
+        addTask(newTask);
+
         int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
         int subtractedDays = 1;
         int remainingTime = time;

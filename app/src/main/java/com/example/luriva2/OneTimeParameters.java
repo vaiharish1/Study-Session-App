@@ -121,6 +121,9 @@ public class OneTimeParameters extends TaskParameters {
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "One-Time", dueDate);
 
+        // adding the task
+        addTask(newTask);
+
         // we will do this task one day before the due date
         Date doingDate = dueDate.subtractDays(1);
         Date today = getToday();

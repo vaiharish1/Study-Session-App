@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Session> allSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
+    private ArrayList<Task> allTasks;
+
     private Date today; // today's date and the date of the task
 
     private ConstraintLayout layout;
@@ -116,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
         showToast("Viewing Calendar...");
     }
 
+    public void viewAllTasks(View v) {
+        Intent intent = new Intent(this, AllTasks.class );
+        startActivity(intent);
+        showToast("Viewing All Tasks...");
+    }
+
     public void addTasksNav(View v){
         Intent intent = new Intent(this, AddTasks.class );
         startActivity(intent);
@@ -159,7 +167,11 @@ public class MainActivity extends AppCompatActivity {
         Type type = new TypeToken<ArrayList<Session>>() {}.getType();
         allSessions = gson.fromJson(json, type);
 
-        if (allSessions == null) {
+        json = sharedPreferences.getString("task list", null);
+        type = new TypeToken<ArrayList<Task>>() {}.getType();
+        allTasks = gson.fromJson(json, type);
+
+        if (allTasks == null || allSessions == null) {
             createPopupWindow();
             setUpSessionModels();
         }
@@ -172,17 +184,19 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Session> savedSessions = new ArrayList<>(allSessions);
 
-        for (int i = 0; i < savedSessions.size(); i++) {
-            Log.v("SAVED SESSION", savedSessions.get(i).toString());
-        }
-
         String json = gson.toJson(savedSessions);
         editor.putString("session list", json);
+        editor.apply();
+
+        ArrayList<Task> savedTasks = new ArrayList<>(allTasks);
+        json = gson.toJson(savedTasks);
+        editor.putString("task list", json);
         editor.apply();
     }
 
     public void setUpSessionModels() {
         allSessions = new ArrayList<>();
+        allTasks = new ArrayList<>();
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionTypes = getResources().getStringArray(R.array.session_types);
 
@@ -200,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
             else if (sessionTypes[i].equals("Project")) d = new Date(5, 23, 2023);
             else d = new Date(5, 13, 2023);
             Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i], d);
+            allTasks.add(t);
             allSessions.add(new Session(t, today, tb));
         }
     }

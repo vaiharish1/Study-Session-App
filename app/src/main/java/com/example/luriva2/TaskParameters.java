@@ -28,6 +28,8 @@ public class TaskParameters extends AppCompatActivity {
 
     private ArrayList<Session> allSessions, daysSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
+    private ArrayList<Task> allTasks;
+
     private Date today; // today's date and the date of the task
 
     @Override
@@ -127,6 +129,12 @@ public class TaskParameters extends AppCompatActivity {
         return Integer.parseInt(howOftenStr);
     }
 
+    public void addTask(Task t) {
+        loadTasks();
+        allTasks.add(t);
+        saveTasks();
+    }
+
     public void saveData(Date thisDay) {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -147,6 +155,18 @@ public class TaskParameters extends AppCompatActivity {
         editor.apply();
     }
 
+    public void saveTasks() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+
+        ArrayList<Task> savedTasks = new ArrayList<>(allTasks);
+        String json = gson.toJson(savedTasks);
+
+        editor.putString("task list", json);
+        editor.apply();
+    }
+
     public void loadData(Date thisDay) {
         daysSessions = new ArrayList<>();
 
@@ -163,6 +183,14 @@ public class TaskParameters extends AppCompatActivity {
 //                Log.v("TODAYS SESSION ADDING", "adding these sessions: " + s.toString());
             }
         }
+    }
+
+    public void loadTasks() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("task list", null);
+        Type type = new TypeToken<ArrayList<Task>>() {}.getType();
+        allTasks = gson.fromJson(json, type);
     }
 
     public boolean addingSessions(Date doingDate, int estimatedTime, Task task) {
