@@ -5,7 +5,7 @@ public class RepetitiveTask extends Task {
 	private int howOften;
 
 	public RepetitiveTask(String taskName, int estimatedTime, int difficulty, int howOften) {
-		super(taskName, estimatedTime, difficulty, "Project");
+		super(taskName, estimatedTime, difficulty, "Repetitive");
 		this.howOften = howOften;
 	}
 

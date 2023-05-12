@@ -69,7 +69,7 @@ public class ProjectParameters extends TaskParameters {
     }
 
     public String getTime() {
-        EditText timeText = findViewById(R.id.editTextEstTime_onetime);
+        EditText timeText = findViewById(R.id.editTextEstTime_project);
         String timeStr = timeText.getText().toString();
         if (timeStr.isEmpty()) {
             timeStr = "";

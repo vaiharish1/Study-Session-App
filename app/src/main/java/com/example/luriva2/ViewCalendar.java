@@ -108,7 +108,7 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         if(!dayText.equals("")){
             String message = "Opening tasks for " + dayText + " " + monthYearFormDate(selectedDate);
             Toast.makeText(this, message,Toast.LENGTH_LONG).show();
-
+//
             Intent intent = new Intent(this, DaySessions.class );
             intent.putExtra("date", monthDateYearFormDate(selectedDate, dayText));
             startActivity(intent);

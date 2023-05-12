@@ -66,7 +66,7 @@ public class DisplaySessions extends AppCompatActivity {
             }
         }
 
-        Collections.addAll(sessionModels);
+        savedSessions.addAll(sessionModels);
 
         String json = gson.toJson(savedSessions);
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -80,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
         Button settingsButton = findViewById(R.id.settings);
         settingsButton.setVisibility(View.GONE);
         // TODO: add settings button
+
+        for (int i = 0; i < allSessions.size(); i++) {
+            Log.v("SESSION", allSessions.get(i).toString());
+        }
+    }
+
+    public void checkSessionsStartTimer() {
+        // TODO: redo the timer
     }
 
     public void showToast(String str) {
@@ -99,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TodaysSessions.class );
         startActivity(intent);
         showToast("Viewing Today's Sessions...");
-//        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
-//        toast.show();
     }
 
     public void viewCalNav(View v){
@@ -164,6 +171,10 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
 
         ArrayList<Session> savedSessions = new ArrayList<>(allSessions);
+
+        for (int i = 0; i < savedSessions.size(); i++) {
+            Log.v("SAVED SESSION", savedSessions.get(i).toString());
+        }
 
         String json = gson.toJson(savedSessions);
         editor.putString("session list", json);

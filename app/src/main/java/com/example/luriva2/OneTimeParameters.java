@@ -75,17 +75,17 @@ public class OneTimeParameters extends TaskParameters {
     // when pressing the "easy" button, populating the difficulty text with "Easy"
     public void populateEasy(View v) {
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
-        difficultyText.setText(R.string.lowDifficultyStr);
+        difficultyText.setText(R.string.lowDifficultyButton);
     }
     // when pressing the "medium" button, populating the difficulty text with "Medium"
     public void populateMid(View v) {
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
-        difficultyText.setText(R.string.midDifficultyStr);
+        difficultyText.setText(R.string.midDifficultyButton);
     }
     // when pressing the "hard" button, populating the difficulty text with "Hard"
     public void populateHard(View v) {
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_onetime);
-        difficultyText.setText(R.string.highDifficultyStr);
+        difficultyText.setText(R.string.highDifficultyButton);
     }
 
     // getting the estimated difficulty from the difficulty textview
