@@ -17,6 +17,12 @@ public class Timeblock implements Comparable<Timeblock> {
         return endTime;
     }
 
+    public boolean contains(Time otherTime) {
+        if (startTime.equals(otherTime)) return true;
+        if (startTime.compareTo(otherTime) <= 0 && endTime.compareTo(otherTime) > 0) return true;
+        return false;
+    }
+
     public boolean intersects(Timeblock other) {
         // if endpoint of other is between
         if (startTime.compareTo(other.getEndTime()) < 0 && endTime.compareTo(other.getEndTime()) > 0) return true;

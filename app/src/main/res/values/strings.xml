@@ -4,7 +4,7 @@
     <string name="app_name">LuRiVa - Study Session App!</string>
     <string name="title">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
-    <string name="allSessions">View All Sessions</string>
+    <string name="allSessions">View All Tasks</string>
     <string name="viewCal">View Calendar</string>
     <string name="addTasks">Add Tasks</string>
     <string name="settings">Settings</string>
@@ -152,4 +152,8 @@
     <string name="friString">FRI</string>
     <string name="satString">SAT</string>
     <string name="taskTypeLabel">aa</string>
+
+    //all tasks
+    <string name="allTasksStr">All Tasks</string>
+
 </resources>
