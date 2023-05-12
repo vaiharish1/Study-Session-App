@@ -1,7 +1,7 @@
 <resources>
     //home screen
     <string name="appTitle">LRV</string>
-    <string name="app_name">LuRiVa - Study Session App!</string>
+    <string name="app_name">enLighten</string>
     <string name="title">LRV</string>
     <string name="todaySession">Today\'s Sessions</string>
     <string name="allSessions">View All Tasks</string>

@@ -147,7 +147,6 @@ public class ProjectParameters extends TaskParameters {
 
         Intent intent = new Intent(this, ViewCalendar.class);
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Calendar...", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Calendar...");
     }
 }

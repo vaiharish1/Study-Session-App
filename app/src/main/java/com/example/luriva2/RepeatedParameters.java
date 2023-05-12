@@ -129,7 +129,6 @@ public class RepeatedParameters extends TaskParameters {
 
         Intent intent = new Intent(this, TodaysSessions.class );
         startActivity(intent);
-        Toast toast = Toast.makeText(getApplicationContext(), "Viewing Today's Sessions", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Viewing Today's Sessions...");
     }
 }

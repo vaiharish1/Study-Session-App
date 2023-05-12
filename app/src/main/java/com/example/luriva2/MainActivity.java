@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,11 +32,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Session> allSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
+    private ArrayList<Session> allSessions, todaySessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
     private ArrayList<Task> allTasks;
 
     private Date today; // today's date and the date of the task
+
+    private Time curTime;
 
     private ConstraintLayout layout;
 
@@ -73,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
         String[] components = formattedDate.split("-");
         today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
 
+        sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        formattedDate = sdf.format(c.getTime());
+        components = formattedDate.split(":");
+        curTime = new Time(Integer.parseInt(components[0]), Integer.parseInt(components[1]));
+
         // adding the sessions automatically
         loadData();
 
@@ -84,13 +92,29 @@ public class MainActivity extends AppCompatActivity {
         settingsButton.setVisibility(View.GONE);
         // TODO: add settings button
 
-        for (int i = 0; i < allSessions.size(); i++) {
-            Log.v("SESSION", allSessions.get(i).toString());
-        }
+        checkSessionsStartTimer();
     }
 
     public void checkSessionsStartTimer() {
-        // TODO: redo the timer
+        boolean flag = true;
+        for (int i = 0; i < todaySessions.size(); i++) {
+            Session sesh = todaySessions.get(i);
+            if (sesh.getTimeblock().contains(curTime)) {
+                showToast("You're currently in a session.");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent mainIntent = new Intent(MainActivity.this, Timer.class);
+                        MainActivity.this.startActivity(mainIntent);
+                        finish();
+                    }
+                }, 2000);
+                flag = false;
+            }
+        }
+        if (flag) {
+            showToast("You're on a break!");
+        }
     }
 
     public void showToast(String str) {
@@ -171,9 +195,17 @@ public class MainActivity extends AppCompatActivity {
         type = new TypeToken<ArrayList<Task>>() {}.getType();
         allTasks = gson.fromJson(json, type);
 
+        todaySessions = new ArrayList<>();
+
         if (allTasks == null || allSessions == null) {
             createPopupWindow();
             setUpSessionModels();
+        }
+
+        for (Session s : allSessions) {
+            if (s.getDate().equals(today)) {
+                todaySessions.add(s);
+            }
         }
     }
 

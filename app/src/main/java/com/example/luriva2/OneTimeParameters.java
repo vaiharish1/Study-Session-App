@@ -144,7 +144,6 @@ public class OneTimeParameters extends TaskParameters {
         startActivity(intent); // start the new activity
 
         // toast that we have added the task
-        Toast toast = Toast.makeText(getApplicationContext(), "Adding Task...", Toast.LENGTH_LONG);
-        toast.show();
+        showToast("Adding Task...");
     }
 }
