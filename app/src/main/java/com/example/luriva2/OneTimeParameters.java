@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.luriva2.dataModelClasses.Date;
-import com.example.luriva2.dataModelClasses.OneTimeTask;
 import com.example.luriva2.dataModelClasses.Task;
 
 public class OneTimeParameters extends TaskParameters {
@@ -120,7 +119,7 @@ public class OneTimeParameters extends TaskParameters {
         int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task
-        Task newTask = new OneTimeTask(name, time, estimatedDifficulty, dueDate);
+        Task newTask = new Task(name, time, estimatedDifficulty, "One-Time", dueDate);
 
         // we will do this task one day before the due date
         Date doingDate = dueDate.subtractDays(1);

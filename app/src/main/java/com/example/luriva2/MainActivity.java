@@ -195,7 +195,11 @@ public class MainActivity extends AppCompatActivity {
             Time startTime = new Time(Integer.parseInt(sessionStartTimesHours[i]), Integer.parseInt(sessionStartTimesMinutes[i]));
             Time endTime = new Time(Integer.parseInt(sessionEndTimesHours[i]), Integer.parseInt(sessionEndTimesMinutes[i]));
             Timeblock tb = new Timeblock(startTime, endTime);
-            Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i]);
+            Date d;
+            if (sessionTypes[i].equals("Repetitive")) d = null;
+            else if (sessionTypes[i].equals("Project")) d = new Date(5, 23, 2023);
+            else d = new Date(5, 13, 2023);
+            Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i], d);
             allSessions.add(new Session(t, today, tb));
         }
     }

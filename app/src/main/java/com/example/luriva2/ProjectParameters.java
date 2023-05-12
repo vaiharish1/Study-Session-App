@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.luriva2.dataModelClasses.Constants;
 import com.example.luriva2.dataModelClasses.Date;
-import com.example.luriva2.dataModelClasses.ProjectTask;
 import com.example.luriva2.dataModelClasses.Task;
 
 import com.google.android.material.navigation.NavigationBarView;
@@ -120,7 +119,7 @@ public class ProjectParameters extends TaskParameters {
         int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task
-        Task newTask = new ProjectTask(name, time, estimatedDifficulty, dueDate);
+        Task newTask = new Task(name, time, estimatedDifficulty, "Project", dueDate);
         int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
         int subtractedDays = 1;
         int remainingTime = time;

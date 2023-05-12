@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.luriva2.dataModelClasses.Date;
-import com.example.luriva2.dataModelClasses.RepetitiveTask;
 import com.example.luriva2.dataModelClasses.Task;
 
 public class RepeatedParameters extends TaskParameters {
@@ -116,7 +115,7 @@ public class RepeatedParameters extends TaskParameters {
         int estimatedDifficulty = transformToEstimatedDifficulty(difficulty);
 
         // actually creating the task
-        Task newTask = new RepetitiveTask(name, time, estimatedDifficulty, howOften);
+        Task newTask = new Task(name, time, estimatedDifficulty, "Repetitive", null);
         Date today = getToday();
 
         for (int i = 0; i < 30; i++) {
