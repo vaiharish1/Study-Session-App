@@ -2,14 +2,10 @@ package com.example.luriva2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class Settings extends AppCompatActivity {
@@ -48,6 +44,5 @@ public class Settings extends AppCompatActivity {
         Intent intent = new Intent(this, EditBlackoutTimes.class);
         startActivity(intent);
     }
-
 
 }

@@ -20,24 +20,6 @@ public class Time implements Comparable<Time> {
         return new Time(h,m);
     }
 
-    public Time subtract(int newHours, int newMinutes) {
-        int h = hour - newHours;
-        int m = minute - newMinutes;
-
-        while (m < 0) {
-            h--;
-            m += 60;
-        }
-
-        h += (m/60);
-        m %= 60;
-
-        while (h < 0) {
-            h += 24;
-        }
-        return new Time(h,m);
-    }
-
     public int compareTo(Time other) {
         if (hour == other.getHour()) return minute - other.getMinute();
         return hour - other.getHour();

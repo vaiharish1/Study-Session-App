@@ -23,13 +23,6 @@ public class Timeblock implements Comparable<Timeblock> {
         return false;
     }
 
-    public boolean intersects(Timeblock other) {
-        // if endpoint of other is between
-        if (startTime.compareTo(other.getEndTime()) < 0 && endTime.compareTo(other.getEndTime()) > 0) return true;
-        if (startTime.compareTo(other.getStartTime()) < 0 && endTime.compareTo(other.getStartTime()) > 0) return true;
-        return false;
-    }
-
     public int compareTo(Timeblock other) {
         return this.getStartTime().compareTo(other.getStartTime());
     }

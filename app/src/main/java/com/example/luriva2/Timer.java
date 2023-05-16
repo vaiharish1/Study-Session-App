@@ -31,7 +31,7 @@ public class Timer extends AppCompatActivity {
     CountDownTimer countdown;
     NavigationBarView navigationBarView;
 
-    private ArrayList<Session> allSessions, todaySessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
+    private ArrayList<Session> todaySessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
     private Date today; // today's date and the date of the task
 
@@ -113,7 +113,7 @@ public class Timer extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("session list", null);
         Type type = new TypeToken<ArrayList<Session>>() {}.getType();
-        allSessions = gson.fromJson(json, type);
+        ArrayList<Session> allSessions = gson.fromJson(json, type);
         todaySessions = new ArrayList<>();
 
         for (int i = 0; i < allSessions.size(); i++) {

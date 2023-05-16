@@ -1,12 +1,14 @@
 package com.example.luriva2.recyclerViewClasses;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.luriva2.R;
@@ -42,7 +44,15 @@ public class Task_RecyclerViewAdapter extends RecyclerView.Adapter<Task_Recycler
         if (dueDate != null) {
             holder.dueDateText.setText(dueDate.toString());
         } else {
-            holder.dueDateText.setText("");
+            holder.dueDateText.setVisibility(View.GONE);
+        }
+
+        if (allTasks.get(position).getDifficulty() == 1) {
+            holder.constraintLayout.setBackgroundColor(0xFFB0E6C0);
+        } else if (allTasks.get(position).getDifficulty() == 2) {
+            holder.constraintLayout.setBackgroundColor(0xFFD2E9CD);
+        } else {
+            holder.constraintLayout.setBackgroundColor(0xFFE9EEE5);
         }
     }
 
@@ -54,9 +64,12 @@ public class Task_RecyclerViewAdapter extends RecyclerView.Adapter<Task_Recycler
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView taskNameText, dueDateText, taskTypeText;
 
+        private ConstraintLayout constraintLayout;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            constraintLayout = itemView.findViewById(R.id.constraintLayout_allTasks);
             taskNameText = itemView.findViewById(R.id.taskNameText_allTasks);
             dueDateText = itemView.findViewById(R.id.dueDateText_allTasks);
             taskTypeText = itemView.findViewById(R.id.taskType_allTasks);

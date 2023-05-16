@@ -1,13 +1,14 @@
 package com.example.luriva2;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
@@ -101,13 +103,10 @@ public class MainActivity extends AppCompatActivity {
             Session sesh = todaySessions.get(i);
             if (sesh.getTimeblock().contains(curTime)) {
                 showToast("You're currently in a session.");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent mainIntent = new Intent(MainActivity.this, Timer.class);
-                        MainActivity.this.startActivity(mainIntent);
-                        finish();
-                    }
+                new Handler().postDelayed(() -> {
+                    Intent mainIntent = new Intent(MainActivity.this, Timer.class);
+                    MainActivity.this.startActivity(mainIntent);
+                    finish();
                 }, 2000);
                 flag = false;
             }

@@ -1,9 +1,9 @@
 package com.example.luriva2.dataModelClasses;
 
 public class Session {
-	private Task task;
+	private final Task task;
 
-	private Date date;
+	private final Date date;
 	private Timeblock timeblock;
 	private Time nextStartTime;
 

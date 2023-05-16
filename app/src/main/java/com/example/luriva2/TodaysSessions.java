@@ -51,6 +51,8 @@ public class TodaysSessions extends DisplaySessions {
         createAdapter();
 
         makeSaveButtonDisabled();
+
+        // TODO: make it so that if the user is in a session it automatically switches to the timer
     }
 
     public void onClickSaveData(View v) {
