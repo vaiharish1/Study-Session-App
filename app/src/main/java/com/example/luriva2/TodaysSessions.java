@@ -4,7 +4,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Timeblock;
@@ -53,6 +58,25 @@ public class TodaysSessions extends DisplaySessions {
         makeSaveButtonDisabled();
 
         // TODO: make it so that if the user is in a session it automatically switches to the timer
+    }
+
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
+
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    public void addTasksNav(View v){
+        Intent intent = new Intent(this, AddTasks.class );
+        startActivity(intent);
+        showToast("Viewing Task Manager...");
     }
 
     public void onClickSaveData(View v) {

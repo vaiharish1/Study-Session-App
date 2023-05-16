@@ -7,7 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
+import com.example.luriva2.dataModelClasses.Timeblock;
+import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import com.example.luriva2.recyclerViewClasses.Task_RecyclerViewAdapter;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
@@ -70,5 +80,24 @@ public class AllTasks extends AppCompatActivity {
         String json = sharedPreferences.getString("task list", null);
         Type type = new TypeToken<ArrayList<Task>>() {}.getType();
         allTasks = gson.fromJson(json, type);
+    }
+
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
+
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    public void addTasksNav(View v){
+        Intent intent = new Intent(this, AddTasks.class );
+        startActivity(intent);
+        showToast("Viewing Task Manager...");
     }
 }

@@ -20,7 +20,7 @@
     <string name="oneTimeText">One-Time</string>
     <string name="repeatedText">Repeated</string>
     <string name="projectText">Project</string>
-    <string name="chooseTaskTypeStr">What Type of Task are you Adding?</string>
+    <string name="chooseTaskTypeStr">What type of task are you adding?</string>
 
    //Add tasks - textViews
     <string name="dueDateStr">Due Date:</string>
@@ -53,7 +53,7 @@
     <string name="upButtonStr">Move up</string>
     <string name="downButtonStr">Move down</string>
     <string name="repeatedTitle">Add Repeated Task</string>
-    <string name="onetimeTitle">Add One- Time Task</string>
+    <string name="onetimeTitle">Add One-Time Task</string>
     <string name="projectTitle">Add Project Task</string>
 
     //settings
@@ -155,5 +155,6 @@
 
     //all tasks
     <string name="allTasksStr">All Tasks</string>
+    <string name="toAddTasksButton">Add Tasks</string>
 
 </resources>
