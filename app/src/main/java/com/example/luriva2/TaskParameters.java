@@ -76,6 +76,11 @@ public class TaskParameters extends AppCompatActivity {
             showToast("Incorrect date format.");
             return true;
         }
+
+        String[] dueDateComponents = dueDateStr.split("/");
+        Date dueDate = new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
+        if (dueDate.compareTo(today) > 0) return true;
+
         return false;
     }
 
