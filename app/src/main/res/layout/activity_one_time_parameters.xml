@@ -109,7 +109,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/editTextDueDateHint"
-        android:inputType="date|datetime"
+        android:inputType="datetime"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/dueDateStr"
         app:layout_constraintStart_toStartOf="@+id/editTextTaskName_onetime"

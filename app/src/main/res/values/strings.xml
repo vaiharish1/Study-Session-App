@@ -125,7 +125,7 @@
     </string-array>
 
     //timer
-    <string name="cancelButtonStr">Cancel</string>
+    <string name="cancelButtonStr">Pause</string>
     <string-array name="motivationQuotes">
         <item>You got this!</item>
         <item>Keep up the good work!</item>
