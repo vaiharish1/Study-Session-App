@@ -33,9 +33,16 @@ public class Timer extends AppCompatActivity {
 
     private ArrayList<Session> todaySessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
-    private Date today; // today's date and the date of the task
+    private Date today; // today's date
 
     private Time curTime;
+
+    boolean onBreak = false;
+
+    private Task curTask;
+    private Session curSession;
+
+    private ArrayList<Task> allTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +96,9 @@ public class Timer extends AppCompatActivity {
         for (int i = 0; i < todaySessions.size(); i++) {
             Session sesh = todaySessions.get(i);
             if (sesh.getTimeblock().contains(curTime)) {
-                Task currentTask = sesh.getTask();
-                status.setText("You're working on: " + currentTask.getTaskName());
+                curSession = sesh;
+                curTask = sesh.getTask();
+                status.setText("You're working on: " + curTask.getTaskName());
 
                 Time endTime = sesh.getTimeblock().getEndTime();
                 int hours = endTime.getHour() - curTime.getHour();
@@ -102,10 +110,14 @@ public class Timer extends AppCompatActivity {
                 Time timeDif = new Time(hours, minutes);
                 int totalMinutesRemaining = timeDif.getHour() * 60 + timeDif.getMinute();
                 flag = false;
+                onBreak = false;
                 startTimer(totalMinutesRemaining);
             }
         }
-        if (flag) status.setText("You're on a break!");
+        if (flag) {
+            status.setText("You're on a break!");
+            onBreak = true;
+        }
     }
 
     private void loadData() {
@@ -122,6 +134,21 @@ public class Timer extends AppCompatActivity {
                 Log.v("TASK IN TIMER", allSessions.get(i).toString());
             }
         }
+
+        json = sharedPreferences.getString("task list", null);
+        type = new TypeToken<ArrayList<Task>>() {}.getType();
+        allTasks = gson.fromJson(json, type);
+    }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+
+        ArrayList<Task> savedTasks = new ArrayList<>(allTasks);
+        String json = gson.toJson(savedTasks);
+        editor.putString("task list", json);
+        editor.apply();
     }
 
     public void startTimer(int min){
@@ -133,13 +160,16 @@ public class Timer extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                if (curSession.getSessionId() == curTask.getAmtSessions()) {
+                    allTasks.remove(curTask);
+                    saveData();
+                }
+
                 String[] motivation = getResources().getStringArray(R.array.motivationQuotes);
                 int motivationLen = motivation.length;
                 Random randy = new Random();
                 motivationalQuote.setText(motivation[randy.nextInt(motivationLen)]);
-                startTimer(min);
             }
-
         };
         countdown.start();
     }
@@ -151,7 +181,9 @@ public class Timer extends AppCompatActivity {
     }
 
     public void cancel(View v){
-        status.setText(R.string.cancelledStr);
-        countdown.cancel();
+        if (!onBreak) {
+            status.setText(R.string.cancelledStr);
+            countdown.cancel();
+        }
     }
 }

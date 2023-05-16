@@ -110,6 +110,7 @@ public class RepeatedParameters extends TaskParameters {
 
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "Repetitive", null);
+        newTask.setAmtSessions(-1);
 
         // adding the task
         addTask(newTask);
@@ -118,7 +119,7 @@ public class RepeatedParameters extends TaskParameters {
 
         for (int i = 0; i < 30; i++) {
             Date doingDate = today.addDays(i * howOften);
-            addingSessions(doingDate, time, newTask);
+            addingSessions(doingDate, time, newTask, 0);
         }
 
         Intent intent = new Intent(this, TodaysSessions.class );

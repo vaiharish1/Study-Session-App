@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.luriva2.dataModelClasses.Constants;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Task;
@@ -120,29 +122,33 @@ public class OneTimeParameters extends TaskParameters {
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "One-Time", dueDate);
 
+        int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
+        newTask.setAmtSessions(amtOfSessions);
+
+        int addedDays = 1;
+        int remainingTime = time;
+
         // adding the task
         addTask(newTask);
 
-        // we will do this task one day before the due date
-        Date doingDate = dueDate.subtractDays(1);
-        Date today = getToday();
+        for (int i = 1; i <= amtOfSessions && remainingTime > 0; i++) {
+            Date doingDate = getToday().addDays(addedDays);
 
-        while (!addingSessions(doingDate, time, newTask)) {
-            doingDate = doingDate.subtractDays(1);
-            if (doingDate.compareTo(today) < 0) break;
+            if (doingDate.compareTo(dueDate) > 0) break;
+
+            int sessionTime = Math.min(remainingTime, Constants.MAX_SESSION_TIME);
+
+            if (!addingSessions(doingDate, sessionTime, newTask, i)) {
+                amtOfSessions--;
+            } else {
+                remainingTime -= sessionTime;
+            }
+            addedDays++;
         }
 
         // starting up another activity with an intent
-        Intent intent;
-        if (doingDate.equals(today)) { // if we're doing this today, then just make a new session for today
-            intent = new Intent(this, TodaysSessions.class);
-        } else { // otherwise, do the sessions on the doing date
-            intent = new Intent(this, DaySessions.class );
-            intent.putExtra("date", doingDate.toString());
-        }
-        startActivity(intent); // start the new activity
-
-        // toast that we have added the task
-        showToast("Adding Task...");
+        Intent intent = new Intent(this, ViewCalendar.class);
+        startActivity(intent);
+        showToast("Viewing Calendar...");
     }
 }

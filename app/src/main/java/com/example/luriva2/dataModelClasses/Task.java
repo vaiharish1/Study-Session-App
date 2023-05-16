@@ -1,12 +1,14 @@
 package com.example.luriva2.dataModelClasses;
 
+import java.util.Objects;
+
 public class Task {
 	private final String taskName;
 	private final int estimatedTime;
 	private final int difficulty;
 	private final String taskType;
-
 	private final Date dueDate;
+	private int amtSessions;
 
 	public Task(String taskName, int estimatedTime, int difficulty, String taskType, Date dueDate) {
 		this.taskName = taskName;
@@ -14,6 +16,28 @@ public class Task {
 		this.difficulty = difficulty;
 		this.taskType = taskType;
 		this.dueDate = dueDate;
+		this.amtSessions = 0;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Task)) return false;
+		Task task = (Task) o;
+		return getEstimatedTime() == task.getEstimatedTime() && getDifficulty() == task.getDifficulty() && getAmtSessions() == task.getAmtSessions() && getTaskName().equals(task.getTaskName()) && getTaskType().equals(task.getTaskType()) && getDueDate().equals(task.getDueDate());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getTaskName(), getEstimatedTime(), getDifficulty(), getTaskType(), getDueDate(), getAmtSessions());
+	}
+
+	public int getAmtSessions() {
+		return amtSessions;
+	}
+
+	public void setAmtSessions(int amtSessions) {
+		this.amtSessions = amtSessions;
 	}
 
 	public Date getDueDate() {

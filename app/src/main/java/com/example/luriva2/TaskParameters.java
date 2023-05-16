@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.luriva2.dataModelClasses.Constants;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
@@ -94,6 +95,13 @@ public class TaskParameters extends AppCompatActivity {
             showToast("No estimated time given.");
             return true;
         }
+
+        int time = Integer.parseInt(timeStr);
+        if (time > Constants.MAX_ESTIMATED_TIME) {
+            showToast("Why?");
+            return true;
+        }
+
         return false;
     }
 
@@ -198,14 +206,14 @@ public class TaskParameters extends AppCompatActivity {
         allTasks = gson.fromJson(json, type);
     }
 
-    public boolean addingSessions(Date doingDate, int estimatedTime, Task task) {
+    public boolean addingSessions(Date doingDate, int estimatedTime, Task task, int sessionId) {
         loadData(doingDate);
         // if there aren't any sessions on this date YET, then add one at 4pm
         if (daysSessions.size() == 0) {
             Time startTime = new Time(12+4, 0);
             Time endTime = startTime.add(0, estimatedTime);
             Timeblock newTB = new Timeblock(startTime, endTime);
-            Session newSession = new Session(task, doingDate, newTB);
+            Session newSession = new Session(task, doingDate, newTB, sessionId);
             daysSessions.add(newSession);
             saveData(doingDate);
             return true;
@@ -221,7 +229,7 @@ public class TaskParameters extends AppCompatActivity {
             if (endTime.compareTo(midnight) > 0 && endTime.compareTo(fourPM) < 0) return false;
             else {
                 Timeblock newTB = new Timeblock(startTime, endTime);
-                Session newSession = new Session(task, doingDate, newTB);
+                Session newSession = new Session(task, doingDate, newTB, sessionId);
                 daysSessions.add(newSession);
                 saveData(doingDate);
                 return true;

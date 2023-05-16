@@ -87,6 +87,7 @@
         <item>DBQs</item>
         <item>Physics</item>
         <item>Exercise</item>
+        <item>Exeter Problems</item>
     </string-array>
 
     <string-array name="session_start_times_hours">
@@ -94,6 +95,7 @@
         <item>9</item>
         <item>11</item>
         <item>16</item>
+        <item>18</item>
     </string-array>
 
     <string-array name="session_start_times_minutes">
@@ -101,6 +103,7 @@
         <item>00</item>
         <item>00</item>
         <item>00</item>
+        <item>30</item>
     </string-array>
 
     <string-array name="session_end_times_hours">
@@ -108,13 +111,15 @@
         <item>9</item>
         <item>11</item>
         <item>16</item>
+        <item>18</item>
     </string-array>
 
     <string-array name="session_end_times_minutes">
         <item>50</item>
         <item>45</item>
         <item>50</item>
-        <item>30</item>
+        <item>35</item>
+        <item>45</item>
     </string-array>
 
     <string-array name="session_types">
@@ -122,6 +127,7 @@
         <item>Repetitive</item>
         <item>One-Time</item>
         <item>Repetitive</item>
+        <item>One-Time</item>
     </string-array>
 
     //timer

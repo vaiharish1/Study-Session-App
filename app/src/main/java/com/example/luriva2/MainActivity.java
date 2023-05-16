@@ -245,8 +245,9 @@ public class MainActivity extends AppCompatActivity {
             else if (sessionTypes[i].equals("Project")) d = new Date(5, 23, 2023);
             else d = new Date(5, 13, 2023);
             Task t = new Task(sessionNames[i], 50, 2, sessionTypes[i], d);
+            t.setAmtSessions(1);
             allTasks.add(t);
-            allSessions.add(new Session(t, today, tb));
+            allSessions.add(new Session(t, today, tb, 1));
         }
     }
 }

@@ -47,8 +47,8 @@ public class Date implements Comparable<Date> {
         int d = day - days;
         int m = month;
         int y = year;
-        while (d < 0) {
-            d += daysOfMonths[m-1];
+        while (d <= 0) {
+            d += daysOfMonths[m];
             m--;
 
             if (m == 0) {

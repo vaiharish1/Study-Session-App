@@ -3,7 +3,9 @@ package com.example.luriva2;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
@@ -11,6 +13,7 @@ import com.example.luriva2.dataModelClasses.Timeblock;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import java.util.ArrayList;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -66,6 +69,25 @@ public class DaySessions extends DisplaySessions {
         createAdapter();
 
         makeSaveButtonDisabled();
+    }
+
+    public void showToast(String str) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
+
+        TextView text = (TextView) layout.findViewById(R.id.toastText);
+        text.setText(str);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    public void addTasksNav(View v){
+        Intent intent = new Intent(this, AddTasks.class );
+        startActivity(intent);
+        showToast("Viewing Task Manager...");
     }
 
     public void onClickSaveData(View v) {

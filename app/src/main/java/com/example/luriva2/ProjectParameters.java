@@ -112,26 +112,28 @@ public class ProjectParameters extends TaskParameters {
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "Project", dueDate);
 
+        int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
+        newTask.setAmtSessions(amtOfSessions);
+
+        int addedDays = 1;
+        int remainingTime = time;
+
         // adding the task
         addTask(newTask);
 
-        int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
-        int subtractedDays = 1;
-        int remainingTime = time;
+        for (int i = 1; i <= amtOfSessions && remainingTime > 0; i++) {
+            Date doingDate = getToday().addDays(addedDays);
 
-        for (int i = 0; i < amtOfSessions && remainingTime > 0; i++) {
-            Date doingDate = dueDate.subtractDays(subtractedDays);
-
-            if (doingDate.compareTo(getToday()) < 0) break;
+            if (doingDate.compareTo(dueDate) > 0) break;
 
             int sessionTime = Math.min(remainingTime, Constants.MAX_SESSION_TIME);
 
-            if (!addingSessions(doingDate, sessionTime, newTask)) {
+            if (!addingSessions(doingDate, sessionTime, newTask, i)) {
                 amtOfSessions--;
             } else {
                 remainingTime -= sessionTime;
             }
-            subtractedDays++;
+            addedDays++;
         }
 
         Intent intent = new Intent(this, ViewCalendar.class);
