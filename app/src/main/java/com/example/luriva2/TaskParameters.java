@@ -80,7 +80,10 @@ public class TaskParameters extends AppCompatActivity {
 
         String[] dueDateComponents = dueDateStr.split("/");
         Date dueDate = new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
-        if (dueDate.compareTo(today) > 0) return true;
+        if (dueDate.compareTo(today) < 0) {
+            showToast("Due date cannot be before today.");
+            return true;
+        }
 
         return false;
     }

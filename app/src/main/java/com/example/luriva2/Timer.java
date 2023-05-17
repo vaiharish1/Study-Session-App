@@ -82,6 +82,12 @@ public class Timer extends AppCompatActivity {
         timer = findViewById(R.id.timer);
         motivationalQuote = findViewById(R.id.motivationalQuote);
 
+        // getting a random motivational quote
+        String[] motivation = getResources().getStringArray(R.array.motivationQuotes);
+        int motivationLen = motivation.length;
+        Random randy = new Random();
+        motivationalQuote.setText(motivation[randy.nextInt(motivationLen)]);
+
         // getting the current time
         sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         String formattedTime = sdf.format(c.getTime());

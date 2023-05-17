@@ -17,10 +17,8 @@ import android.widget.Toast;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
-import com.example.luriva2.dataModelClasses.Timeblock;
-import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import com.example.luriva2.recyclerViewClasses.Task_RecyclerViewAdapter;
-import com.example.luriva2.recyclerViewClasses.ViewTasksRecyclerViewInterface;
+import com.example.luriva2.recyclerViewClasses.ViewTasksSessions_RecyclerViewAdapter;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,17 +26,17 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerViewInterface {
-
-    private ArrayList<Task> allTasks;
+public class ViewTaskSessions extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private Task thisTask;
+    private ArrayList<Session> thisTasksSessions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_tasks);
+        setContentView(R.layout.activity_view_task_sessions);
 
-        // navigation bar
         NavigationBarView navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
         navigationBarView.setOnItemSelectedListener(item -> {
@@ -60,28 +58,41 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
             return false;
         });
 
-        loadTasks();
+        Bundle extras = getIntent().getExtras();
+
+        if(extras!=null){
+            String taskName = extras.getString("taskName");
+            int estimatedTime = Integer.parseInt(extras.getString("estimatedTime"));
+
+            int difficulty = Integer.parseInt(extras.getString("difficulty"));
+            String taskType = extras.getString("taskType");
+
+            String dueDateStr = extras.getString("dueDate");
+
+            Date dueDate;
+            if (dueDateStr == null || dueDateStr.isEmpty()) {
+                dueDate = null;
+            } else {
+                String[] components = dueDateStr.split("/");
+                dueDate = new Date(Integer.parseInt(components[0]), Integer.parseInt(components[1]), Integer.parseInt(components[2]));
+            }
+
+            thisTask = new Task(taskName, estimatedTime, difficulty, taskType, dueDate);
+            thisTask.setEstimatedTime(estimatedTime);
+
+            int amtSessions = Integer.parseInt(extras.getString("amtSessions"));
+            thisTask.setAmtSessions(amtSessions);
+
+            TextView taskNameText = findViewById(R.id.todaysSessionHeader);
+            taskNameText.setText(thisTask.getTaskName());
+        }
+
+        Log.v("THIS TASK HERE", thisTask.toString());
+        loadData();
 
         recyclerView = findViewById(R.id.recyclerView);
 
         createAdapter();
-    }
-
-    public void createAdapter() {
-        Task_RecyclerViewAdapter adapter = new Task_RecyclerViewAdapter(this, allTasks, this);
-
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    public void loadTasks() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<Task>>() {}.getType();
-        allTasks = gson.fromJson(json, type);
     }
 
     public void showToast(String str) {
@@ -103,23 +114,29 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
         showToast("Viewing Task Manager...");
     }
 
-    @Override
-    public void onItemClick(int position) {
-        Intent intent = new Intent(AllTasks.this, ViewTaskSessions.class);
+    public void createAdapter() {
+        ViewTasksSessions_RecyclerViewAdapter adapter = new ViewTasksSessions_RecyclerViewAdapter(this, thisTasksSessions);
 
-        intent.putExtra("taskName", allTasks.get(position).getTaskName());
-        intent.putExtra("estimatedTime", Integer.toString(allTasks.get(position).getEstimatedTime()));
-        intent.putExtra("difficulty", Integer.toString(allTasks.get(position).getDifficulty()));
-        intent.putExtra("taskType", allTasks.get(position).getTaskType());
+        recyclerView.setAdapter(adapter);
 
-        if (allTasks.get(position).getDueDate() == null) {
-            intent.putExtra("dueDate", "");
-        } else {
-            intent.putExtra("dueDate", allTasks.get(position).getDueDate().toString());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("session list", null);
+        Type type = new TypeToken<ArrayList<Session>>() {}.getType();
+        ArrayList<Session> allSessions = gson.fromJson(json, type);
+
+        thisTasksSessions = new ArrayList<>();
+
+        for (Session s : allSessions) {
+            Log.v("SESSION HERE", s.toString());
+            if (s.getTask().equals(thisTask)) {
+                thisTasksSessions.add(s);
+            }
         }
-
-        intent.putExtra("amtSessions", Integer.toString(allTasks.get(position).getAmtSessions()));
-
-        startActivity(intent);
     }
 }

@@ -9,4 +9,6 @@ public final class Constants {
 	public static final int MAX_SESSION_TIME = 45;
 
 	public static final int MAX_ESTIMATED_TIME = 100000;
+
+	public static final int MAX_REPEATED_SESSIONS = 30;
 }

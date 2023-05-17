@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.luriva2.dataModelClasses.Constants;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Task;
@@ -116,10 +118,17 @@ public class RepeatedParameters extends TaskParameters {
         addTask(newTask);
 
         Date today = getToday();
+        int addedDays = 0;
 
-        for (int i = 0; i < 30; i++) {
-            Date doingDate = today.addDays(i * howOften);
-            addingSessions(doingDate, time, newTask, 0);
+        for (int i = 0; i < Constants.MAX_REPEATED_SESSIONS; i++) {
+            Date doingDate = today.addDays(addedDays);
+
+            while (!addingSessions(doingDate, time, newTask, 0)) {
+                addedDays++;
+                doingDate = today.addDays(i * howOften);
+            }
+
+            addedDays += howOften;
         }
 
         Intent intent = new Intent(this, TodaysSessions.class );

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FFFFFF">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -21,7 +20,7 @@
             android:id="@+id/constraintLayout_allTasks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#BA5555">
+            android:background="#DFBEBE">
 
             <TextView
                 android:id="@+id/taskNameText_allTasks"
@@ -45,6 +44,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="#00000000"
                 android:text="@string/dueDateStr"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/horizontalDivider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/taskNameText_allTasks" />
@@ -56,7 +56,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="#00000000"
-                android:text="TextView"
+                android:text="@string/difficultyStr"
+                android:textSize="16sp"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

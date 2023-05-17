@@ -79,9 +79,9 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
-            taskNameText = itemView.findViewById(R.id.taskNameText);
-            taskTimeDisplayText = itemView.findViewById(R.id.taskTimeDisplayText2);
-            sessionTypeDisplayText = itemView.findViewById(R.id.sessionTypeText);
+            taskNameText = itemView.findViewById(R.id.taskNameText_viewTasksSessions);
+            taskTimeDisplayText = itemView.findViewById(R.id.taskTimeDisplayText_viewTasksSessions);
+            sessionTypeDisplayText = itemView.findViewById(R.id.sessionTypeText_viewTasksSessions);
             upButton = itemView.findViewById(R.id.upButton);
             downButton = itemView.findViewById(R.id.downButton);
 

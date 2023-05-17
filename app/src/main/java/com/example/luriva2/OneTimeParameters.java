@@ -2,6 +2,7 @@ package com.example.luriva2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -100,6 +101,7 @@ public class OneTimeParameters extends TaskParameters {
 
     // when adding the task, we get all the required information (and catch for errors) and then add the task
     public void todaysSessionsNav(View v){
+        Log.v("DONE BUTTON PRESSED", "pressed session");
         // getting the task name
         String name = getTaskName();
         if (checkTaskName(name)) return;
@@ -144,6 +146,8 @@ public class OneTimeParameters extends TaskParameters {
                 remainingTime -= sessionTime;
             }
             addedDays++;
+
+            Log.v("session added", doingDate.toString());
         }
 
         // starting up another activity with an intent

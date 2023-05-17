@@ -22,13 +22,13 @@
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What type of task are you adding?</string>
 
-   //Add tasks - textViews
+    //Add tasks - textViews
     <string name="dueDateStr">Due Date:</string>
     <string name="repeatStr">Repeat: </string>
     <string name="daysStr">days</string>
     <string name="estTimeStr">Est. Time:</string>
 
-   //Add tasks - hints
+    //Add tasks - hints
     <string name="taskNameHint">Enter Task Name </string>
     <string name="EstTimeHint">Enter Est. Time</string>
     <string name="difficultyStr">Difficulty:</string>
@@ -132,19 +132,34 @@
 
     //timer
     <string name="cancelButtonStr">Pause</string>
+    <!--    <string-array name="motivationQuotes">-->
+    <!--        <item>You got this!</item>-->
+    <!--        <item>Keep up the good work!</item>-->
+    <!--        <item>Relax. Take a deep breath.</item>-->
+    <!--        <item>Don\'t give up!</item>-->
+    <!--        <item>Give your all!</item>-->
+    <!--        <item>Try your best!</item>-->
+    <!--    </string-array>-->
+
+    <!--    from https://www.shopify.com/blog/motivational-quotes -->
     <string-array name="motivationQuotes">
-        <item>You got this!</item>
-        <item>Keep up the good work!</item>
-        <item>Relax. Take a deep breathe.</item>
-        <item>Don\'t give up!</item>
-        <item>Give your all!</item>
-        <item>Try your best!</item>
+        <item>“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein</item>
+        <item>“Learn as if you will live forever, live like you will die tomorrow.” — Mahatma Gandhi</item>
+        <item>“Stay away from those people who try to disparage your ambitions. Small minds will always do that, but great minds will give you a feeling that you can become great too.” — Mark Twain</item>
+        <item>“When you give joy to other people, you get more joy in return. You should give a good thought to happiness that you can give out.”— Eleanor Roosevelt</item>
+        <item>“When you change your thoughts, remember to also change your world.”—Norman Vincent Peale</item>
+        <item>“It is only when we take chances, when our lives improve. The initial and the most difficult risk that we need to take is to become honest. —Walter Anderson</item>
+        <item>“Nature has given us all the pieces required to achieve exceptional wellness and health, but has left it to us to put these pieces together.”—Diane McLaren</item>
+
+        <item>“Concentrate all your thoughts upon the work in hand. The sun\'s rays do not burn until brought to a focus. “ — Alexander Graham Bell</item>
+        <item>“Either you run the day or the day runs you.” — Jim Rohn</item>
+        <item>“I\’m a greater believer in luck, and I find the harder I work the more I have of it.” — Thomas Jefferson</item>
     </string-array>
 
     <string name="statusNotWorkingString">Status: Not Working</string>
     <string name="statusBreakTimeString">Status: Break Time</string>
     <string name="statusWorkingString">Status: In Session</string>
-    <string name="cancelledStr">Timer Cancelled</string>
+    <string name="cancelledStr">Timer Paused</string>
 
     // calendar
     <string name="rightArrow"><![CDATA[—>]]></string>
@@ -162,5 +177,8 @@
     //all tasks
     <string name="allTasksStr">All Tasks</string>
     <string name="toAddTasksButton">Add Tasks</string>
+
+    //view task's sessions
+    <string name="viewTasksSessionsTitleStr">Sessions For: </string>
 
 </resources>

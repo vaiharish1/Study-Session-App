@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Task {
 	private final String taskName;
-	private final int estimatedTime;
+	private int estimatedTime;
 	private final int difficulty;
 	private final String taskType;
 	private final Date dueDate;
@@ -24,7 +24,7 @@ public class Task {
 		if (this == o) return true;
 		if (!(o instanceof Task)) return false;
 		Task task = (Task) o;
-		return getEstimatedTime() == task.getEstimatedTime() && getDifficulty() == task.getDifficulty() && getAmtSessions() == task.getAmtSessions() && getTaskName().equals(task.getTaskName()) && getTaskType().equals(task.getTaskType()) && getDueDate().equals(task.getDueDate());
+		return getEstimatedTime() == task.getEstimatedTime() && getDifficulty() == task.getDifficulty() && getAmtSessions() == task.getAmtSessions() && getTaskName().equals(task.getTaskName()) && getTaskType().equals(task.getTaskType()) && Objects.equals(getDueDate(), task.getDueDate());
 	}
 
 	@Override
@@ -56,6 +56,10 @@ public class Task {
 		return estimatedTime;
 	}
 
+	public void setEstimatedTime(int estimatedTime) {
+		this.estimatedTime = estimatedTime;
+	}
+
 	public String getTaskType() {
 		return taskType;
 	}
@@ -67,6 +71,8 @@ public class Task {
 				", estimatedTime=" + estimatedTime +
 				", difficulty=" + difficulty +
 				", taskType='" + taskType + '\'' +
+				", dueDate=" + dueDate +
+				", amtSessions=" + amtSessions +
 				'}';
 	}
 }

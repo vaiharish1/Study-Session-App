@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -202,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for (Session s : allSessions) {
+            Log.v("MAIN ACTIVITY SESSIONS", s.toString());
             if (s.getDate().equals(today)) {
                 todaySessions.add(s);
             }
