@@ -35,9 +35,7 @@ public class ViewTasksSessions_RecyclerViewAdapter extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull ViewTasksSessions_RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.taskNameText.setText(allSessions.get(position).getTask().getTaskName());
         holder.taskTimeText.setText(allSessions.get(position).getTimeblock().getStartTime() + " - " + allSessions.get(position).getTimeblock().getEndTime());
-        holder.taskTypeText.setText(allSessions.get(position).getTask().getTaskType());
         holder.doingDateText.setText(allSessions.get(position).getDate().toString());
     }
 
@@ -48,14 +46,12 @@ public class ViewTasksSessions_RecyclerViewAdapter extends RecyclerView.Adapter<
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView taskNameText, doingDateText, taskTimeText, taskTypeText;
+        private TextView doingDateText, taskTimeText;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            taskNameText = itemView.findViewById(R.id.taskNameText_viewTasksSessions);
             doingDateText = itemView.findViewById(R.id.doingDateText_viewTasksSessions);
-            taskTypeText = itemView.findViewById(R.id.sessionTypeText_viewTasksSessions);
             taskTimeText = itemView.findViewById(R.id.taskTimeDisplayText_viewTasksSessions);
         }
     }

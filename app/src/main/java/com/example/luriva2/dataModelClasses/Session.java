@@ -1,6 +1,6 @@
 package com.example.luriva2.dataModelClasses;
 
-public class Session {
+public class Session implements Comparable<Session> {
 	private final Task task;
 	private final Date date;
 	private Timeblock timeblock;
@@ -52,6 +52,12 @@ public class Session {
 				", date=" + date +
 				", timeblock=" + timeblock +
 				", nextStartTime=" + nextStartTime +
+				", sessionId=" + sessionId +
 				'}';
+	}
+
+	@Override
+	public int compareTo(Session session) {
+		return this.getSessionId() - session.getSessionId();
 	}
 }

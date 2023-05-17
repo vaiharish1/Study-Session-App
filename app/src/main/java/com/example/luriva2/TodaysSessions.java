@@ -12,14 +12,18 @@ import android.widget.Toast;
 
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
+import com.example.luriva2.dataModelClasses.Task;
 import com.example.luriva2.dataModelClasses.Timeblock;
+import com.example.luriva2.recyclerViewClasses.SessionRecyclerViewInterface;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayList;
 
-public class TodaysSessions extends DisplaySessions {
+public class TodaysSessions extends DisplaySessions implements SessionRecyclerViewInterface {
 
     private RecyclerView recyclerView;
+
+    Session_RecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +87,7 @@ public class TodaysSessions extends DisplaySessions {
 
     public void createAdapter() {
         ArrayList<Session> sessionModels = getSessionModels();
-        Session_RecyclerViewAdapter adapter = new Session_RecyclerViewAdapter(this, sessionModels);
+        adapter = new Session_RecyclerViewAdapter(this, sessionModels, this);
 
         recyclerView.setAdapter(adapter);
 
@@ -114,5 +118,13 @@ public class TodaysSessions extends DisplaySessions {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+        ArrayList<Session> sessionModels = getSessionModels();
+        sessionModels.remove(position);
+        adapter.notifyItemRemoved(position);
+        makeSaveButtonEnabled();
     }
 }

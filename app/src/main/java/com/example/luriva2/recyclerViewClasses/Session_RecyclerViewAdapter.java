@@ -22,9 +22,12 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
     private ArrayList<Session> sessionModels;
     private OnItemClickListener listener;
 
-    public Session_RecyclerViewAdapter(Context context, ArrayList<Session> sessionModels) {
+    private SessionRecyclerViewInterface sessionRecyclerViewInterface;
+
+    public Session_RecyclerViewAdapter(Context context, ArrayList<Session> sessionModels, SessionRecyclerViewInterface sessionRecyclerViewInterface) {
         this.context = context;
         this.sessionModels = sessionModels;
+        this.sessionRecyclerViewInterface = sessionRecyclerViewInterface;
     }
 
     public interface OnItemClickListener {
@@ -42,7 +45,7 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_todays_sessions, parent, false);
 
-        return new Session_RecyclerViewAdapter.MyViewHolder(view, listener);
+        return new Session_RecyclerViewAdapter.MyViewHolder(view, listener, sessionRecyclerViewInterface);
     }
 
     @Override
@@ -71,12 +74,12 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
         return sessionModels.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         private TextView taskNameText, taskTimeDisplayText, sessionTypeDisplayText;
         private Button upButton, downButton;
 
-        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener, SessionRecyclerViewInterface sessionRecyclerViewInterface) {
             super(itemView);
 
             taskNameText = itemView.findViewById(R.id.taskNameText_viewTasksSessions);
@@ -96,6 +99,20 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
                 @Override
                 public void onClick(View view) {
                     listener.onItemClick(view, getAdapterPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (sessionRecyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            sessionRecyclerViewInterface.onItemLongClick(pos);
+                        }
+                    }
+                    return true;
                 }
             });
         }

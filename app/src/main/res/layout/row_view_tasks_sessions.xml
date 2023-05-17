@@ -21,43 +21,22 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/taskNameText_viewTasksSessions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/taskNameLabel"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
                 android:id="@+id/doingDateText_viewTasksSessions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="@string/dueDateStr"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/taskNameText_viewTasksSessions" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/taskTimeDisplayText_viewTasksSessions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="@string/todaySessionTimeStr"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/taskNameText_viewTasksSessions" />
-
-            <TextView
-                android:id="@+id/sessionTypeText_viewTasksSessions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/taskTypeLabel"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

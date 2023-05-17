@@ -84,7 +84,7 @@ public class ViewTaskSessions extends AppCompatActivity {
             thisTask.setAmtSessions(amtSessions);
 
             TextView taskNameText = findViewById(R.id.todaysSessionHeader);
-            taskNameText.setText(thisTask.getTaskName());
+            taskNameText.setText(thisTask.getTaskName() + " (" + thisTask.getTaskType() + ")");
         }
 
         Log.v("THIS TASK HERE", thisTask.toString());

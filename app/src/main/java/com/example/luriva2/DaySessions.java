@@ -3,13 +3,16 @@ package com.example.luriva2;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
+import com.example.luriva2.dataModelClasses.Task;
 import com.example.luriva2.dataModelClasses.Timeblock;
+import com.example.luriva2.recyclerViewClasses.SessionRecyclerViewInterface;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import java.util.ArrayList;
 import android.content.Intent;
@@ -17,10 +20,12 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
-public class DaySessions extends DisplaySessions {
+public class DaySessions extends DisplaySessions implements SessionRecyclerViewInterface {
     NavigationBarView navigationBarView;
     private RecyclerView recyclerView;
     private Date thisDay;
+
+    Session_RecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +101,7 @@ public class DaySessions extends DisplaySessions {
 
     public void createAdapter() {
         ArrayList<Session> sessionModels = getSessionModels();
-        Session_RecyclerViewAdapter adapter = new Session_RecyclerViewAdapter(this, sessionModels);
+        adapter = new Session_RecyclerViewAdapter(this, sessionModels, this);
 
         recyclerView.setAdapter(adapter);
 
@@ -127,5 +132,13 @@ public class DaySessions extends DisplaySessions {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+        ArrayList<Session> sessionModels = getSessionModels();
+        sessionModels.remove(position);
+        adapter.notifyItemRemoved(position);
+        makeSaveButtonEnabled();
     }
 }

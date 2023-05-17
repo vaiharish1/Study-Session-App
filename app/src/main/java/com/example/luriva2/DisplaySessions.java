@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
+import com.example.luriva2.dataModelClasses.Task;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
@@ -17,6 +18,8 @@ import java.util.Locale;
 public class DisplaySessions extends AppCompatActivity {
 
     private ArrayList<Session> allSessions, sessionModels;
+
+    private ArrayList<Task> allTasks;
     private Date today;
 
     @Override
@@ -71,6 +74,11 @@ public class DisplaySessions extends AppCompatActivity {
         editor.putString("session list", json);
         editor.apply();
 
+        ArrayList<Task> savedTasks = new ArrayList<>(allTasks);
+        json = gson.toJson(savedTasks);
+        editor.putString("task list", json);
+        editor.apply();
+
         makeSaveButtonDisabled();
     }
 
@@ -88,5 +96,9 @@ public class DisplaySessions extends AppCompatActivity {
                 sessionModels.add(s);
             }
         }
+
+        json = sharedPreferences.getString("task list", null);
+        type = new TypeToken<ArrayList<Task>>() {}.getType();
+        allTasks = gson.fromJson(json, type);
     }
 }

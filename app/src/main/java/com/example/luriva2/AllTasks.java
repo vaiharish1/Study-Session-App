@@ -27,8 +27,11 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerViewInterface {
+
+    private ArrayList<Session> allSessions;
 
     private ArrayList<Task> allTasks;
 
@@ -62,6 +65,10 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
 
         loadTasks();
 
+        checkAllTasks();
+
+        saveTasks();
+
         recyclerView = findViewById(R.id.recyclerView);
 
         createAdapter();
@@ -79,9 +86,30 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
     public void loadTasks() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<Task>>() {}.getType();
+        String json = sharedPreferences.getString("session list", null);
+        Type type = new TypeToken<ArrayList<Session>>() {}.getType();
+        allSessions = gson.fromJson(json, type);
+
+        json = sharedPreferences.getString("task list", null);
+        type = new TypeToken<ArrayList<Task>>() {}.getType();
         allTasks = gson.fromJson(json, type);
+    }
+
+    public void saveTasks() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+
+        ArrayList<Session> savedSessions = new ArrayList<>(allSessions);
+
+        String json = gson.toJson(savedSessions);
+        editor.putString("session list", json);
+        editor.apply();
+
+        ArrayList<Task> savedTasks = new ArrayList<>(allTasks);
+        json = gson.toJson(savedTasks);
+        editor.putString("task list", json);
+        editor.apply();
     }
 
     public void showToast(String str) {
@@ -95,6 +123,42 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
+    }
+
+    public void checkAllTasks() {
+        for (int index = 0; index < allTasks.size(); index++) {
+            ArrayList<Session> tasksSessions = getTasksSessions(allTasks.get(index));
+            int amtSessions = tasksSessions.size();
+
+            if (amtSessions == 0) {
+                allTasks.remove(index);
+                index--;
+            } else {
+                allTasks.get(index).setAmtSessions(amtSessions);
+
+                for (int sessionIndex = 0; sessionIndex < tasksSessions.size(); sessionIndex++) {
+                    Session sesh = tasksSessions.get(sessionIndex);
+                    int allSessionIndex = allSessions.indexOf(sesh);
+                    allSessions.remove(allSessionIndex);
+                    sesh.setSessionId(sessionIndex);
+                    allSessions.add(allSessionIndex, sesh);
+                }
+            }
+        }
+    }
+
+    public ArrayList<Session> getTasksSessions(Task t) {
+        ArrayList<Session> taskSessions = new ArrayList<>();
+
+        for (Session s : allSessions) {
+            if (s.getTask().equals(t)) {
+                taskSessions.add(s);
+            }
+        }
+
+        Log.v("GET TASKS SESSIONS", taskSessions.toString());
+        Collections.sort(taskSessions);
+        return taskSessions;
     }
 
     public void addTasksNav(View v){
