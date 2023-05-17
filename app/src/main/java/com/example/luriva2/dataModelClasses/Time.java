@@ -1,14 +1,15 @@
 package com.example.luriva2.dataModelClasses;
 
 public class Time implements Comparable<Time> {
-    private final int hour;
-    private final int minute;
+    private final int hour, minute; // the hour and minute of this time
 
+    // the constructor
     public Time(int hour, int minute) {
         this.hour = hour;
         this.minute = minute;
     }
 
+    // adding a certain amount of minutes
     public Time add(int newHours, int newMinutes) {
         int h = hour + newHours;
         int m = minute + newMinutes;
@@ -20,11 +21,13 @@ public class Time implements Comparable<Time> {
         return new Time(h,m);
     }
 
+    // comparing this time to another time
     public int compareTo(Time other) {
         if (hour == other.getHour()) return minute - other.getMinute();
         return hour - other.getHour();
     }
 
+    // formatting the time
     public String toString() {
         String str = "";
         if (hour < 10) {
@@ -39,10 +42,12 @@ public class Time implements Comparable<Time> {
         return str;
     }
 
+    // getting the hour
     public int getHour() {
         return hour;
     }
 
+    // getting the minute
     public int getMinute() {
         return minute;
     }

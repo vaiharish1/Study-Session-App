@@ -3,17 +3,17 @@ package com.example.luriva2.dataModelClasses;
 import java.util.Objects;
 
 public class Date implements Comparable<Date> {
-    public static int[] daysOfMonths = {31,28,31,30,31,30,31,31,30,31,30,31};
-    private final int month;
-    private final int day;
-    private final int year;
+    public static int[] daysOfMonths = {31,28,31,30,31,30,31,31,30,31,30,31}; // number of days in each of the months
+    private final int month, day, year;
 
+    // constructing the date
     public Date(int month, int day, int year) {
         this.month = month;
         this.day = day;
         this.year = year;
     }
 
+    // if one date is equal to another
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,11 +22,13 @@ public class Date implements Comparable<Date> {
         return month == date.month && day == date.day && year == date.year;
     }
 
+    // hash code of date using Objects method
     @Override
     public int hashCode() {
         return Objects.hash(month, day, year);
     }
 
+    // adding days to the current date
     public Date addDays(int days) {
         int d = day + days;
         int m = month;
@@ -43,22 +45,7 @@ public class Date implements Comparable<Date> {
         return new Date(m, d, y);
     }
 
-    public Date subtractDays(int days) {
-        int d = day - days;
-        int m = month;
-        int y = year;
-        while (d <= 0) {
-            d += daysOfMonths[m];
-            m--;
-
-            if (m == 0) {
-                m = 12;
-                y--;
-            }
-        }
-        return new Date(m, d, y);
-    }
-
+    // formatting the date
     public String toString() {
         String str = "";
         if (month < 10) {
@@ -76,6 +63,7 @@ public class Date implements Comparable<Date> {
     }
 
 
+    // comparing this date to other dates
     public int compareTo(Date other) {
         if (month == other.getMonth()) {
             return day - other.getDay();
@@ -83,10 +71,12 @@ public class Date implements Comparable<Date> {
         return month - other.getMonth();
     }
 
+    // getting the month
     public int getMonth() {
         return month;
     }
 
+    // getting the day
     public int getDay() {
         return day;
     }

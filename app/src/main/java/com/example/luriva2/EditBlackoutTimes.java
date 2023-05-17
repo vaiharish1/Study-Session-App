@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 
 //Made with help from https://developer.android.com/develop/ui/views/components/spinner#java
+// not used for the app
 public class EditBlackoutTimes extends AppCompatActivity {
     NavigationBarView navigationBarView;
     @Override

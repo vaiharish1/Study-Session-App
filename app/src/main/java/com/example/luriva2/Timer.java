@@ -25,30 +25,31 @@ import java.util.Locale;
 import java.util.Random;
 
 public class Timer extends AppCompatActivity {
-    TextView status;
-    TextView timer;
-    TextView motivationalQuote;
-    CountDownTimer countdown;
-    NavigationBarView navigationBarView;
+    TextView status; // the status of the timer
+    TextView timer; // the timer screen
+    TextView motivationalQuote; // the motivation quote
+    CountDownTimer countdown; // countdown
+    NavigationBarView navigationBarView; // the navigation bar
 
     private ArrayList<Session> todaySessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
     private Date today; // today's date
 
-    private Time curTime;
+    private Time curTime; // the current time
 
-    boolean onBreak = false;
+    boolean onBreak = false; // if we are on a break or not
 
-    private Task curTask;
-    private Session curSession;
+    private Task curTask; // the current task
+    private Session curSession; // the current session
 
-    private ArrayList<Task> allTasks;
+    private ArrayList<Task> allTasks; // all tasks
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
 
+        // setting up the navigation bar
         navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.timerNavigation);
         navigationBarView.setOnItemSelectedListener(item -> {
@@ -94,18 +95,25 @@ public class Timer extends AppCompatActivity {
         components = formattedTime.split(":");
         curTime = new Time(Integer.parseInt(components[0]), Integer.parseInt(components[1]));
 
+        // check sessions and start the timer
         checkSessionsStartTimer();
     }
 
+    // check all sessions and start timer if necessary
     private void checkSessionsStartTimer() {
         boolean flag = true;
+
+        // for all sessions
         for (int i = 0; i < todaySessions.size(); i++) {
             Session sesh = todaySessions.get(i);
+            // if the timeblock contains current time
             if (sesh.getTimeblock().contains(curTime)) {
+                // show the session
                 curSession = sesh;
                 curTask = sesh.getTask();
                 status.setText("You're working on: " + curTask.getTaskName());
 
+                // get end time
                 Time endTime = sesh.getTimeblock().getEndTime();
                 int hours = endTime.getHour() - curTime.getHour();
                 int minutes = endTime.getMinute() - curTime.getMinute();
@@ -113,19 +121,28 @@ public class Timer extends AppCompatActivity {
                     minutes += 60;
                     hours--;
                 }
+
+                // get time difference
                 Time timeDif = new Time(hours, minutes);
+                // get minutes remaining
                 int totalMinutesRemaining = timeDif.getHour() * 60 + timeDif.getMinute();
+
+                // you're not on break
                 flag = false;
                 onBreak = false;
+
+                // start the timer
                 startTimer(totalMinutesRemaining);
             }
         }
+        // otherwise, you're on break
         if (flag) {
             status.setText("You're on a break!");
             onBreak = true;
         }
     }
 
+    // load all the sessions
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -146,6 +163,7 @@ public class Timer extends AppCompatActivity {
         allTasks = gson.fromJson(json, type);
     }
 
+    // save the sessions
     private void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -157,36 +175,48 @@ public class Timer extends AppCompatActivity {
         editor.apply();
     }
 
+    // start the timer
     public void startTimer(int min){
+        // initialize new countdown timer
         countdown = new CountDownTimer((long) min *60*1000,1000) {
+
+            // count down
             @Override
             public void onTick(long millisUntilFinished) {
                 timer.setText(msToMin(millisUntilFinished));
             }
 
+            // when finished
             @Override
             public void onFinish() {
+                // remove the task if finished
                 if (curSession.getSessionId() == curTask.getAmtSessions()) {
                     allTasks.remove(curTask);
                     saveData();
                 }
 
+                // get the motivational quote!
                 String[] motivation = getResources().getStringArray(R.array.motivationQuotes);
                 int motivationLen = motivation.length;
                 Random randy = new Random();
                 motivationalQuote.setText(motivation[randy.nextInt(motivationLen)]);
             }
         };
+
+        // start the countdown timer
         countdown.start();
     }
 
+    // turn milliseconds to minutes
     private String msToMin(long ms) {
         int sec = (int)(ms/1000)%60;
         int min = (int)(ms/1000)/60;
         return String.format("%02d",min) + ":" + String.format("%02d",sec);
     }
 
+    // cancel (or pause) the timer
     public void cancel(View v){
+        // only do it if you're on a break
         if (!onBreak) {
             status.setText(R.string.cancelledStr);
             countdown.cancel();

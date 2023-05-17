@@ -18,20 +18,22 @@ import java.util.ArrayList;
 
 public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
-    private TextView monthYearText;
-    private RecyclerView calendarRecyclerView;
-    private LocalDate selectedDate;
+    private TextView monthYearText; // get the month and year
+    private RecyclerView calendarRecyclerView; // the recycler view
+    private LocalDate selectedDate; // the selected date
 
-    NavigationBarView navigationBarView;
+    NavigationBarView navigationBarView; // the navigation bar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_calendar); // the layout used for this page
 
-        setContentView(R.layout.activity_view_calendar);
+        // initialize all attributes
         initWidgets();
         selectedDate = LocalDate.now();
         setMonthView();
 
+        // setting up the navigation bar
         navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
         navigationBarView.setOnItemSelectedListener(item -> {
@@ -54,11 +56,13 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         });
     }
 
+    // initialize the recycler view and month year text
     private void initWidgets(){
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
     }
 
+    // setting up the month
     private void setMonthView() {
         monthYearText.setText(monthYearFormDate(selectedDate));
         ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
@@ -69,6 +73,7 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
+    // getting the days in a month
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
@@ -87,25 +92,31 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         return daysInMonthArray;
     }
 
+    // getting the format
     private String monthYearFormDate(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         return date.format(formatter);
     }
 
+    // getting the month date year format
     private String monthDateYearFormDate(LocalDate date, String dayText){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/" + dayText + "/yyyy");
         return date.format(formatter);
     }
 
+    // getting the previous month
     public void previousMonthAction(View view){
         selectedDate = selectedDate.minusMonths(1);
         setMonthView();
     }
+
+    // getting the next month
     public void nextMonthAction(View view){
         selectedDate = selectedDate.plusMonths(1);
         setMonthView();
     }
 
+    // custom toast message
     public void showToast(String str) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
@@ -119,6 +130,7 @@ public class ViewCalendar extends AppCompatActivity implements CalendarAdapter.O
         toast.show();
     }
 
+    // when cllicking on the item
     public void onItemClick(int position, String dayText){
         if(!dayText.equals("")){
             String message = "Opening tasks for " + dayText + " " + monthYearFormDate(selectedDate);

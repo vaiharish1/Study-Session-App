@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import com.google.android.material.navigation.NavigationBarView;
 
+// settings
+// not used in final app
 public class Settings extends AppCompatActivity {
     NavigationBarView navigationBarView;
     @Override

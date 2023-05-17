@@ -5,49 +5,54 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.luriva2.R;
 import com.example.luriva2.dataModelClasses.Session;
-
 import java.util.ArrayList;
 
 public class ViewTasksSessions_RecyclerViewAdapter extends RecyclerView.Adapter<ViewTasksSessions_RecyclerViewAdapter.MyViewHolder> {
 
-    private Context context;
-    private ArrayList<Session> allSessions;
+    private Context context; // the context
+    private ArrayList<Session> allSessions; // all of the sessions in the recycler view
 
+    // the constructor
     public ViewTasksSessions_RecyclerViewAdapter(Context context, ArrayList<Session> allSessions) {
         this.context = context;
         this.allSessions = allSessions;
     }
 
+    // creating the actual recycler view with all of the rows
     @NonNull
     @Override
     public ViewTasksSessions_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // this is where you inflate the layout (Giving a look to our rows)
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view_tasks_sessions, parent, false);
 
         return new ViewTasksSessions_RecyclerViewAdapter.MyViewHolder(view);
     }
 
+    // setting the rows with the correct information
     @Override
     public void onBindViewHolder(@NonNull ViewTasksSessions_RecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.taskTimeText.setText(allSessions.get(position).getTimeblock().getStartTime() + " - " + allSessions.get(position).getTimeblock().getEndTime());
         holder.doingDateText.setText(allSessions.get(position).getDate().toString());
     }
 
+    // get total amount of sessions
     @Override
     public int getItemCount() {
         return allSessions.size();
     }
 
+    // the view holder
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
+        // all of the layouts
         private TextView doingDateText, taskTimeText;
 
+        // the constructor
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

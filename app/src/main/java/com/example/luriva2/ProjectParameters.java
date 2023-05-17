@@ -15,11 +15,12 @@ public class ProjectParameters extends TaskParameters {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_parameters);
+        setContentView(R.layout.activity_project_parameters); // the layout to be used
+
+        // all the things with the navigation bar
         // navigation bar
         NavigationBarView navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
-
         navigationBarView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.timerNavigation:
@@ -40,6 +41,7 @@ public class ProjectParameters extends TaskParameters {
         });
     }
 
+    // getting the task name from the edittext
     public String getTaskName() {
         EditText taskNameText = findViewById(R.id.editTextTaskName_project);
         String taskNameStr = taskNameText.getText().toString();
@@ -49,6 +51,7 @@ public class ProjectParameters extends TaskParameters {
         return taskNameStr;
     }
 
+    // getting the due date from the edittext
     public String getDueDate() {
         EditText dueDateText = findViewById(R.id.editTextDueDate_project);
         String dueDateStr = dueDateText.getText().toString();
@@ -58,6 +61,7 @@ public class ProjectParameters extends TaskParameters {
         return dueDateStr;
     }
 
+    // getting the estimated time from the edittext
     public String getTime() {
         EditText timeText = findViewById(R.id.editTextEstTime_project);
         String timeStr = timeText.getText().toString();
@@ -67,19 +71,23 @@ public class ProjectParameters extends TaskParameters {
         return timeStr;
     }
 
+    // when pressing the "easy" button, populating the difficulty text with "Easy"
     public void populateEasy(View v){
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_project);
         difficultyText.setText("Easy");
     }
+    // when pressing the "medium" button, populating the difficulty text with "Medium"
     public void populateMid(View v){
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_project);
         difficultyText.setText("Medium");
     }
+    // when pressing the "hard" button, populating the difficulty text with "Hard"
     public void populateHard(View v){
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_project);
         difficultyText.setText("Hard");
     }
 
+    // getting the estimated difficulty from the difficulty textview
     public String getDif() {
         TextView difText = findViewById(R.id.TextViewdifficulty_project);
         String difStr = difText.getText().toString();
@@ -89,6 +97,7 @@ public class ProjectParameters extends TaskParameters {
         return difStr;
     }
 
+    // when adding the task, we get all the required information (and catch for errors) and then add the task
     public void todaysSessionsNav(View v){
         // getting the task name
         String name = getTaskName();
@@ -112,6 +121,7 @@ public class ProjectParameters extends TaskParameters {
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "Project", dueDate);
 
+        // finding the total amount of sessions
         int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
         newTask.setAmtSessions(amtOfSessions);
 
@@ -121,6 +131,7 @@ public class ProjectParameters extends TaskParameters {
         // adding the task
         addTask(newTask);
 
+        // adding the sessions
         for (int i = 1; i <= amtOfSessions && remainingTime > 0; i++) {
             Date doingDate = getToday().addDays(addedDays);
 
@@ -136,6 +147,7 @@ public class ProjectParameters extends TaskParameters {
             addedDays++;
         }
 
+        // starting new intent
         Intent intent = new Intent(this, ViewCalendar.class);
         startActivity(intent);
         showToast("Viewing Calendar...");

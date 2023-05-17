@@ -16,11 +16,12 @@ public class RepeatedParameters extends TaskParameters {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repeated_parameters);
+        setContentView(R.layout.activity_repeated_parameters); // the layout to be used
+
+        // all the things with the navigation bar
         // navigation bar
         NavigationBarView navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
-
         navigationBarView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
                 case R.id.timerNavigation:
@@ -41,6 +42,7 @@ public class RepeatedParameters extends TaskParameters {
         });
     }
 
+    // getting the task name from the edittext
     public String getTaskName() {
         EditText taskNameText = findViewById(R.id.editTextTaskName_repeated);
         String taskNameStr = taskNameText.getText().toString();
@@ -50,6 +52,7 @@ public class RepeatedParameters extends TaskParameters {
         return taskNameStr;
     }
 
+    // getting the "how often" from the edittext
     public String getIncrement() {
         EditText incrementText = findViewById(R.id.editTextIncrementValue_repeated);
         String incrementStr = incrementText.getText().toString();
@@ -59,6 +62,7 @@ public class RepeatedParameters extends TaskParameters {
         return incrementStr;
     }
 
+    // getting the estimated time from the edittext
     public String getTime() {
         EditText timeText = findViewById(R.id.editTextEstTime_repeated);
         String timeStr = timeText.getText().toString();
@@ -68,19 +72,23 @@ public class RepeatedParameters extends TaskParameters {
         return timeStr;
     }
 
+    // when pressing the "easy" button, populating the difficulty text with "Easy"
     public void populateEasy(View v){
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_repeated);
         difficultyText.setText("Easy");
     }
+    // when pressing the "medium" button, populating the difficulty text with "Medium"
     public void populateMid(View v){
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_repeated);
         difficultyText.setText("Medium");
     }
+    // when pressing the "hard" button, populating the difficulty text with "Hard"
     public void populateHard(View v){
         TextView difficultyText = findViewById(R.id.TextViewdifficulty_repeated);
         difficultyText.setText("Hard");
     }
 
+    // getting the estimated difficulty from the difficulty textview
     public String getDif() {
         TextView difText = findViewById(R.id.TextViewdifficulty_repeated);
         String difStr = difText.getText().toString();
@@ -90,6 +98,7 @@ public class RepeatedParameters extends TaskParameters {
         return difStr;
     }
 
+    // when adding the task, we get all the required information (and catch for errors) and then add the task
     public void todaysSessionsNav(View v){
         // getting the task name
         String name = getTaskName();
@@ -120,6 +129,7 @@ public class RepeatedParameters extends TaskParameters {
         Date today = getToday();
         int addedDays = 0;
 
+        // adding the sessions
         for (int i = 0; i < Constants.MAX_REPEATED_SESSIONS; i++) {
             Date doingDate = today.addDays(addedDays);
 
@@ -131,6 +141,7 @@ public class RepeatedParameters extends TaskParameters {
             addedDays += howOften;
         }
 
+        // starting new activity
         Intent intent = new Intent(this, TodaysSessions.class );
         startActivity(intent);
         showToast("Viewing Today's Sessions...");

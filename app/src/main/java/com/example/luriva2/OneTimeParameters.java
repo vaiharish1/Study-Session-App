@@ -101,7 +101,6 @@ public class OneTimeParameters extends TaskParameters {
 
     // when adding the task, we get all the required information (and catch for errors) and then add the task
     public void todaysSessionsNav(View v){
-        Log.v("DONE BUTTON PRESSED", "pressed session");
         // getting the task name
         String name = getTaskName();
         if (checkTaskName(name)) return;
@@ -124,6 +123,7 @@ public class OneTimeParameters extends TaskParameters {
         // actually creating the task
         Task newTask = new Task(name, time, estimatedDifficulty, "One-Time", dueDate);
 
+        // finding the total amount of sessions
         int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
         newTask.setAmtSessions(amtOfSessions);
 
@@ -133,6 +133,7 @@ public class OneTimeParameters extends TaskParameters {
         // adding the task
         addTask(newTask);
 
+        // adding the sessions
         for (int i = 1; i <= amtOfSessions && remainingTime > 0; i++) {
             Date doingDate = getToday().addDays(addedDays);
 
@@ -146,8 +147,6 @@ public class OneTimeParameters extends TaskParameters {
                 remainingTime -= sessionTime;
             }
             addedDays++;
-
-            Log.v("session added", doingDate.toString());
         }
 
         // starting up another activity with an intent
