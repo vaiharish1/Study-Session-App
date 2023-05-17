@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
             Date d;
             if (sessionTypes[i].equals("Repetitive")) d = null;
             else if (sessionTypes[i].equals("Project")) d = new Date(5, 23, 2023);
-            else d = new Date(5, 13, 2023);
+            else d = new Date(5, 23, 2023);
 
             // initialize the task
             Task t = new Task(sessionNames[i], 10, 2, sessionTypes[i], d);

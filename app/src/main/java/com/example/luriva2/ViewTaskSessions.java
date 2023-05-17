@@ -87,7 +87,6 @@ public class ViewTaskSessions extends AppCompatActivity {
 
             // initialize the task
             thisTask = new Task(taskName, estimatedTime, difficulty, taskType, dueDate);
-            thisTask.setEstimatedTime(estimatedTime); // set the correct amount of time
 
             // get the correct amount of sessions
             int amtSessions = Integer.parseInt(extras.getString("amtSessions"));

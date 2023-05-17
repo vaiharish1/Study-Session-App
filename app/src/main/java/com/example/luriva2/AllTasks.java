@@ -91,6 +91,7 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
         json = sharedPreferences.getString("task list", null);
         type = new TypeToken<ArrayList<Task>>() {}.getType();
         allTasks = gson.fromJson(json, type);
+        Log.v("ALL TASKS", allTasks.toString());
     }
 
     // saving the tasks
@@ -147,7 +148,7 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
                     Session sesh = tasksSessions.get(sessionIndex);
                     int allSessionIndex = allSessions.indexOf(sesh);
                     allSessions.remove(allSessionIndex);
-                    sesh.setSessionId(sessionIndex);
+                    sesh.setSessionId(sessionIndex+1);
                     allSessions.add(allSessionIndex, sesh);
                 }
             }
@@ -165,7 +166,7 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
         }
 
         // debug message output
-//        Log.v("GET TASKS SESSIONS", taskSessions.toString());
+        Log.v("GET TASKS SESSIONS", taskSessions.toString());
         Collections.sort(taskSessions);
         return taskSessions;
     }

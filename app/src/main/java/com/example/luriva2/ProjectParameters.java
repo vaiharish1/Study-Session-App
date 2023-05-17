@@ -125,7 +125,7 @@ public class ProjectParameters extends TaskParameters {
         int amtOfSessions = Math.floorDiv(newTask.getEstimatedTime(), Constants.MAX_SESSION_TIME);
         newTask.setAmtSessions(amtOfSessions);
 
-        int addedDays = 1;
+        int addedDays = 0;
         int remainingTime = time;
 
         // adding the task

@@ -105,6 +105,11 @@ public class TaskParameters extends AppCompatActivity {
             return true;
         }
 
+        if (timeStr.contains(".")) {
+            showToast("No decimal minutes.");
+            return true;
+        }
+
         int time = Integer.parseInt(timeStr);
         if (time > Constants.MAX_ESTIMATED_TIME) {
             showToast("Why?");
@@ -151,6 +156,17 @@ public class TaskParameters extends AppCompatActivity {
     public boolean checkHowOften(String howOftenStr) {
         if (howOftenStr.isEmpty()) {
             showToast("How often task is repeated not given.");
+            return false;
+        }
+
+        int howOften = Integer.parseInt(howOftenStr);
+        if (howOften <= 0) {
+            showToast("Don't break the system.");
+            return false;
+        }
+
+        if (howOften >= Constants.MAX_HOW_OFTEN) {
+            showToast("Why.");
             return false;
         }
         return true;

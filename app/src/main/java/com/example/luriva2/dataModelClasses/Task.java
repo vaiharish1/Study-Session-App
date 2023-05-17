@@ -26,13 +26,13 @@ public class Task {
 		if (this == o) return true;
 		if (!(o instanceof Task)) return false;
 		Task task = (Task) o;
-		return getEstimatedTime() == task.getEstimatedTime() && getDifficulty() == task.getDifficulty() && getAmtSessions() == task.getAmtSessions() && getTaskName().equals(task.getTaskName()) && getTaskType().equals(task.getTaskType()) && Objects.equals(getDueDate(), task.getDueDate());
+		return getDifficulty() == task.getDifficulty() && getTaskName().equals(task.getTaskName()) && getTaskType().equals(task.getTaskType()) && Objects.equals(getDueDate(), task.getDueDate());
 	}
 
 	// the hashcode method
 	@Override
 	public int hashCode() {
-		return Objects.hash(getTaskName(), getEstimatedTime(), getDifficulty(), getTaskType(), getDueDate(), getAmtSessions());
+		return Objects.hash(getTaskName(), getDifficulty(), getTaskType(), getDueDate());
 	}
 
 	// getting the total amount of sessions

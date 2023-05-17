@@ -195,11 +195,8 @@ public class Timer extends AppCompatActivity {
                     saveData();
                 }
 
-                // get the motivational quote!
-                String[] motivation = getResources().getStringArray(R.array.motivationQuotes);
-                int motivationLen = motivation.length;
-                Random randy = new Random();
-                motivationalQuote.setText(motivation[randy.nextInt(motivationLen)]);
+                Intent intent = new Intent(Timer.this, MainActivity.class);
+                startActivity(intent);
             }
         };
 

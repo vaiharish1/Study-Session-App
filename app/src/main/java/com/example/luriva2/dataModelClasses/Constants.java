@@ -11,4 +11,6 @@ public final class Constants {
 	public static final int MAX_ESTIMATED_TIME = 100000; // max time for a given task
 
 	public static final int MAX_REPEATED_SESSIONS = 30; // max number of repeated sessions
+
+	public static final int MAX_HOW_OFTEN = 30; // max number of how often to repeat a session
 }
