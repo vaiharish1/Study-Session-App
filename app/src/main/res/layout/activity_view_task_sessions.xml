@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TodaysSessions">
+    tools:context=".ViewTaskSessions">
+
 
     <FrameLayout
         android:id="@+id/navigationLayout"
@@ -22,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/todaySessionHeaderStr"
+        android:text="@string/viewTasksSessionsTitleStr"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -43,30 +44,16 @@
         app:layout_constraintTop_toBottomOf="@+id/todaysSessionHeader" />
 
     <Button
-        android:id="@+id/saveButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:onClick="onClickSaveData"
-        android:text="@string/saveButtonStr"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/toAddTasks"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:onClick="addTasksNav"
         android:text="@string/toAddTasksButton"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
 
 
+        app:layout_constraintBottom_toBottomOf="@+id/navigationLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -77,4 +64,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation_bar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

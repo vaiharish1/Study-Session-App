@@ -11,12 +11,13 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class AddTasks extends AppCompatActivity {
-    NavigationBarView navigationBarView;
+    NavigationBarView navigationBarView; // getting the navigation bar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tasks);
 
+        // setting up the navigation bar
         navigationBarView = findViewById(R.id.navigationView);
         navigationBarView.setSelectedItemId(R.id.viewTasksNavigation);
         navigationBarView.setOnItemSelectedListener(item -> {
@@ -39,6 +40,7 @@ public class AddTasks extends AppCompatActivity {
         });
     }
 
+    // custom toast message
     public void showToast(String str) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
@@ -52,16 +54,21 @@ public class AddTasks extends AppCompatActivity {
         toast.show();
     }
 
+    // going to one time task parameters
     public void oneTimeNav(View v){
         Intent intent = new Intent(this, OneTimeParameters.class );
         startActivity(intent);
         showToast("Viewing One-Time Task Manager...");
     }
+
+    // going to repetitive task parameters
     public void repeatedNav(View v){
         Intent intent = new Intent(this, RepeatedParameters.class );
         startActivity(intent);
         showToast("Viewing Repeated Task Manager...");
     }
+
+    // going to project task parameters
     public void projectNav(View v){
         Intent intent = new Intent(this, ProjectParameters.class );
         startActivity(intent);

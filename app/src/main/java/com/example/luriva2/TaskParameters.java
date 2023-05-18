@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.luriva2.dataModelClasses.Constants;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
@@ -28,7 +29,7 @@ public class TaskParameters extends AppCompatActivity {
 
     private ArrayList<Session> allSessions, daysSessions; // all sessions (from shared preferences) and the day's sessions (to be displayed in the recycler view)
 
-    private ArrayList<Task> allTasks;
+    private ArrayList<Task> allTasks; // all the tasks
 
     private Date today; // today's date and the date of the task
 
@@ -44,6 +45,7 @@ public class TaskParameters extends AppCompatActivity {
         today = new Date(Integer.parseInt(components[1]), Integer.parseInt(components[0]), Integer.parseInt(components[2]));
     }
 
+    // custom toast message
     public void showToast(String str) {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.navigation_bar_toast, (ViewGroup) findViewById(R.id.toastLayoutRoot));
@@ -57,10 +59,12 @@ public class TaskParameters extends AppCompatActivity {
         toast.show();
     }
 
+    // get today's date
     public Date getToday() {
         return today;
     }
 
+    // check if task name is suitable
     public boolean checkTaskName(String name) {
         if (name.isEmpty()) {
             showToast("Empty task name.");
@@ -69,6 +73,7 @@ public class TaskParameters extends AppCompatActivity {
         return false;
     }
 
+    // check if due date fits the regular expression
     public boolean checkDueDate(String dueDateStr) {
         String dueDateRegEx = "^(1[0-2]|0[1-9])/(3[01]|[12]\\d|0[1-9])/\\d{4}$";
 
@@ -76,26 +81,55 @@ public class TaskParameters extends AppCompatActivity {
             showToast("Incorrect date format.");
             return true;
         }
+
+        String[] dueDateComponents = dueDateStr.split("/");
+        Date dueDate = new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
+        if (dueDate.compareTo(today) < 0) {
+            showToast("Due date cannot be before today.");
+            return true;
+        }
+
         return false;
     }
 
+    // transform it into an actual date
     public Date transformToDate(String dueDateStr) {
         String[] dueDateComponents = dueDateStr.split("/");
         return new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
     }
 
+    // check if estimate time isn't too large or negative
     public boolean checkEstimatedTime(String timeStr) {
         if (timeStr.isEmpty()) {
             showToast("No estimated time given.");
             return true;
         }
+
+        if (timeStr.contains(".")) {
+            showToast("No decimal minutes.");
+            return true;
+        }
+
+        int time = Integer.parseInt(timeStr);
+        if (time > Constants.MAX_ESTIMATED_TIME) {
+            showToast("Why?");
+            return true;
+        }
+
+        if (time < 0) {
+            showToast("You cannot do a task for negative time.");
+            return true;
+        }
+
         return false;
     }
 
+    // transform time into an integer
     public int transformToTime(String timeStr) {
         return Integer.parseInt(timeStr);
     }
 
+    // check if the difficulty is suitable
     public boolean checkDifficulty(String difficulty) {
         if (difficulty.equals("Click Difficulty")) {
             showToast("No task difficulty stated.");
@@ -104,6 +138,7 @@ public class TaskParameters extends AppCompatActivity {
         return false;
     }
 
+    // transform estimated difficulty into an integer
     public int transformToEstimatedDifficulty(String difficulty) {
         switch (difficulty) {
             case "Easy":
@@ -117,24 +152,39 @@ public class TaskParameters extends AppCompatActivity {
         }
     }
 
+    // check how often (for repetitive tasks)
     public boolean checkHowOften(String howOftenStr) {
         if (howOftenStr.isEmpty()) {
             showToast("How often task is repeated not given.");
             return false;
         }
+
+        int howOften = Integer.parseInt(howOftenStr);
+        if (howOften <= 0) {
+            showToast("Don't break the system.");
+            return false;
+        }
+
+        if (howOften >= Constants.MAX_HOW_OFTEN) {
+            showToast("Why.");
+            return false;
+        }
         return true;
     }
 
+    // transform into an integer
     public int transformToHowOften(String howOftenStr) {
         return Integer.parseInt(howOftenStr);
     }
 
+    // add the task by loading it, adding it to the array list, and saving it
     public void addTask(Task t) {
         loadTasks();
         allTasks.add(t);
         saveTasks();
     }
 
+    // save data according to this particular date
     public void saveData(Date thisDay) {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -155,6 +205,7 @@ public class TaskParameters extends AppCompatActivity {
         editor.apply();
     }
 
+    // saving tasks
     public void saveTasks() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -167,6 +218,7 @@ public class TaskParameters extends AppCompatActivity {
         editor.apply();
     }
 
+    // loading all the sessions
     public void loadData(Date thisDay) {
         daysSessions = new ArrayList<>();
 
@@ -185,6 +237,7 @@ public class TaskParameters extends AppCompatActivity {
         }
     }
 
+    // loading all the tasks
     public void loadTasks() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
@@ -193,14 +246,15 @@ public class TaskParameters extends AppCompatActivity {
         allTasks = gson.fromJson(json, type);
     }
 
-    public boolean addingSessions(Date doingDate, int estimatedTime, Task task) {
+    // adding the session (the real meat of the algorithm)
+    public boolean addingSessions(Date doingDate, int estimatedTime, Task task, int sessionId) {
         loadData(doingDate);
         // if there aren't any sessions on this date YET, then add one at 4pm
         if (daysSessions.size() == 0) {
-            Time startTime = new Time(12+4, 0);
-            Time endTime = startTime.add(0, estimatedTime);
+            Time startTime = new Time(12+4, 0, 0);
+            Time endTime = startTime.add(0, estimatedTime, 0);
             Timeblock newTB = new Timeblock(startTime, endTime);
-            Session newSession = new Session(task, doingDate, newTB);
+            Session newSession = new Session(task, doingDate, newTB, sessionId);
             daysSessions.add(newSession);
             saveData(doingDate);
             return true;
@@ -208,15 +262,15 @@ public class TaskParameters extends AppCompatActivity {
         else {
             Session lastSession = daysSessions.get(daysSessions.size()-1);
             Time startTime = lastSession.getNextStartTime();
-            Time endTime = startTime.add(0, estimatedTime);
+            Time endTime = startTime.add(0, estimatedTime, 0);
 
-            Time midnight = new Time(0, 0);
-            Time fourPM = new Time(16, 0);
+            Time midnight = new Time(0, 0, 0);
+            Time fourPM = new Time(16, 0, 0);
 
             if (endTime.compareTo(midnight) > 0 && endTime.compareTo(fourPM) < 0) return false;
             else {
                 Timeblock newTB = new Timeblock(startTime, endTime);
-                Session newSession = new Session(task, doingDate, newTB);
+                Session newSession = new Session(task, doingDate, newTB, sessionId);
                 daysSessions.add(newSession);
                 saveData(doingDate);
                 return true;

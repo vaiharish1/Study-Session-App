@@ -1,48 +1,39 @@
 package com.example.luriva2.dataModelClasses;
 
 public class Time implements Comparable<Time> {
-    private final int hour;
-    private final int minute;
+    private final int hour, minute, second; // the hour and minute of this time
 
-    public Time(int hour, int minute) {
+    // the constructor
+    public Time(int hour, int minute, int second) {
         this.hour = hour;
         this.minute = minute;
+        this.second = second;
     }
 
-    public Time add(int newHours, int newMinutes) {
-        int h = hour + newHours;
+    // adding a certain amount of minutes
+    public Time add(int newHours, int newMinutes, int newSeconds) {
+        int s = second + newSeconds;
         int m = minute + newMinutes;
+        int h = hour + newHours;
+
+        m += (s / 60);
+        s %= 60;
 
         h += (m / 60);
         m %= 60;
 
         h %= 24;
-        return new Time(h,m);
+        return new Time(h,m,s);
     }
 
-    public Time subtract(int newHours, int newMinutes) {
-        int h = hour - newHours;
-        int m = minute - newMinutes;
-
-        while (m < 0) {
-            h--;
-            m += 60;
-        }
-
-        h += (m/60);
-        m %= 60;
-
-        while (h < 0) {
-            h += 24;
-        }
-        return new Time(h,m);
-    }
-
+    // comparing this time to another time
     public int compareTo(Time other) {
+        if (hour == other.getHour() && minute == other.getMinute()) return second - other.getSecond();
         if (hour == other.getHour()) return minute - other.getMinute();
         return hour - other.getHour();
     }
 
+    // formatting the time
     public String toString() {
         String str = "";
         if (hour < 10) {
@@ -57,11 +48,18 @@ public class Time implements Comparable<Time> {
         return str;
     }
 
+    // getting the hour
     public int getHour() {
         return hour;
     }
 
+    // getting the minute
     public int getMinute() {
         return minute;
+    }
+
+    // getting the second
+    public int getSecond() {
+        return second;
     }
 }

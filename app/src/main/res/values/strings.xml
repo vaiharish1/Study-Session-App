@@ -22,13 +22,13 @@
     <string name="projectText">Project</string>
     <string name="chooseTaskTypeStr">What type of task are you adding?</string>
 
-   //Add tasks - textViews
+    //Add tasks - textViews
     <string name="dueDateStr">Due Date:</string>
     <string name="repeatStr">Repeat: </string>
     <string name="daysStr">days</string>
     <string name="estTimeStr">Est. Time:</string>
 
-   //Add tasks - hints
+    //Add tasks - hints
     <string name="taskNameHint">Enter Task Name </string>
     <string name="EstTimeHint">Enter Est. Time</string>
     <string name="difficultyStr">Difficulty:</string>
@@ -87,34 +87,39 @@
         <item>DBQs</item>
         <item>Physics</item>
         <item>Exercise</item>
+        <item>Exeter Problems</item>
     </string-array>
 
     <string-array name="session_start_times_hours">
         <item>8</item>
-        <item>9</item>
-        <item>11</item>
-        <item>16</item>
+        <item>8</item>
+        <item>8</item>
+        <item>8</item>
+        <item>13</item>
     </string-array>
 
     <string-array name="session_start_times_minutes">
         <item>00</item>
-        <item>00</item>
-        <item>00</item>
-        <item>00</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
     </string-array>
 
     <string-array name="session_end_times_hours">
         <item>8</item>
-        <item>9</item>
-        <item>11</item>
-        <item>16</item>
+        <item>8</item>
+        <item>8</item>
+        <item>8</item>
+        <item>14</item>
     </string-array>
 
     <string-array name="session_end_times_minutes">
-        <item>50</item>
-        <item>45</item>
-        <item>50</item>
-        <item>30</item>
+        <item>05</item>
+        <item>15</item>
+        <item>25</item>
+        <item>35</item>
+        <item>00</item>
     </string-array>
 
     <string-array name="session_types">
@@ -122,23 +127,62 @@
         <item>Repetitive</item>
         <item>One-Time</item>
         <item>Repetitive</item>
+        <item>One-Time</item>
     </string-array>
 
     //timer
     <string name="cancelButtonStr">Pause</string>
+
+    <!--    from https://www.shopify.com/blog/motivational-quotes -->
     <string-array name="motivationQuotes">
-        <item>You got this!</item>
-        <item>Keep up the good work!</item>
-        <item>Relax. Take a deep breathe.</item>
-        <item>Don\'t give up!</item>
-        <item>Give your all!</item>
-        <item>Try your best!</item>
+        <item>“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein</item>
+        <item>“Learn as if you will live forever, live like you will die tomorrow.” — Mahatma Gandhi</item>
+        <item>“Stay away from those people who try to disparage your ambitions. Small minds will always do that, but great minds will give you a feeling that you can become great too.” — Mark Twain</item>
+        <item>“When you give joy to other people, you get more joy in return. You should give a good thought to happiness that you can give out.”— Eleanor Roosevelt</item>
+        <item>“When you change your thoughts, remember to also change your world.”—Norman Vincent Peale</item>
+        <item>“It is only when we take chances, when our lives improve. The initial and the most difficult risk that we need to take is to become honest. —Walter Anderson</item>
+        <item>“Nature has given us all the pieces required to achieve exceptional wellness and health, but has left it to us to put these pieces together.”—Diane McLaren</item>
+
+        <item>“Concentrate all your thoughts upon the work in hand. The sun\'s rays do not burn until brought to a focus. “ — Alexander Graham Bell</item>
+        <item>“Either you run the day or the day runs you.” — Jim Rohn</item>
+        <item>“I\’m a greater believer in luck, and I find the harder I work the more I have of it.” — Thomas Jefferson</item>
+        <item>“When we strive to become better than we are, everything around us becomes better too.” — Paulo Coelho</item>
+        <item>“Opportunity is missed by most people because it is dressed in overalls and looks like work.” — Thomas Edison</item>
+        <item>“Setting goals is the first step in turning the invisible into the visible.” — Tony Robbins</item>
+        <item>“It’s not about better time management. It’s about better life management” — Alexandra of The Productivity Zone</item>
+
+        <item>“You\'ve got to get up every morning with determination if you\'re going to go to bed with satisfaction.” — George Lorimer</item>
+        <item>“Education is the most powerful weapon which you can use to change the world.” — Nelson Mandela</item>
+        <item>“The most difficult thing is the decision to act, the rest is merely tenacity.” —Amelia Earhart</item>
+        <item>“You’ll find that education is just about the only thing lying around loose in this world, and it’s about the only thing a fellow can have as much of as he’s willing to haul away.” —John Graham</item>
+        <item>“Take the attitude of a student, never be too big to ask questions, never know too much to learn something new.” —Augustine Og Mandino</item>
+
+        <item>“It is remarkable how much long-term advantage people like us have gotten by trying to be consistently not stupid, instead of trying to be very intelligent.” —Charlie Munger</item>
+        <item>“You can’t be that kid standing at the top of the waterslide, overthinking it. You have to go down the chute.” —Tina Fey</item>
+        <item>“When I believe in something, I’m like a dog with a bone.” —Melissa McCarthy</item>
+        <item>“And the day came when the risk to remain tight in a bud was more painful than the risk it took to blossom.” —Anaïs Nin</item>
+        <item>“The standard you walk past, is the standard you accept.” —David Hurley</item>
+        <item>“I\'ve searched all the parks in all the cities and found no statues of committees.” —Gilbert K. Chesterton</item>
+        <item>“Success is stumbling from failure to failure with no loss of enthusiasm.” ―Winston Churchill</item>
+        <item>“Keep your eyes on the stars, and your feet on the ground.” ―Theodore Roosevelt</item>
+        <item>“Perfection is not attainable. But if we chase perfection we can catch excellence.” —Vince Lombardi</item>
+        <item>“Get a good idea and stay with it. Dog it, and work at it until it’s done right.” —Walt Disney</item>
+        <item>“Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.” —Helen Keller</item>
+
+        <item>“The elevator to success is out of order. You’ll have to use the stairs, one step at a time.” — Joe Girard</item>
+        <item>“Be a positive energy trampoline – absorb what you need and rebound more back.” — Dave Carolan</item>
+        <item>“People often say that motivation doesn’t last. Well, neither does bathing – that’s why we recommend it daily.” — Zig Ziglar</item>
+        <item>“Work until your bank account looks like a phone number.” — Unknown </item>
+        <item>“I am so clever that sometimes I don’t understand a single word of what I am saying.” — Oscar Wilde</item>
+        <item>“People say nothing is impossible, but I do nothing every day.” — Winnie the Pooh</item>
+        <item>“Life is like a sewer… what you get out of it depends on what you put into it.” — Tom Lehrer</item>
+        <item>“I always wanted to be somebody, but now I realise I should have been more specific.” — Lily Tomlin</item>
     </string-array>
 
     <string name="statusNotWorkingString">Status: Not Working</string>
     <string name="statusBreakTimeString">Status: Break Time</string>
     <string name="statusWorkingString">Status: In Session</string>
-    <string name="cancelledStr">Timer Cancelled</string>
+    <string name="cancelledStr">Timer Paused</string>
 
     // calendar
     <string name="rightArrow"><![CDATA[—>]]></string>
@@ -156,5 +200,8 @@
     //all tasks
     <string name="allTasksStr">All Tasks</string>
     <string name="toAddTasksButton">Add Tasks</string>
+
+    //view task's sessions
+    <string name="viewTasksSessionsTitleStr">Sessions For: </string>
 
 </resources>
