@@ -63,7 +63,7 @@ public class ViewTaskSessions extends AppCompatActivity implements RecyclerViewI
         // get all the attributes from the intent
         Bundle extras = getIntent().getExtras();
 
-        if(extras!=null){
+        if (extras != null) {
             // get the task name
             String taskName = extras.getString("taskName");
 
