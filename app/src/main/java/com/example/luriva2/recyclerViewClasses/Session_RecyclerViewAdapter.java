@@ -21,13 +21,13 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
     private Context context; // the context
     private ArrayList<Session> sessionModels; // all of the sessions in the recycler view
     private OnItemClickListener listener; // the item click listener for BUTTONS
-    private SessionRecyclerViewInterface sessionRecyclerViewInterface; // the long item click listener
+    private RecyclerViewInterface recyclerViewInterface; // the long item click listener
 
     // the constructor
-    public Session_RecyclerViewAdapter(Context context, ArrayList<Session> sessionModels, SessionRecyclerViewInterface sessionRecyclerViewInterface) {
+    public Session_RecyclerViewAdapter(Context context, ArrayList<Session> sessionModels, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.sessionModels = sessionModels;
-        this.sessionRecyclerViewInterface = sessionRecyclerViewInterface;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     // interface for on item click listener
@@ -48,7 +48,7 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_todays_sessions, parent, false);
 
-        return new Session_RecyclerViewAdapter.MyViewHolder(view, listener, sessionRecyclerViewInterface);
+        return new Session_RecyclerViewAdapter.MyViewHolder(view, listener, recyclerViewInterface);
     }
 
     // setting the rows with the correct information
@@ -90,7 +90,7 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
         private Button upButton, downButton;
 
         // the constructor
-        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener, SessionRecyclerViewInterface sessionRecyclerViewInterface) {
+        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             // initializing textviews and buttons
@@ -119,11 +119,11 @@ public class Session_RecyclerViewAdapter extends RecyclerView.Adapter<Session_Re
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    if (sessionRecyclerViewInterface != null) {
+                    if (recyclerViewInterface != null) {
                         int pos = getAdapterPosition();
 
                         if (pos != RecyclerView.NO_POSITION) {
-                            sessionRecyclerViewInterface.onItemLongClick(pos);
+                            recyclerViewInterface.onItemLongClick(pos);
                         }
                     }
                     return true;

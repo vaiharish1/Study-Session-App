@@ -3,16 +3,14 @@ package com.example.luriva2;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
-import com.example.luriva2.dataModelClasses.Task;
 import com.example.luriva2.dataModelClasses.Timeblock;
-import com.example.luriva2.recyclerViewClasses.SessionRecyclerViewInterface;
+import com.example.luriva2.recyclerViewClasses.RecyclerViewInterface;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import java.util.ArrayList;
 import android.content.Intent;
@@ -20,7 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
-public class DaySessions extends DisplaySessions implements SessionRecyclerViewInterface {
+public class DaySessions extends DisplaySessions implements RecyclerViewInterface {
     NavigationBarView navigationBarView; // getting the navigation bar
     private RecyclerView recyclerView; // the recycler view
     private Date thisDay; // the day for the sessions
@@ -152,5 +150,10 @@ public class DaySessions extends DisplaySessions implements SessionRecyclerViewI
         sessionModels.remove(position);
         adapter.notifyItemRemoved(position);
         makeSaveButtonEnabled();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }

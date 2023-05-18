@@ -93,7 +93,7 @@ public class Timer extends AppCompatActivity {
         sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         String formattedTime = sdf.format(c.getTime());
         components = formattedTime.split(":");
-        curTime = new Time(Integer.parseInt(components[0]), Integer.parseInt(components[1]));
+        curTime = new Time(Integer.parseInt(components[0]), Integer.parseInt(components[1]), Integer.parseInt(components[2]));
 
         // check sessions and start the timer
         checkSessionsStartTimer();
@@ -117,13 +117,18 @@ public class Timer extends AppCompatActivity {
                 Time endTime = sesh.getTimeblock().getEndTime();
                 int hours = endTime.getHour() - curTime.getHour();
                 int minutes = endTime.getMinute() - curTime.getMinute();
+                int seconds = endTime.getSecond() - curTime.getSecond();
+                if (seconds < 0) {
+                    seconds += 60;
+                    minutes--;
+                }
                 if (minutes < 0) {
                     minutes += 60;
                     hours--;
                 }
 
                 // get time difference
-                Time timeDif = new Time(hours, minutes);
+                Time timeDif = new Time(hours, minutes, seconds);
                 // get minutes remaining
                 int totalMinutesRemaining = timeDif.getHour() * 60 + timeDif.getMinute();
 
@@ -132,7 +137,7 @@ public class Timer extends AppCompatActivity {
                 onBreak = false;
 
                 // start the timer
-                startTimer(totalMinutesRemaining);
+                startTimer(totalMinutesRemaining, seconds);
             }
         }
         // otherwise, you're on break
@@ -176,9 +181,9 @@ public class Timer extends AppCompatActivity {
     }
 
     // start the timer
-    public void startTimer(int min){
+    public void startTimer(int min, int sec){
         // initialize new countdown timer
-        countdown = new CountDownTimer((long) min *60*1000,1000) {
+        countdown = new CountDownTimer((long) min *60*1000 + sec * 1000,1000) {
 
             // count down
             @Override

@@ -19,12 +19,12 @@ import java.util.ArrayList;
 
 public class Task_RecyclerViewAdapter extends RecyclerView.Adapter<Task_RecyclerViewAdapter.MyViewHolder>{
 
-    private final ViewTasksRecyclerViewInterface recyclerViewInterface; // the item click listener
+    private final RecyclerViewInterface recyclerViewInterface; // the item click listener
     private Context context; // the context
     private ArrayList<Task> allTasks; // the list of tasks
 
     // the constructor
-    public Task_RecyclerViewAdapter(Context context, ArrayList<Task> allTasks, ViewTasksRecyclerViewInterface recyclerViewInterface) {
+    public Task_RecyclerViewAdapter(Context context, ArrayList<Task> allTasks, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.allTasks = allTasks;
         this.recyclerViewInterface = recyclerViewInterface;
@@ -82,7 +82,7 @@ public class Task_RecyclerViewAdapter extends RecyclerView.Adapter<Task_Recycler
         private ConstraintLayout constraintLayout;
 
         // the constructor
-        public MyViewHolder(@NonNull View itemView, ViewTasksRecyclerViewInterface recyclerViewInterface) {
+        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             // initializing textviews and buttons

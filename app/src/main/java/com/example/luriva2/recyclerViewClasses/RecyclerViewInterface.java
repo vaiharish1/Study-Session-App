@@ -1,6 +1,6 @@
 package com.example.luriva2.recyclerViewClasses;
 
-// interface for on item click
-public interface ViewTasksRecyclerViewInterface {
+public interface RecyclerViewInterface {
+    void onItemLongClick(int position);
     void onItemClick(int position);
 }

@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
+import com.example.luriva2.recyclerViewClasses.RecyclerViewInterface;
 import com.example.luriva2.recyclerViewClasses.Task_RecyclerViewAdapter;
-import com.example.luriva2.recyclerViewClasses.ViewTasksRecyclerViewInterface;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,7 +23,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerViewInterface {
+public class AllTasks extends AppCompatActivity implements RecyclerViewInterface {
 
     private ArrayList<Session> allSessions; // all sessions
 
@@ -176,6 +176,11 @@ public class AllTasks extends AppCompatActivity implements ViewTasksRecyclerView
         Intent intent = new Intent(this, AddTasks.class );
         startActivity(intent);
         showToast("Viewing Task Manager...");
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+
     }
 
     // on item click method

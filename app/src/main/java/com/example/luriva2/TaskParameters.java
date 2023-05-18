@@ -251,8 +251,8 @@ public class TaskParameters extends AppCompatActivity {
         loadData(doingDate);
         // if there aren't any sessions on this date YET, then add one at 4pm
         if (daysSessions.size() == 0) {
-            Time startTime = new Time(12+4, 0);
-            Time endTime = startTime.add(0, estimatedTime);
+            Time startTime = new Time(12+4, 0, 0);
+            Time endTime = startTime.add(0, estimatedTime, 0);
             Timeblock newTB = new Timeblock(startTime, endTime);
             Session newSession = new Session(task, doingDate, newTB, sessionId);
             daysSessions.add(newSession);
@@ -262,10 +262,10 @@ public class TaskParameters extends AppCompatActivity {
         else {
             Session lastSession = daysSessions.get(daysSessions.size()-1);
             Time startTime = lastSession.getNextStartTime();
-            Time endTime = startTime.add(0, estimatedTime);
+            Time endTime = startTime.add(0, estimatedTime, 0);
 
-            Time midnight = new Time(0, 0);
-            Time fourPM = new Time(16, 0);
+            Time midnight = new Time(0, 0, 0);
+            Time fourPM = new Time(16, 0, 0);
 
             if (endTime.compareTo(midnight) > 0 && endTime.compareTo(fourPM) < 0) return false;
             else {

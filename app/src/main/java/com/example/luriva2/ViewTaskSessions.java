@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
 import com.example.luriva2.dataModelClasses.Task;
+import com.example.luriva2.recyclerViewClasses.RecyclerViewInterface;
 import com.example.luriva2.recyclerViewClasses.Task_RecyclerViewAdapter;
 import com.example.luriva2.recyclerViewClasses.ViewTasksSessions_RecyclerViewAdapter;
 import com.google.android.material.navigation.NavigationBarView;
@@ -26,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class ViewTaskSessions extends AppCompatActivity {
+public class ViewTaskSessions extends AppCompatActivity implements RecyclerViewInterface {
 
     private RecyclerView recyclerView; // the recycler view
     private Task thisTask; // this task
@@ -128,7 +129,7 @@ public class ViewTaskSessions extends AppCompatActivity {
 
     // creating the adapter for the recycler view
     public void createAdapter() {
-        ViewTasksSessions_RecyclerViewAdapter adapter = new ViewTasksSessions_RecyclerViewAdapter(this, thisTasksSessions);
+        ViewTasksSessions_RecyclerViewAdapter adapter = new ViewTasksSessions_RecyclerViewAdapter(this, thisTasksSessions, this);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -154,5 +155,15 @@ public class ViewTaskSessions extends AppCompatActivity {
                 thisTasksSessions.add(s);
             }
         }
+    }
+
+    @Override
+    public void onItemLongClick(int position) {
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }

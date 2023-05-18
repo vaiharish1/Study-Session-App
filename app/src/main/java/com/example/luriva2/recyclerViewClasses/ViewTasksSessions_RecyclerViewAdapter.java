@@ -16,10 +16,13 @@ public class ViewTasksSessions_RecyclerViewAdapter extends RecyclerView.Adapter<
     private Context context; // the context
     private ArrayList<Session> allSessions; // all of the sessions in the recycler view
 
+    private RecyclerViewInterface recyclerViewInterface;
+
     // the constructor
-    public ViewTasksSessions_RecyclerViewAdapter(Context context, ArrayList<Session> allSessions) {
+    public ViewTasksSessions_RecyclerViewAdapter(Context context, ArrayList<Session> allSessions, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.allSessions = allSessions;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     // creating the actual recycler view with all of the rows
@@ -30,7 +33,7 @@ public class ViewTasksSessions_RecyclerViewAdapter extends RecyclerView.Adapter<
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.row_view_tasks_sessions, parent, false);
 
-        return new ViewTasksSessions_RecyclerViewAdapter.MyViewHolder(view);
+        return new ViewTasksSessions_RecyclerViewAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     // setting the rows with the correct information
@@ -47,17 +50,31 @@ public class ViewTasksSessions_RecyclerViewAdapter extends RecyclerView.Adapter<
     }
 
     // the view holder
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         // all of the layouts
         private TextView doingDateText, taskTimeText;
 
         // the constructor
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             doingDateText = itemView.findViewById(R.id.doingDateText_viewTasksSessions);
             taskTimeText = itemView.findViewById(R.id.taskTimeDisplayText_viewTasksSessions);
+
+            // setting up on item click listener
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }

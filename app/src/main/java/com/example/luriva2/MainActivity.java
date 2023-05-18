@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         formattedDate = sdf.format(c.getTime());
         components = formattedDate.split(":");
-        curTime = new Time(Integer.parseInt(components[0]), Integer.parseInt(components[1]));
+        curTime = new Time(Integer.parseInt(components[0]), Integer.parseInt(components[1]), Integer.parseInt(components[2]));
 
         // adding the sessions automatically
         loadData();
@@ -265,23 +265,19 @@ public class MainActivity extends AppCompatActivity {
         // get all string arrays from string resources
         String[] sessionNames = getResources().getStringArray(R.array.session_names);
         String[] sessionTypes = getResources().getStringArray(R.array.session_types);
-        String[] sessionStartTimesHours = getResources().getStringArray(R.array.session_start_times_hours);
-        String[] sessionStartTimesMinutes = getResources().getStringArray(R.array.session_start_times_minutes);
-        String[] sessionEndTimesHours = getResources().getStringArray(R.array.session_end_times_hours);
-        String[] sessionEndTimesMinutes = getResources().getStringArray(R.array.session_end_times_minutes);
 
         // go through them one at a time
         for (int i = 0; i < sessionNames.length; i++) {
             // get the time block
-            Time startTime = new Time(Integer.parseInt(sessionStartTimesHours[i]), Integer.parseInt(sessionStartTimesMinutes[i]));
-            Time endTime = new Time(Integer.parseInt(sessionEndTimesHours[i]), Integer.parseInt(sessionEndTimesMinutes[i]));
+            Time startTime = curTime.add(0, 5, 0).add(0, i * 60, 0);
+            Time endTime = startTime.add(0, 45, 0);
             Timeblock tb = new Timeblock(startTime, endTime);
 
             // get the date
             Date d;
             if (sessionTypes[i].equals("Repetitive")) d = null;
-            else if (sessionTypes[i].equals("Project")) d = new Date(5, 23, 2023);
-            else d = new Date(5, 23, 2023);
+            else if (sessionTypes[i].equals("Project")) d = today.addDays(2);
+            else d = today.addDays(1);
 
             // initialize the task
             Task t = new Task(sessionNames[i], 10, 2, sessionTypes[i], d);

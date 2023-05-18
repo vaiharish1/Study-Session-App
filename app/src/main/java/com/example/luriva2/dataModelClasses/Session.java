@@ -13,7 +13,7 @@ public class Session implements Comparable<Session> {
 		this.task = task;
 		this.date = date;
 		this.timeblock = timeblock;
-		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.IN_BETWEEN_TIME);
+		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.IN_BETWEEN_TIME, 0);
 		this.sessionId = sessionId;
 	}
 
@@ -45,7 +45,7 @@ public class Session implements Comparable<Session> {
 	// setting the timeblock if changing time of session
 	public void setTimeblock(Timeblock timeblock) {
 		this.timeblock = timeblock;
-		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.IN_BETWEEN_TIME);
+		this.nextStartTime = this.timeblock.getEndTime().add(0, Constants.IN_BETWEEN_TIME, 0);
 	}
 
 	// getting the next start time

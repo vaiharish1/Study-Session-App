@@ -12,14 +12,13 @@ import android.widget.Toast;
 
 import com.example.luriva2.dataModelClasses.Date;
 import com.example.luriva2.dataModelClasses.Session;
-import com.example.luriva2.dataModelClasses.Task;
 import com.example.luriva2.dataModelClasses.Timeblock;
-import com.example.luriva2.recyclerViewClasses.SessionRecyclerViewInterface;
+import com.example.luriva2.recyclerViewClasses.RecyclerViewInterface;
 import com.example.luriva2.recyclerViewClasses.Session_RecyclerViewAdapter;
 import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayList;
 
-public class TodaysSessions extends DisplaySessions implements SessionRecyclerViewInterface {
+public class TodaysSessions extends DisplaySessions implements RecyclerViewInterface {
 
     private RecyclerView recyclerView; // the recycler view
 
@@ -140,5 +139,10 @@ public class TodaysSessions extends DisplaySessions implements SessionRecyclerVi
         sessionModels.remove(position);
         adapter.notifyItemRemoved(position);
         makeSaveButtonEnabled();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }
