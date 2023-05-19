@@ -73,22 +73,45 @@ public class TaskParameters extends AppCompatActivity {
         return false;
     }
 
-    // check if due date fits the regular expression
-    public boolean checkDueDate(String dueDateStr) {
-        String dueDateRegEx = "^(1[0-2]|0[1-9])/(3[01]|[12]\\d|0[1-9])/\\d{4}$";
+    public int findSlashes(String str) {
+        int count = 0;
+        for (char ch : str.toCharArray()) {
+            if (ch == '/') count++;
+        }
+        return count;
+    }
 
-        if (!dueDateStr.matches(dueDateRegEx)) {
+    // check if due date fits the criteria needed to be an actual date
+    public boolean checkDueDate(String dueDateStr) {
+        // if it's not even the correct format, return true
+        if (findSlashes(dueDateStr) != 2) {
+            showToast("Not enough slashes.");
+            return true;
+        }
+
+        String[] components = dueDateStr.split("/");
+        // if the length of the components are not correct
+        if (components[0].length() != 2 || components[1].length() != 2 || components[2].length() != 4) {
             showToast("Incorrect date format.");
             return true;
         }
 
         String[] dueDateComponents = dueDateStr.split("/");
         Date dueDate = new Date(Integer.parseInt(dueDateComponents[0]), Integer.parseInt(dueDateComponents[1]), Integer.parseInt(dueDateComponents[2]));
+
+        // if it's an invalid date as shown by the Date class
+        if (!Date.correctDate(dueDate)) {
+            showToast("Invalid Date.");
+            return true;
+        }
+
+        // if the date is before today's date
         if (dueDate.compareTo(today) < 0) {
             showToast("Due date cannot be before today.");
             return true;
         }
 
+        // if it's passed all of these checks, then it's good
         return false;
     }
 

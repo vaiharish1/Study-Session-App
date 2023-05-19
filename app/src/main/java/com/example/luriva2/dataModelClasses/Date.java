@@ -45,6 +45,15 @@ public class Date implements Comparable<Date> {
         return new Date(m, d, y);
     }
 
+    // if the date is valid (correct day of the month)
+    public static boolean correctDate(Date d) {
+        int dMonth = d.getMonth();
+        int dDay = d.getDay();
+        if (dMonth > 12 || dMonth < 0) return false;
+        if (dDay > daysOfMonths[dMonth-1] || dDay < 0) return false;
+        return true;
+    }
+
     // formatting the date
     public String toString() {
         String str = "";
@@ -65,11 +74,13 @@ public class Date implements Comparable<Date> {
 
     // comparing this date to other dates
     public int compareTo(Date other) {
-        if (month == other.getMonth()) {
-            return day - other.getDay();
-        }
-        return month - other.getMonth();
+        if (year == other.getYear() && month == other.getMonth()) return day - other.getDay();
+        if (year == other.getYear()) return month - other.getMonth();
+        return year - other.getYear();
     }
+
+    // getting the year
+    public int getYear() { return year; }
 
     // getting the month
     public int getMonth() {
